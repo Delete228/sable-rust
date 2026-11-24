@@ -1,0 +1,6 @@
+[package]
+name = "marten"
+version = "0.1.0"
+edition = "2024"
+license-file = "../LICENSE-SABLE.md"
+[dependencies]

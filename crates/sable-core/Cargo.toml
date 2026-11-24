@@ -1,0 +1,12 @@
+[package]
+name = "sable-core"
+version = "0.1.0"
+edition = "2024"
+license-file = "LICENSE-SABLE.md"
+
+[features]
+default = ["native-physics"]
+native-physics = ["dep:sable-physics"]
+
+[dependencies]
+sable-physics = { path = "../sable-physics", optional = true }

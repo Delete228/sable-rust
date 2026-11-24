@@ -1,0 +1,13 @@
+/references/*
+!/references/README.md
+/.local/
+/.tools/
+/target/
+**/target/
+/.venv/
+__pycache__/
+*.pyc
+.DS_Store
+*.jar
+*.hnmod
+*.appimage

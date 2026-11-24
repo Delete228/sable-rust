@@ -1,0 +1,230 @@
+{
+  "schema": "sable.core-origin",
+  "schema_version": 1,
+  "sable_commit": "9b1a3d1555d35db9fb7b1103701e7490f0a968b9",
+  "companion_commit": "652ecf0e051846f3a433dd20126dd4d64ec3793a",
+  "kind": "Rust translations of selected Java contracts; Engine reused unchanged; see Phase2 contract/deviation documents",
+  "sources": [
+    {
+      "target": "src/gather.rs",
+      "source": "references/sable/common/src/main/java/dev/ryanhcode/sable/api/SubLevelAssemblyHelper.java",
+      "sha256": "03395d06bd22a7995cbeb7f8f8512dc5c4d2c2512a2f13ae97457cf82e7f5665"
+    },
+    {
+      "target": "src/split.rs",
+      "source": "references/sable/common/src/main/java/dev/ryanhcode/sable/sublevel/plot/heat/SubLevelHeatMapManager.java",
+      "sha256": "6e54d1608406f09b7a55b6fe6c5251697d9cd462d17a7a5bd1cc0d011c7bc3b1"
+    },
+    {
+      "target": "src/split.rs",
+      "source": "references/sable/common/src/main/java/dev/ryanhcode/sable/sublevel/plot/heat/HeatMapPropagationState.java",
+      "sha256": "7688645d3eebb31079edf5b178c89db2e2406c486ac1aae116d4b09b98aab332"
+    },
+    {
+      "target": "src/split.rs",
+      "source": "references/sable/common/src/main/java/dev/ryanhcode/sable/sublevel/plot/HeatDataChunkSection.java",
+      "sha256": "95a640fcfe63acdd9a774d3c4bcbb912cc1599d5f9a2896a48754ca89c5abafc"
+    },
+    {
+      "target": "src/mass.rs",
+      "source": "references/sable/common/src/main/java/dev/ryanhcode/sable/api/physics/mass/MassTracker.java",
+      "sha256": "1ac9e75d6b78fd48f097186c5259b206fd17fcf853acaef9c02bad725a0e7202"
+    },
+    {
+      "target": "src/mass.rs",
+      "source": "references/sable/common/src/main/java/dev/ryanhcode/sable/util/SableMathUtils.java",
+      "sha256": "25f672020fdc362a12b94b47d46cfc175cda635897e9f8415a394f9467fadb9c"
+    },
+    {
+      "target": "src/mass.rs",
+      "source": "references/sable/common/src/main/java/dev/ryanhcode/sable/physics/config/block_properties/PhysicsBlockPropertyTypes.java",
+      "sha256": "a90a290974c130e933660c3d2924ee1f4340110325ac5df188700f223bc23a52"
+    },
+    {
+      "target": "src/mass.rs",
+      "source": "references/sable/common/src/main/java/dev/ryanhcode/sable/physics/config/block_properties/PhysicsBlockPropertyHelper.java",
+      "sha256": "70e40bf10aa6a197e878aa5988bbb0fe799107eb6ea8d18fb70fe6ca3d658e2d"
+    },
+    {
+      "target": "src/mass.rs",
+      "source": "references/sable/common/src/main/java/dev/ryanhcode/sable/physics/chunk/VoxelNeighborhoodState.java",
+      "sha256": "a96779166ea245696dfd75f4b3e20f53e3b2933bbfb92190fa89c1abb8c7270d"
+    },
+    {
+      "target": "src/lib.rs",
+      "source": "references/sable/common/src/main/java/dev/ryanhcode/sable/api/sublevel/SubLevelContainer.java",
+      "sha256": "af2e6926a2caaa38abe32882c8a9c318d868b004f62fa0a2dc4cee415d50d272"
+    },
+    {
+      "target": "src/lib.rs",
+      "source": "references/sable/common/src/main/java/dev/ryanhcode/sable/sublevel/SubLevel.java",
+      "sha256": "5a178911b71b15d9524aab32281cb087a48a14b4e7081bbcf4351ce7261cef05"
+    },
+    {
+      "target": "src/lib.rs",
+      "source": "references/sable/common/src/main/java/dev/ryanhcode/sable/sublevel/plot/LevelPlot.java",
+      "sha256": "9d3c288847b1ab7c68d4c7e7ad37b5fc2866fc3100c842567b8f2542d3e49d9a"
+    },
+    {
+      "target": "src/lifecycle.rs",
+      "source": "references/sable/common/src/main/java/dev/ryanhcode/sable/api/SubLevelAssemblyHelper.java",
+      "sha256": "03395d06bd22a7995cbeb7f8f8512dc5c4d2c2512a2f13ae97457cf82e7f5665"
+    },
+    {
+      "target": "src/lifecycle.rs",
+      "source": "references/sable/common/src/main/java/dev/ryanhcode/sable/SableCommonEvents.java",
+      "sha256": "b3d0410a994a52ce5697f18178fb38a48f339a984e5a95e757e0f37e136679c9"
+    },
+    {
+      "target": "src/physics.rs",
+      "source": "references/sable/common/src/main/java/dev/ryanhcode/sable/api/physics/mass/MergedMassTracker.java",
+      "sha256": "7f237f86c9f059bedafdc48d2aea583164cd174d297d7d6237cb9557db4053b2"
+    },
+    {
+      "target": "src/persistence.rs",
+      "source": "references/sable/common/src/main/java/dev/ryanhcode/sable/sublevel/storage/serialization/SubLevelSerializer.java",
+      "sha256": "0c912ea7eb9eb4c34265bace4305a7963e009af61a846fdd18825f2dc8dfc17c"
+    },
+    {
+      "target": "src/persistence.rs",
+      "source": "references/sable/common/src/main/java/dev/ryanhcode/sable/sublevel/plot/ServerLevelPlot.java",
+      "sha256": "53063bc8ba68658369c6fadcf7630bcc055cc6ae00b2463ac104b4de2dfe8e19"
+    },
+    {
+      "target": "src/persistence.rs",
+      "source": "references/sable/common/src/main/java/dev/ryanhcode/sable/sublevel/storage/holding/SubLevelHoldingChunk.java",
+      "sha256": "47d44c46d6e0dd309ceb9abd48a34bd23698bb27108d3bf33135d1a78839c936"
+    },
+    {
+      "target": "src/persistence.rs",
+      "source": "references/sable/common/src/main/java/dev/ryanhcode/sable/sublevel/storage/holding/SubLevelHoldingChunkMap.java",
+      "sha256": "feaa71a36069cad52c214a2e3da272354c079e1b30996277d270fb658bdd7ea2"
+    },
+    {
+      "target": "src/transfer.rs",
+      "source": "references/sable/common/src/main/java/dev/ryanhcode/sable/api/SubLevelAssemblyHelper.java",
+      "sha256": "03395d06bd22a7995cbeb7f8f8512dc5c4d2c2512a2f13ae97457cf82e7f5665"
+    },
+    {
+      "target": "src/lib.rs",
+      "source": "references/sable-companion/common/src/main/java/dev/ryanhcode/sable/companion/math/Pose3dc.java",
+      "sha256": "f4f506ec71037376e27f261cd07047d8d011c06f53050541f08de9762dea3b0f"
+    },
+    {
+      "target": "src/mass.rs (bounded supported profile; other registry rules unported)",
+      "source": "references/sable/common/src/main/resources/data/sable/physics_block_properties/bedrock_absurdity.json",
+      "sha256": "85e1c031fb25598f5fb944a198c49e471cecae2e47a32f27ffd18a9896bcb34f"
+    },
+    {
+      "target": "src/mass.rs (bounded supported profile; other registry rules unported)",
+      "source": "references/sable/common/src/main/resources/data/sable/physics_block_properties/bouncy.json",
+      "sha256": "ceee2c7d33c672e42f05fd3242d160451c26d6f398c140317cda0d29be3f1cb5"
+    },
+    {
+      "target": "src/mass.rs (bounded supported profile; other registry rules unported)",
+      "source": "references/sable/common/src/main/resources/data/sable/physics_block_properties/end_stone_brick_slab.json",
+      "sha256": "924a9e8a0b4baa6bbdff10f2a85b49db6cc0480ad374018ee829f467a4b59986"
+    },
+    {
+      "target": "src/mass.rs (bounded supported profile; other registry rules unported)",
+      "source": "references/sable/common/src/main/resources/data/sable/physics_block_properties/end_stones.json",
+      "sha256": "bcaad63e782b3f316e27ebbdeec916d54c5dca6a1a9cd3a20f66f2eb8b74aa12"
+    },
+    {
+      "target": "src/mass.rs (bounded supported profile; other registry rules unported)",
+      "source": "references/sable/common/src/main/resources/data/sable/physics_block_properties/flywheel.json",
+      "sha256": "8812aed4f680fd6c7b1b9179c0bd4907ec55a6328292d843bb035067a4686973"
+    },
+    {
+      "target": "src/mass.rs (bounded supported profile; other registry rules unported)",
+      "source": "references/sable/common/src/main/resources/data/sable/physics_block_properties/fragile.json",
+      "sha256": "349695357bc5f094101ac630d26ddfa991383d40487a8f756393dac70a16ea48"
+    },
+    {
+      "target": "src/mass.rs (bounded supported profile; other registry rules unported)",
+      "source": "references/sable/common/src/main/resources/data/sable/physics_block_properties/grindstone.json",
+      "sha256": "611019ab910dc1ff8532d24537966886f67b51ce1282bcf0378619d559eaa4b7"
+    },
+    {
+      "target": "src/mass.rs (bounded supported profile; other registry rules unported)",
+      "source": "references/sable/common/src/main/resources/data/sable/physics_block_properties/half_volume.json",
+      "sha256": "8ffc7278624bd6ecb231fcd8e91b5e0a53a3b0cb00a7c978002eb9e74e6ff6fb"
+    },
+    {
+      "target": "src/mass.rs (bounded supported profile; other registry rules unported)",
+      "source": "references/sable/common/src/main/resources/data/sable/physics_block_properties/heavy.json",
+      "sha256": "cd5327c4f36219d982734490379da5ff19dde84e31c99a24d9ee12fd12fcdde6"
+    },
+    {
+      "target": "src/mass.rs (bounded supported profile; other registry rules unported)",
+      "source": "references/sable/common/src/main/resources/data/sable/physics_block_properties/light.json",
+      "sha256": "29ad18c430b77d891c852164f80a4941d6fe36263fde26a349032bf8dfbca7a1"
+    },
+    {
+      "target": "src/mass.rs (bounded supported profile; other registry rules unported)",
+      "source": "references/sable/common/src/main/resources/data/sable/physics_block_properties/mud.json",
+      "sha256": "f7b853eca363b41c7c913143890a25ce8259c2bf01a2f581adc19b22b4adb3b9"
+    },
+    {
+      "target": "src/mass.rs (bounded supported profile; other registry rules unported)",
+      "source": "references/sable/common/src/main/resources/data/sable/physics_block_properties/normal.json",
+      "sha256": "684f398293e9d4860d8558246b75cda4c865c1458486da9456b5dd3e1c7d0d8e"
+    },
+    {
+      "target": "src/mass.rs (bounded supported profile; other registry rules unported)",
+      "source": "references/sable/common/src/main/resources/data/sable/physics_block_properties/piston.json",
+      "sha256": "2f67e87db2e2c7c3c7ded3888b35560fe4167698369d0130e0b9540899f5ba86"
+    },
+    {
+      "target": "src/mass.rs (bounded supported profile; other registry rules unported)",
+      "source": "references/sable/common/src/main/resources/data/sable/physics_block_properties/quarter_volume.json",
+      "sha256": "15098a193d477a5b74248716230bbb48f9ff3580444cea60acb2794274dc6f39"
+    },
+    {
+      "target": "src/mass.rs (bounded supported profile; other registry rules unported)",
+      "source": "references/sable/common/src/main/resources/data/sable/physics_block_properties/slippery.json",
+      "sha256": "aabe9f5caabec12b04b9904bd22ca5e3ba1787cbbd900327103fc9665d1a2c7f"
+    },
+    {
+      "target": "src/mass.rs (bounded supported profile; other registry rules unported)",
+      "source": "references/sable/common/src/main/resources/data/sable/physics_block_properties/sticky.json",
+      "sha256": "3cf4ae2e9e025afbc6e6c50fe5cab36c17fb1b5e337791356bc9480ce0a8cb34"
+    },
+    {
+      "target": "src/mass.rs (bounded supported profile; other registry rules unported)",
+      "source": "references/sable/common/src/main/resources/data/sable/physics_block_properties/super_heavy.json",
+      "sha256": "32bf9bb01f02bf035d06c1f56e24d19f92d2cda625ec917175fe12059de15d30"
+    },
+    {
+      "target": "src/mass.rs (bounded supported profile; other registry rules unported)",
+      "source": "references/sable/common/src/main/resources/data/sable/physics_block_properties/super_light.json",
+      "sha256": "fc9ec0ed505694c53d658d3336a4a9bb4abe3c18a284f7cb1b432236f06a804b"
+    },
+    {
+      "target": "src/mass.rs (bounded supported profile; other registry rules unported)",
+      "source": "references/sable/common/src/main/resources/data/sable/physics_block_properties/weightless.json",
+      "sha256": "d6d709c62df60245feb13e4aa456a0d4806787a9a6859e95482e8ba4bd93269d"
+    },
+    {
+      "target": "src/mass.rs (bounded supported profile; other registry rules unported)",
+      "source": "references/sable/common/src/main/resources/data/sable/tags/block/heavy.json",
+      "sha256": "3e17c13abfab196f7a3f68fdfb7d070d640c74fac620c5dbe86702604618e810"
+    }
+  ],
+  "joml": {
+    "version": "1.10.5",
+    "jar_sha256": "cac9f22f83a7aa33eebda73c16ff5261e3cb4911b6bafcf4c79ea486099d0c9a",
+    "target": [
+      "src/lib.rs",
+      "src/mass.rs",
+      "src/persistence.rs"
+    ],
+    "notice": "LICENSE-JOML.txt",
+    "configuration": "joml.useMathFma=false (captured default)",
+    "bytecode_sha256": {
+      "Quaterniond": "3e60ca865a58812bfa8ccaedc36f1ba0c19c7019e0e451e0c99680b4d9426008",
+      "Vector3d": "0704df10235c8b3ddfd29b8fcbe479a1435d36c94a02010453d5a2c446b9fa9c"
+    },
+    "adaptation": "Preserve original reciprocal multiplication, right-associated unfused arithmetic and squared-norm matrix transforms; no JVM production dependency"
+  }
+}

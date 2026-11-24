@@ -1,0 +1,23 @@
+[workspace]
+resolver = "3"
+members = ["crates/sable-core", "crates/sable-physics", "crates/sable-physics/marten", "crates/sable-sunrise", "crates/sable-bridge", "crates/sable-physics-ffi", "tools/phase1/candidate-runner", "tools/phase2/candidate-runner"]
+exclude = [".local/phase-3-continuation/sable_port"]
+
+[workspace.package]
+edition = "2024"
+version = "0.1.0"
+
+[workspace.dependencies]
+marten = { path = "crates/sable-physics/marten" }
+log = "0.4.22"
+colored = "2.1.0"
+fern = { version = "0.6.2", features = ["colored"] }
+humantime = "2.1.0"
+serde_json = "=1.0.149"
+
+[profile.release]
+lto = "thin"
+codegen-units = 1
+
+[profile.bench]
+debug = true

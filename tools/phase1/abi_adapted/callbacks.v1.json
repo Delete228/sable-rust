@@ -1,0 +1,13 @@
+{
+  "schema": "sable.native_scenarios",
+  "schema_version": 1,
+  "reference_kind": "unchanged native / ABI-adapted fixture",
+  "scenarios": [
+    {"id":"callback-accept","repeat_count":10,"timeout_seconds":15,"acceptance_scope":["synchronous_callback_order","contact_acceptance"],"actions":[{"op":"callback_fixture","mode":"accept"}]},
+    {"id":"callback-reject","repeat_count":10,"timeout_seconds":15,"acceptance_scope":["synchronous_callback_order","contact_rejection"],"actions":[{"op":"callback_fixture","mode":"reject"}]},
+    {"id":"callback-immediate-world","repeat_count":10,"timeout_seconds":15,"acceptance_scope":["immediate_fixture_world_mutation","subsequent_callback_visibility","contact_rejection"],"actions":[{"op":"callback_fixture","mode":"immediate_java_world"}]},
+    {"id":"callback-reentrant-read","repeat_count":2,"timeout_seconds":4,"expected_outcome":"timeout","acceptance_scope":[],"actions":[{"op":"callback_fixture","mode":"reentrant_pose_query"}]},
+    {"id":"callback-reentrant-change","repeat_count":10,"timeout_seconds":15,"acceptance_scope":["synchronous_native_world_mutation","post_step_geometry_visibility"],"actions":[{"op":"callback_fixture","mode":"reentrant_change_block"}]},
+    {"id":"callback-reentrant-material","repeat_count":2,"timeout_seconds":4,"expected_outcome":"timeout","acceptance_scope":[],"actions":[{"op":"callback_fixture","mode":"reentrant_material_edit"}]}
+  ]
+}

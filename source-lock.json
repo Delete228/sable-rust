@@ -1,0 +1,2313 @@
+{
+  "schema_version": 1,
+  "prepared_date": "2026-11-19",
+  "purpose": "Phase 0 source snapshots; not a verified executable dependency set",
+  "references": [
+    {
+      "id": "create-java",
+      "path": "references/create-java",
+      "url": "https://github.com/Creators-of-Create/Create.git",
+      "commit": "37ea4afcfe5bf85875d4b0749798a45330070a1f",
+      "sparse_paths": [
+        "src/main/java",
+        "src/main/resources/data"
+      ],
+      "shallow": true,
+      "status": "source_snapshot_only"
+    },
+    {
+      "id": "create-port",
+      "path": "references/create-port",
+      "url": "https://github.com/OlaHulleberg/create-horizon.git",
+      "commit": "4625fb5df47366236e5951edd045369a4ae0752a",
+      "sparse_paths": [
+        "create/data",
+        "create/src",
+        "docs",
+        "tools/create-data/src"
+      ],
+      "shallow": true,
+      "status": "source_snapshot_only"
+    },
+    {
+      "id": "horizon",
+      "path": "references/horizon",
+      "url": "https://github.com/horizon-rust/horizon.git",
+      "commit": "ff7679e3eb5b38c47102e9433c147ca62910e5e9",
+      "sparse_paths": [
+        "crates",
+        "docs/design/mod-api",
+        "docs/mod-api",
+        "docs/modding",
+        "docs/parity"
+      ],
+      "shallow": true,
+      "status": "source_snapshot_only"
+    },
+    {
+      "id": "rapier",
+      "path": "references/rapier",
+      "url": "https://github.com/ryanhcode/rapier.git",
+      "commit": "38e92f117590862481a53df6fc69a5d893e29186",
+      "sparse_paths": [
+        "crates",
+        "src"
+      ],
+      "shallow": true,
+      "status": "source_snapshot_only"
+    },
+    {
+      "id": "sable",
+      "path": "references/sable",
+      "url": "https://github.com/ryanhcode/sable.git",
+      "commit": "9b1a3d1555d35db9fb7b1103701e7490f0a968b9",
+      "sparse_paths": [
+        "common/src/main/java",
+        "common/src/main/resources",
+        "sable_rapier/src/main/rust",
+        "wiki"
+      ],
+      "shallow": true,
+      "status": "source_snapshot_only"
+    },
+    {
+      "id": "sable-companion",
+      "path": "references/sable-companion",
+      "url": "https://github.com/ryanhcode/sable-companion.git",
+      "commit": "652ecf0e051846f3a433dd20126dd4d64ec3793a",
+      "sparse_paths": [
+        "common/src/main/java",
+        "docs"
+      ],
+      "shallow": true,
+      "status": "source_snapshot_only"
+    },
+    {
+      "id": "sunrise",
+      "path": "references/sunrise",
+      "url": "https://github.com/sunrise-org/sunrise.git",
+      "commit": "0b95688f31c73c9a4e2ff43726e077558d7ccc01",
+      "sparse_paths": [
+        "crates",
+        "docs/design/mod-api",
+        "docs/mod-api",
+        "docs/modding",
+        "docs/parity"
+      ],
+      "shallow": true,
+      "status": "source_snapshot_only"
+    }
+  ],
+  "declared_reference_environment": {
+    "sable_version": "2.0.7",
+    "minecraft_version": "1.21.1",
+    "java_version": "21",
+    "sable_companion_version": "1.6.0",
+    "create_version_in_sable": "6.0.10-280",
+    "create_java_checkout_version": "6.0.11",
+    "rapier_commit": "38e92f117590862481a53df6fc69a5d893e29186",
+    "sable_rust_channel": "nightly-2026-01-29",
+    "create_port_declared_sunrise_commit": "ed3ac19558d8dc1092c431312848cbb58fb01e41",
+    "runtime_game_version": "26.3"
+  },
+  "phase_0_reconciliation_required": [
+    "Sable declares a released companion dependency; confirm which companion source revision matches it.",
+    "Sable declares Create 6.0.10-280; the prepared Create source branch reports 6.0.11.",
+    "The Create port pins Sunrise ed3ac19558d8dc1092c431312848cbb58fb01e41; the prepared Sunrise checkout is a different current-main snapshot.",
+    "Original Java Minecraft 1.21.1 and native runtime 26.3 are separate reference/target environments.",
+    "The preserved Rust 1.99.1 toolchain does not provide the original Sable pinned nightly or rustup.",
+    "Java on PATH is OpenJDK 25.0.2; original Sable declares Java 21, which has not been located or tested."
+  ],
+  "phase_0_audit_date": "2026-11-19",
+  "phase_0_reconciliation": {
+    "evidence_document": "docs/version-reconciliation.md",
+    "reference_heads_verified": true,
+    "reference_worktrees_clean_at_start": true,
+    "verified_executable_dependency_set": false,
+    "companion": {
+      "declared": "1.6.0",
+      "prepared_source_version": "1.6.0",
+      "status": "declaration_match_only; published artifact checksum/source identity unverified",
+      "metadata_check": "Declared Maven POM and Gradle module URLs each HTTP403 on 2026-11-19; see docs/version-reconciliation.md"
+    },
+    "create_java": {
+      "declared_by_sable": "6.0.10-280",
+      "prepared_source_version": "6.0.11",
+      "status": "mismatch; release tag located but artifact build suffix not verified"
+    },
+    "create_port_sunrise": {
+      "pin": "ed3ac19558d8dc1092c431312848cbb58fb01e41",
+      "prepared_head": "0b95688f31c73c9a4e2ff43726e077558d7ccc01",
+      "github_compare_status": "ahead",
+      "ahead_by": 856,
+      "behind_by": 0,
+      "status": "ancestry_verified_only; no source/ABI/behavior compatibility test"
+    },
+    "java_reference": {
+      "required": "21",
+      "available": "25.0.2",
+      "status": "Java21/reference_execution_not_verified"
+    },
+    "native_toolchain": {
+      "required": "nightly-2026-01-29",
+      "preserved": "1.99.1",
+      "rustup_available": false,
+      "status": "original_toolchain_unavailable; see native audit probes",
+      "signature_inventory": "53 matching names; 51 source-compatible signatures, 2 discrepancies; no JNI execution"
+    },
+    "game_versions": {
+      "reference": "1.21.1",
+      "targets": "26.3",
+      "status": "different_game_semantics; explicit adapter mapping required"
+    }
+  },
+  "additional_observations": [
+    {
+      "id": "create-java-release-tag-metadata",
+      "repository": "https://github.com/Creators-of-Create/Create.git",
+      "commit": "ac0c444d9828da3453ae8cc65338e8de063286fb",
+      "tag": "mc1.21.1-6.0.10",
+      "scope": "GitHub Git ref plus gradle.properties blob 8518139b6661f18d9b8e50d8cb4409a372b02f86 only",
+      "reason": "Reconcile Sable Create 6.0.10-280 against prepared 6.0.11; not a replacement checkout or verified artifact"
+    },
+    {
+      "id": "create-port-sunrise-pin-ancestry",
+      "repository": "https://github.com/sunrise-org/sunrise.git",
+      "commit": "ed3ac19558d8dc1092c431312848cbb58fb01e41",
+      "scope": "GitHub compare metadata only",
+      "reason": "Verify relation to prepared Sunrise; original prepared HEAD preserved"
+    }
+  ],
+  "same_revision_additional_blob_reads": [
+    {
+      "reference": "sable",
+      "path": "buildSrc/src/main/groovy/multiloader-common.gradle",
+      "blob": "35a2c5a2ac1469805c470a8f8053bf111bdc3c8a",
+      "reason": "Identify declared Companion Maven repository"
+    },
+    {
+      "reference": "sable-companion",
+      "path": "build-logic/src/main/kotlin/configure-base.gradle.kts",
+      "blob": "96839da54e2d9e4da662204f4d05c94dd694c0dd",
+      "reason": "Inspect publication metadata configuration"
+    },
+    {
+      "reference": "sable",
+      "scope": "10 NeoForge and 6 native Java files",
+      "evidence": "docs/source-map.md and .local/phase-0/native/java-blobs.json",
+      "reason": "Complete sparse source lifecycle/Create/GameTest/JNI caller audit; same HEAD, no checkout source changes"
+    }
+  ],
+  "phase_0_probe_sources": [
+    {
+      "path": ".local/phase-0/native/octree_probe.rs",
+      "sha256": "1e8527ec2d16bfbb1dc49c8572e2bb04fef4cd62a3c453efd4367882d3f72f48",
+      "scope": "disposable Phase0 probe only; not production implementation"
+    },
+    {
+      "path": ".local/phase-0/native/simd_gate.rs",
+      "sha256": "1a170daa17a1d97c7ea4471b10121ae4dfa85d65ca86bd06bd5bc1edd9a88abb",
+      "scope": "disposable Phase0 probe only; not production implementation"
+    },
+    {
+      "path": ".local/phase-0/native/inventory.py",
+      "sha256": "ed6c815ac59e7b1fb1c6bde21a9afdf922de9e47d5177693b516e47b9ce2e1a6",
+      "scope": "disposable Phase0 probe only; not production implementation"
+    }
+  ],
+  "accepted_phase_0_probe_sources": [
+    {
+      "path": "tools/probes/octree_probe.rs",
+      "sha256": "38239fb2b4d99ba10c66611125fb3726f23e1b79322b303e1caffb09f99b9534",
+      "scope": "Portable Phase 0 research probe; not production physics, generated descriptors or ABI execution"
+    },
+    {
+      "path": "tools/probes/simd_gate.rs",
+      "sha256": "03d5bfb4916c9ebbeb0140ff363c60ca7f570be5b5faf53b646a7fe2d7a8070b",
+      "scope": "Portable Phase 0 research probe; not production physics, generated descriptors or ABI execution"
+    },
+    {
+      "path": "tools/probes/jni_inventory.py",
+      "sha256": "a84b26589b71ca840f06875e7561e8baa29657f9b780c18822414eada69446af",
+      "scope": "Portable Phase 0 research probe; not production physics, generated descriptors or ABI execution"
+    }
+  ],
+  "phase_1_execution": {
+    "date": "2026-11-19",
+    "starting_commit": "880263e",
+    "status": "external_R1_R2_corrected_verified_awaiting_re_review",
+    "owner_scope": "Independent captured native components; full Java/Minecraft compatibility remains unconfirmed",
+    "configuration": "unchanged native / ABI-adapted fixture",
+    "adapted_java_declarations": {
+      "newVoxelCollider": "Append trailing boolean dynamic; ordinary static materials false; dedicated false/true cases",
+      "removeRope": "void return"
+    },
+    "native_binary_sha256": "09dbb2d7005fec5b17e905fb227a09fe18f4f147937722fbebb786ec03f88d1a",
+    "candidate_binary_sha256": "f93bdb4441a3b627c655afa99d4f97e701ee0bb478edc6b9f5c4f92346d16219",
+    "original_sources_lock_solver_features_precision_modified": false,
+    "prepared_reference_heads_changed": false,
+    "old_capture_labels_changed": false,
+    "global_golden_eligibility": false,
+    "native_scenarios": 22,
+    "native_reference_jvms": 210,
+    "successful_callback_scenarios": 4,
+    "callback_reference_jvms": 40,
+    "diagnostic_timeout_scenarios": 2,
+    "diagnostic_jvms_per_case": 2,
+    "candidate_repeats_per_case": 3,
+    "numeric_comparison": "exact IEEE bits, same-host zero observed reference variance; abs=0 rel=0",
+    "discrete_comparison": "exact IDs, fields, callback/contact events and order",
+    "jni_adapted_descriptors_matched": 53,
+    "core": "crates/sable-physics",
+    "reference_runner": "tools/phase1/candidate-runner",
+    "evidence_index": "docs/phase-1-corrections-evidence.json",
+    "result_document": "docs/phase-1-corrections.md",
+    "independent_review": "docs/phase-1-corrections-review.md",
+    "phase_2_started": false,
+    "full_game_compatibility_confirmed": false,
+    "original_lock_sha256": "b0d511d6fc2d925fd139fdddf51e09086709ef8db00421836de93a46463c1740",
+    "candidate_lock_policy": "All external package source/version/checksums remain an unchanged subset of the original lock; only local packages and unused package pruning differ",
+    "external_review": "docs/phase-1-external-review.md",
+    "external_findings": {
+      "R1": "shared signed section/block domain checks before packed-key access; refusal preserves contents/contacts",
+      "R2": "closed callback contract v2 and explicit document families before producer/native/Engine execution"
+    },
+    "callback_input_contract_version": 2,
+    "callback_reference_index": "tools/phase1/abi_adapted/correction_observations/callback-contract-v2/provenance.json",
+    "original_native_cases": "22 immutable existing native case references reused; no change to originals",
+    "callback_reference_capture_version": "fresh closed callback contract v2; all successful outputs equal historical originals",
+    "rust_workspace_tests_passed": 11,
+    "callback_adverse_inputs": 45,
+    "callback_three_boundary_refusals": 135,
+    "independent_adverse_inputs": 68,
+    "independent_three_boundary_refusals": 204,
+    "clippy": {
+      "advisory_exit": 0,
+      "strict_exit": 101,
+      "retained_core_warnings": 68,
+      "new_R1_R2_warnings": 0,
+      "marten_warnings_fixed": 2,
+      "disposition": "docs/phase-1-lint-debt.md; precise inventory; no global suppression"
+    },
+    "runner_only_dependency_note": "Direct serde 1.0.228 reuses the existing locked external package; no new external identity or production-core dependency",
+    "external_acceptance": false
+  },
+  "phase_1_initial_execution": {
+    "date": "2026-11-19",
+    "starting_commit": "e01520c",
+    "status": "partial_blocked",
+    "evidence_index": "docs/phase-1-evidence.json",
+    "result_document": "docs/phase-1-results.md",
+    "independent_review": "docs/phase-1-review.md",
+    "prepared_reference_heads_changed": false,
+    "original_native_build": "passed; exact nightly, original manifests/lock/features; native dev build only",
+    "full_original_java_native_gate": "blocked; newVoxelCollider trailing boolean and removeRope return mismatch also corroborated in inspected published artifact",
+    "capture_evidence": "actual C original Java arithmetic/mock host and native ABI subset; no full runtime or candidate parity",
+    "extraction_started": false,
+    "phase_2_started": false,
+    "installed_tools": {
+      "java": "Temurin 21.0.13.1+2",
+      "rust": "nightly-2026-01-29",
+      "rustc_commit": "de6d33c033441c5880b863f94d7a3ec8cad141bd",
+      "preserved_stable": "1.99.1"
+    },
+    "companion_common_1_6_0": "published binary/source hashes match metadata; all 12 published Java sources match prepared revision; binary build attestation not established"
+  },
+  "phase_1_before_external_corrections_execution": {
+    "date": "2026-11-19",
+    "starting_commit": "4883a8e",
+    "status": "native_slice_verified_awaiting_external_validation",
+    "owner_scope": "Independent captured native components; full Java/Minecraft compatibility remains unconfirmed",
+    "configuration": "unchanged native / ABI-adapted fixture",
+    "adapted_java_declarations": {
+      "newVoxelCollider": "Append trailing boolean dynamic; ordinary static materials false; dedicated false/true cases",
+      "removeRope": "void return"
+    },
+    "native_binary_sha256": "09dbb2d7005fec5b17e905fb227a09fe18f4f147937722fbebb786ec03f88d1a",
+    "candidate_binary_sha256": "699dbc9aeb3bd80dc0b3ebdeefac3bc1c985acd98fa4de98aae5db270aed2543",
+    "original_sources_lock_solver_features_precision_modified": false,
+    "prepared_reference_heads_changed": false,
+    "old_capture_labels_changed": false,
+    "global_golden_eligibility": false,
+    "native_scenarios": 22,
+    "native_reference_jvms": 210,
+    "successful_callback_scenarios": 4,
+    "callback_reference_jvms": 40,
+    "diagnostic_timeout_scenarios": 2,
+    "diagnostic_jvms_per_case": 2,
+    "candidate_repeats_per_case": 3,
+    "numeric_comparison": "exact IEEE bits, same-host zero observed reference variance; abs=0 rel=0",
+    "discrete_comparison": "exact IDs, fields, callback/contact events and order",
+    "jni_adapted_descriptors_matched": 53,
+    "core": "crates/sable-physics",
+    "reference_runner": "tools/phase1/candidate-runner",
+    "evidence_index": "docs/phase-1-native-evidence.json",
+    "result_document": "docs/phase-1-native-results.md",
+    "independent_review": "docs/phase-1-native-review.md",
+    "phase_2_started": false,
+    "full_game_compatibility_confirmed": false,
+    "original_lock_sha256": "b0d511d6fc2d925fd139fdddf51e09086709ef8db00421836de93a46463c1740",
+    "candidate_lock_policy": "All external package source/version/checksums remain an unchanged subset of the original lock; only local packages and unused package pruning differ"
+  },
+  "phase_2_execution": {
+    "date": "2026-11-19",
+    "starting_commit": "bdf8156",
+    "phase_1_acceptance_commit": "b8373ea",
+    "status": "implemented_verified_external_acceptance_pending",
+    "core": "crates/sable-core",
+    "reference_tools": "tools/phase2",
+    "original_java": "9b1a3d1555d35db9fb7b1103701e7490f0a968b9",
+    "reference_sources_modified": false,
+    "external_packages_changed": false,
+    "solver_changed": false,
+    "evidence_index": "docs/phase-2-evidence.json",
+    "phase_3_started": false,
+    "full_game_compatibility_confirmed": false,
+    "new_rust_tests": 43,
+    "preserved_phase1_rust_tests": 11,
+    "original_source_cases": 40,
+    "phase1_differential_cases": 26,
+    "clippy_unique_accepted_diagnostics": 68,
+    "new_diagnostics": 0,
+    "candidate_sha256": "7201150d9a207dc6f8ae308d540f31c2e6aa7229c27ebe04e9b50f3c9d2409aa",
+    "external_review_corrections": {
+      "starting_commit": "09bba15",
+      "reviewed_implementation": "1dea88f2e0631e1205ae6c88d2dd9576e49fb945",
+      "status": "corrected_verified_ready_for_external_re_review",
+      "external_acceptance": false,
+      "evidence_index": "docs/phase-2-revisions-evidence.json",
+      "findings_closed": [
+        "R1",
+        "R2",
+        "R3",
+        "R4"
+      ],
+      "R5_resolution": "explicit atomic-batch child motion deviation with unchanged-helper contract and independent public API tests",
+      "P3_storage_note": "private Unix temporary, preserved destination mode, owned cleanup",
+      "rust_tests": 61,
+      "new_correction_rust_tests": 7,
+      "phase2_comparator_guards": 17,
+      "phase2_refusals": 155,
+      "phase2_coordinate_context_checks": 18,
+      "phase1_differential_cases": 26,
+      "new_lint_diagnostics": 0,
+      "candidate_sha256": "fe0a8765435623cc4c597619b4a1ade19c4fa5c868b6af28ae98b98e5e603b9c",
+      "phase3_started": false
+    }
+  },
+  "phase_3_execution": {
+    "date": "2026-11-19",
+    "starting_commit": "912d3bc",
+    "status": "partial_blocked_ready_for_external_review",
+    "evidence_index": "docs/phase-3-evidence.json",
+    "result_document": "docs/phase-3-results.md",
+    "sdk_contract": "docs/phase-3-sdk-contract.md",
+    "independent_review": "docs/phase-3-review.md",
+    "sunrise_current_source": {
+      "repository": "https://github.com/sunrise-org/sunrise.git",
+      "commit": "d4be68317b0c86f1409d8cce65d467ddd40f68ed",
+      "sdk": "sunrise-mod-api 0.1.0, unmodified current official source; not release rlibs",
+      "compiler": "rustc 1.99.1 (58cf8f9c35b355199727627d07ae34a4e2846d67)",
+      "target": "aarch64-apple-darwin",
+      "game": "26.3",
+      "official_source_unmodified": true,
+      "runtime_executed": false
+    },
+    "sunrise_release": {
+      "commit": "520fc4882de3abb8ecd8b98293f4d7263bc88181",
+      "rust": "1.99.1",
+      "game": "26.3",
+      "content_api": "0.2",
+      "package_format": 6,
+      "sdk_manifest_sha256": "7a6c3584c76e3b339fe29a2c6166356517eef6ce19b224911897373e2cfd26dd",
+      "signature_verified": false,
+      "runtime_downloaded": false,
+      "runtime_executed": false,
+      "api_source_downloaded": true,
+      "api_source_sha256": "2ce6c9eb54b511957551e0589d4a8750c86a8837b169ff4fd4bf4390c0e374c3",
+      "api_source_census": {
+        "schema_version": 1,
+        "release_commit": "520fc4882de3abb8ecd8b98293f4d7263bc88181",
+        "sha256": "2ce6c9eb54b511957551e0589d4a8750c86a8837b169ff4fd4bf4390c0e374c3",
+        "archive_unpacked": false,
+        "rust_files_scanned": 1773,
+        "symbol_census": {
+          "StructureRef": [],
+          "StructureCellRef": [],
+          "StructureMotionPart": [],
+          "carrier_assemble": [],
+          "carrier_disassemble": [],
+          "local_world_save_barrier": []
+        },
+        "first_members": [
+          "./crates/sunrise-core/src/arm_pose.rs",
+          "./crates/sunrise-core/src/bin/density_parity.rs",
+          "./crates/sunrise-core/src/bin/float_log_parity.rs",
+          "./crates/sunrise-core/src/bin/geometry_parity.rs",
+          "./crates/sunrise-core/src/bin/noise_parity.rs",
+          "./crates/sunrise-core/src/bin/parity.rs",
+          "./crates/sunrise-core/src/bin/tick_parity.rs",
+          "./crates/sunrise-core/src/biome.rs",
+          "./crates/sunrise-core/src/biome/seed_hash.rs",
+          "./crates/sunrise-core/src/bounding_box.rs",
+          "./crates/sunrise-core/src/carving.rs",
+          "./crates/sunrise-core/src/carving/ellipsoid.rs"
+        ]
+      },
+      "ancestry": {
+        "base": "520fc4882de3abb8ecd8b98293f4d7263bc88181",
+        "head": "d4be68317b0c86f1409d8cce65d467ddd40f68ed",
+        "status": "ahead",
+        "ahead_by": 743,
+        "behind_by": 0,
+        "merge_base_commit": {
+          "sha": "520fc4882de3abb8ecd8b98293f4d7263bc88181",
+          "url": "https://api.github.com/repos/sunrise-org/sunrise/commits/520fc4882de3abb8ecd8b98293f4d7263bc88181",
+          "html_url": "https://github.com/sunrise-org/sunrise/commit/520fc4882de3abb8ecd8b98293f4d7263bc88181"
+        }
+      },
+      "artifacts": {
+        "api-aarch64-apple-darwin.tar.xz": {
+          "sha256": "0f89c0d6a694669e69d774d7dc9579c6682505405a90dfde7c429aef197659ec",
+          "size": 34299016,
+          "kind": "api",
+          "codec": "xz",
+          "target": "aarch64-apple-darwin",
+          "side": "client"
+        },
+        "api-source.tar.xz": {
+          "sha256": "2ce6c9eb54b511957551e0589d4a8750c86a8837b169ff4fd4bf4390c0e374c3",
+          "size": 1725396,
+          "kind": "api-source",
+          "codec": "xz"
+        },
+        "runtime-aarch64-apple-darwin.tar.xz": {
+          "sha256": "24e98155dab18d809fb31f436398b98db66c4d534f9085e3ade5c368ae8660f1",
+          "size": 64468136,
+          "kind": "runtime",
+          "codec": "xz",
+          "target": "aarch64-apple-darwin",
+          "side": "client"
+        }
+      }
+    },
+    "accepted_physics_compiler": "nightly-2026-01-29",
+    "sdk_compiler": "1.99.1",
+    "same_compiler_sdk_probe": "failed_E0658_atomic_try_update",
+    "mixed_compiler_rlibs_used": false,
+    "production_adapter": "engine-free capability/registry/change/frame preflight contracts; no live SDK link",
+    "physics_change": "retain actual bodies on content-only revisions; guard published motion and generation",
+    "original_sources_solver_features_precision_modified": false,
+    "prepared_reference_heads_changed": false,
+    "external_packages_changed": false,
+    "accepted_tests_preserved": 61,
+    "rust_tests": 78,
+    "new_rust_tests": 17,
+    "native_callback_differential_cases": 26,
+    "phase2_algorithm_value_cases": 40,
+    "clippy_accepted_fingerprints": 68,
+    "new_lint_diagnostics": 0,
+    "review_scenarios": 16,
+    "world_generated": false,
+    "runtime_executed": false,
+    "playable_complete": false,
+    "external_acceptance": false,
+    "phase_4_started": false,
+    "blockers": [
+      "public_live_transformed_local_world",
+      "durable_host_core_ownership_save_barrier",
+      "authoritative_transformed_cell_actions",
+      "live_local_chunk_BE_rendering",
+      "tested_separate_compiler_data_boundary",
+      "actual_official_runtime_scenarios"
+    ]
+  },
+  "phase_3_continuation": {
+    "date": "2026-11-19",
+    "starting_commit": "c1feb24",
+    "status": "Bounded Phase3 experimental API/mod/physics/world milestone ready for external review after actual independent owner-command launch and clean final census. External acceptance pending; Phase4/publication not started; full16/wholemod compatibility not claimed.",
+    "runtime_kind": "experimental_local",
+    "official_base": "d4be68317b0c86f1409d8cce65d467ddd40f68ed",
+    "engine_branch": "local/live-world-phase3-continuation",
+    "engine_worktree": ".local/phase-3-continuation/sunrise-dev",
+    "physics_compiler": "nightly-2026-01-29",
+    "sdk_compiler": "1.99.1",
+    "mixed_compiler_rust_rlibs": false,
+    "compiler_boundary": "versioned C ABI, separately built nightly cdylib and stable loader; actual same-process native/callback reference comparison",
+    "source_references_modified": false,
+    "old_receipts_rewritten": false,
+    "runtime_executed": true,
+    "playable_complete": false,
+    "upstream_coordination_performed": false,
+    "upstream_approval": "pending; local experiment only",
+    "external_acceptance": false,
+    "phase_4_started": false,
+    "execution_plan": "docs/phase-3-continuation.md",
+    "evidence_index": "docs/phase-3-continuation-evidence.json",
+    "target_engine": "sunrise",
+    "demo_addendum": "prompts/phase-3-demo-addendum.txt",
+    "horizon_adapter_goal_superseded": true,
+    "latest_official_recheck": {
+      "path": ".local/phase-3-continuation/engine-evidence/official-a2-20261121/receipt.json",
+      "sha256": "49a7e447e00b6e88defc6a8b84d2a4e92032a5cfee5b1e7639737482de81a1a8",
+      "observed_main": "81e16dbad186f9da5a219f32bb8a065c0d967bfa",
+      "observed_newest_published_sdk": "a2dac1ee7526d80cf355722962d0195c16f79bd2",
+      "scope": "Bounded own-source/policy/public metadata GET only; no rebase/latest compiler/build/runtime compatibility proof; claim/spec approval pending"
+    },
+    "engine_source_checkpoint": {
+      "tip": "87e9a3ae80dfd56603b4b52a1e9e6e8fd9419f32",
+      "base": "d4be68317b0c86f1409d8cce65d467ddd40f68ed",
+      "commits": [
+        "e999f7cef8739f3d0a9e8e1c8b66e3f1764865a1",
+        "f687661b9d99038d38027288e0b44c47ec89da4a",
+        "9da9109624b508c3ef48f5eaa7cf475af7168573",
+        "22ff5f84d105a5726a11c87a043cf9d7cffa637d",
+        "a944343976f58423a5b11a4afb2c93fbea4bb6dd",
+        "a4347f448aebca8becf1ce878741ef45a1d9335b",
+        "7c750589a877a7b7eadc8edee814207b4e7fdc29",
+        "0d47d15b86cc5063aedfcb2c98faebf322a25b86",
+        "ba3bc9ba0b8d3ab2c2a5014a6e0fb141560242d0",
+        "4e304766528935f3c37708a137d2248eff66a76a",
+        "f2eb4db856f8dcdc7faf5cbbc67ace4e7f243761",
+        "18b66007acd196f01afcdd7f77415c4ce6f36499",
+        "860fd62195b09a521c3eec2d27692ee278b1e235",
+        "74b542724f3aff1da3927f585fc06fbc35f7f2c6",
+        "266a63ec1a5c5215f5131ff9336b045160a1cc80",
+        "3392fd2de281ecb384cfc27573b243e31014ac5a",
+        "2741e18b6ac040a0a3a6b2a14f052d4da772b7d1",
+        "f47486986666887072901ffaa5b04dc53a01b1a5",
+        "7522ac419df177a2254aca201f503592ec46e1a8",
+        "e0620feaa4d63c0cd2e14a971ce9aa596df80131",
+        "87e9a3ae80dfd56603b4b52a1e9e6e8fd9419f32"
+      ],
+      "patch_index": "patches/sunrise/phase-3-continuation/series.json",
+      "reconstructed_tree": "eff11cfcf160ffa2b6fc947e0997a7275bdb611a",
+      "temporary_index_reconstruction_passed": true,
+      "status": "21 local patches reconstruct exact clean87e9/eff11 tree; normalSDK9/private23build10/39strict0 PASS. Actualcurrent77/GIF/orientation157/safe383/fullreopen completed with explicit preserved118/47 failures. Independent owner-command launch/final census PASS; external acceptance pending; no wholepr_ready/latestmain/submission claim.",
+      "independent_final_artifact_replay": {
+        "receipt": {
+          "path": ".local/phase-3-continuation/coordinator-validation/post-sdk-648-independent/receipt.json",
+          "sha256": "26a205fdff64396b078571a2e24b7eb0369720726c8c0a496f05769fa5e9e5f6"
+        },
+        "passed": 40,
+        "game_fixtures": 33,
+        "pure_unit_tests": 7,
+        "sdk_or_window_claim": false,
+        "note": "Historical SDK14/648 component replay retained; not a current SDK21 artifact claim."
+      },
+      "sdk_runtime_commit": "87e9a3ae80dfd56603b4b52a1e9e6e8fd9419f32",
+      "independent_fixture_commit": "f47486986666887072901ffaa5b04dc53a01b1a5",
+      "tree": "eff11cfcf160ffa2b6fc947e0997a7275bdb611a",
+      "independent_sdk21_artifact_replay": {
+        "path": ".local/phase-3-continuation/bridge/upstream21-binary-independent/receipt.json",
+        "sha256": "d8be34e3363ca0bd05d9bfe8ca1c89cbca947b553faa2a2c4430bc6bfb5136c9",
+        "passed": 41,
+        "scope": "Exact Source5 Rust matching committed21;13Game+15coreticks+13lowerWAL, execution before normal SDK export; build metadata attribution retained."
+      }
+    },
+    "actual_component_checks": {
+      "preserved_rust_tests": 78,
+      "new_actual_bridge_replica_tests": 5,
+      "native_callback_reference_cases_per_route": 26,
+      "stable_java_helper_reference_cases": 40,
+      "accepted_lint_fingerprints": 68,
+      "new_port_lint_diagnostics": 0,
+      "sunrise_game_fixture_cases": 2,
+      "sunrise_unit_cases_in_same_four_test_binary": 2,
+      "interactive_game_run": true,
+      "interactive_scope": "SDK74/private0017: actualnative200 fall/contact/rest andchestcursor/translationcarry/jump/dismount PASS in prior boundedruns; 138Return andordinaryretirementrestore then NEWcapture/rearm/reset89assertionsPASS/cleanexit. Non-authoractualgap/slab/Yrotation PASS, horizontal-axis Zrotation losesplayer support; latterrunstopped, savedcontrolledpausedfalse/epoch2. No complete16matrix/ownerhandoff.",
+      "sdk_codec_unit_tests": 4,
+      "new_sdk_port_strict_clippy_diagnostics": 0,
+      "rotating_native_reconstruction": "four actual stepped samples exact native pose/velocity bits in a new native scene; not full game/process restart; coordinator and non-author executed five-test binary",
+      "frozen_game_host_snapshot7": {
+        "binary_sha256": "6cc288e8735fa73a8c89822e1de0eccbe280b600c43466f23a50b591057ad8e2",
+        "filtered_functions": 11,
+        "actual_fresh_game_functions": 7,
+        "unit_functions": 4,
+        "client_four_source_case": 1,
+        "parked_level_cases": 2,
+        "author_and_non_author_pass": true,
+        "receipt": {
+          "path": ".local/phase-3-continuation/independent-validation/game-host-snapshot7/receipt.json",
+          "sha256": "49316c8967ed8632f1822e15b567a98de09604c14f0fcca29a602fc3aede3eda"
+        },
+        "scope": "Frozen source7 only; not SDK/window, later outerTx guard, ownership transfer/WAL or full saved-world restart"
+      },
+      "frozen_game_host_snapshot9": {
+        "binary_sha256": "a50b30b6d39e8e9ceaa9ef36b874277b591a5fdfdfa30b790684f2e93ed076b5",
+        "filtered_functions": 11,
+        "actual_fresh_game_functions": 7,
+        "unit_functions": 4,
+        "client_four_source_case": 1,
+        "parked_level_cases": 2,
+        "author_and_non_author_pass": true,
+        "scope": "Frozen check9 adds outerTxBusy and true unbound-level revision reads; not new SDK/window/ownership transfer/WAL",
+        "receipt": {
+          "path": ".local/phase-3-continuation/coordinator-validation/game-host-snapshot9-independent/receipt.json",
+          "sha256": "11fcef1e5c3aae20a5d786ffdeab1197f6b9a413caa04fbaf7105df3a063685d"
+        }
+      },
+      "host_lifecycle_v4": {
+        "integration_invariants": 15,
+        "bounded_cycle_unit": 128,
+        "strict_no_default_clippy_diagnostics": 0,
+        "author_and_non_author_pass": true,
+        "scope": "Engine-free core invariants including receipt-only postcommit latches; not actual host",
+        "receipt": {
+          "path": ".local/phase-3-continuation/coordinator-validation/core-policy-v4-independent/receipt.json",
+          "sha256": "6dbd249ac50a163b74b4b76ce3d7286c9babe7ecf1a63dcc2252829acd820ff4"
+        }
+      },
+      "current_rust_test_total": 94,
+      "all_78_old_rust_names_preserved": true,
+      "final_v4_regressions": ".local/phase-3-continuation/preserved-regressions-core-v4/commands.json",
+      "lower_durable_backend_snapshot3": {
+        "filesystem_cases": 8,
+        "core_scheduler_cases": 2,
+        "world_scheduler_cases": 1,
+        "author_and_coordinator_replay_pass": true,
+        "scope": "Exactlowercheck3binary/source only; noactualGame/commondecision/publictransfer/sessionfence/window",
+        "receipt": ".local/phase-3-continuation/coordinator-validation/lower-durable-backend-independent/receipt.json"
+      },
+      "sdk_adapter_unit_tests": 17
+    },
+    "runtime_observed_scope": "SDK21/private23/F90 actualnative77/GIF,orientation157/exactremaining-safe383/fullreopen, explicitrearmrecovery421, actualnon-authorownerlaunch/readbacks/savequit/finalcensusPASS. World421/73iron21diamond/playerblackstone1/Creativeground/noWAL. HistoricalSDK20support/menu/clock/generic665 attribution preserved; farf32/occupiedresetunsupported andbroaderpartialmatrixremain.",
+    "personal_adapter_loaded": true,
+    "physical_demo_executed": true,
+    "ordinary_runtime_report": {
+      "path": ".local/phase-3-continuation/instance/ordinary-baseline-2/report.json",
+      "sha256": "36cdbfb79b7cf72206ca8ba3b06c6edaac8803a344bd6397e04e9c9fb6b4a158",
+      "scenes_passed": 2,
+      "phase3_playable_acceptance": false
+    },
+    "review_world_path": ".local/phase-3-continuation/instance/game/saves/Experimental local Sunrise - Phase 3",
+    "sdk_export_recheck": {
+      "main": "bbbf904a634badbac2be93562b49204ec4e2ad8f",
+      "committer_date": "2026-11-19T21:16:27Z",
+      "additional_commits_since_4f80": 18,
+      "relevant_source_changes_since_4f80": 0,
+      "sdk_api_source_blob": "e3c4cb8defa294ad8e837bc079dfb699ac748cc0",
+      "exporter_unchanged_from_development_base": true,
+      "metadata": ".local/phase-3-continuation/upstream-sdk-export-recheck.json",
+      "development_base_preserved": true,
+      "latest_main_fit_tested": false
+    },
+    "sdk_export_status": "SDK21/87e9 normal9/fourstrictconsumers/private23normal10/39strict0/currentactual77/safe383/independentownerlaunch PASS. Independentfixture18 normal15/native665 retain SDK20 attribution; legacyWASM runtimeLoadFAIL, currentofficialnative-only. No stock/latestSDKcompatibility claim.",
+    "prepared_ordinary_world_report": {
+      "path": ".local/phase-3-continuation/instance/world-preparation-3/report.json",
+      "sha256": "1f06c67d0638ca4e1d4076f500698d0d1dade38a755be66d4b77226ac2701f86",
+      "scenes_passed": 3,
+      "safe_visual_review_state": "authoritative mob controls and server night vision passed full process restart; coordinator inspected real PNGs; personal adapter still disabled"
+    },
+    "safe_environment_report": {
+      "path": ".local/phase-3-continuation/instance/environment-readiness-2/report.json",
+      "sha256": "6bcbd0412775970c10c631ac59a26aec53127ceb5d8048c6dea32c9cbcbf8a7a",
+      "scenes_passed": 2,
+      "assertions_passed": 37,
+      "physical_demo": false
+    },
+    "sdk_api_source_checkpoint": {
+      "commit": "a944343976f58423a5b11a4afb2c93fbea4bb6dd",
+      "generation_routes": [
+        "native",
+        "wasm32-unknown-unknown",
+        "native all features"
+      ],
+      "exported_files": 1907,
+      "exported_bytes": 12426448,
+      "archive": ".local/phase-3-continuation/sdk-export/releases/sdk-a944343976f58423a5b11a4afb2c93fbea4bb6dd/api-source.tar.xz",
+      "archive_bytes": 1757260,
+      "archive_sha256": "7fc891eb787fc72bc068bbe85f04643328dfc82ef5da584f2975d9fd551ccf78",
+      "consumer_fidelity_check": "FAILED E_CLOSURE after all4 compilation routes; exact receipt engine-evidence/a944343/sdk-consumer-closure/receipt.json",
+      "package_and_load": "pending"
+    },
+    "sdk_bootstrap_first_observation": {
+      "path": ".local/phase-3-continuation/instance/sdk-bootstrap-a944-1/report.json",
+      "sha256": "1424bd1dfe109d052695a83c4be2d3de5dce1533d526cbd42b1cdc3b90c6cd66",
+      "sdk_native_app_verified": true,
+      "sdk_hook_bridge_loaded_observed": true,
+      "gameplay_result": "FAILED bodies0 instead of3, all four owners awaiting source activation",
+      "native_epoch": 0,
+      "physical_demo_passed": false,
+      "no_live_inventory_seeded": true
+    },
+    "sdk_api_source_fixed_gate": {
+      "commit": "7c750589a877a7b7eadc8edee814207b4e7fdc29",
+      "result": "PASS official generation/native+wasm+all-features/4 actual compilers/strict API+WASMTIME package and feature comparison",
+      "archive": {
+        "path": "/Users/delete/projects/create2rust_port/sable-rust/.local/phase-3-continuation/sdk-export/api-source-7c75058.tar.xz",
+        "bytes": 1760972,
+        "sha256": "120c8eeaef26187c7f1f6b816ea3c571098463f7e474554cee44b25903aa0cc7"
+      },
+      "evidence": ".local/phase-3-continuation/engine-evidence/7c75058/sdk-native-unifiers/receipt.json",
+      "rebuilt_game_or_final_sdk": false,
+      "non_author_focused_tests": 37
+    },
+    "sdk_bootstrap_activation_observation": {
+      "path": ".local/phase-3-continuation/instance/sdk-bootstrap-a944-activation-1/report.json",
+      "sha256": "39fc7ed3ff0c1383b166c2b8118be7fee8faa6b56a452dde8c25e2652cf4bd61",
+      "result": "FAILED third/fourth projection Budget from negotiated max_levels2; actual source callbacks and real BEs active",
+      "native_epoch": 0,
+      "partial_source_contents_preserved": true
+    },
+    "official_942_recheck": {
+      "main": "94256510f74e6843754e0a93fd9e4da7e45b1056",
+      "committer_date": "2026-11-19T23:45:48Z",
+      "additional_commits_since_bbbf": 337,
+      "full_git_changed_paths": 664,
+      "unchanged_previously_traced_blobs": 8,
+      "reviewed_changed_traced_blobs": 2,
+      "merged_sdk_overlap": 3472,
+      "open_sdk_overlap": [
+        3468,
+        3478
+      ],
+      "development_base_preserved": true,
+      "reference_head_preserved": true,
+      "latest_main_fit_tested": false,
+      "audit": {
+        "path": ".local/phase-3-continuation/latest-main-942-source-audit.json",
+        "sha256": "dc4348bf9658806fa6f1a9a4d1fd111498354b41d7b69d8d3eb04ed7b0bf9243"
+      },
+      "publication_or_coordination_performed": false
+    },
+    "native_artifact_rebuild_v4": {
+      "compiler": "nightly-2026-01-29:rustc1.95.0-nightly(de6d33c03)",
+      "rapier": "38e92f117590862481a53df6fc69a5d893e29186",
+      "features": [
+        "f32",
+        "dim3",
+        "simd-nightly",
+        "parallel",
+        "std"
+      ],
+      "bridge_and_ffi_source_unchanged": true,
+      "source_identity_audit": "coordinator actual source hashes + Cargo fingerprint/compiler/linkage reads; byte-change cause not inferred",
+      "current_private_library": {
+        "path": "/Users/delete/projects/create2rust_port/sable-rust/.local/phase-3-continuation/instance/native-private/libsable_physics_ffi.dylib",
+        "sha256": "f90e515b1e0dee23f504698bad13db425d4a96d7be9453c2955bd7ea3cac63b1",
+        "bytes": 8780744
+      },
+      "old_library_retained": {
+        "path": "/Users/delete/projects/create2rust_port/sable-rust/.local/phase-3-continuation/bridge/retained-native/c2283087811f3585976fcf12619ef603083a757a7ecdb46ccbf0e44daacf0d78/libsable_physics_ffi.dylib",
+        "sha256": "c2283087811f3585976fcf12619ef603083a757a7ecdb46ccbf0e44daacf0d78",
+        "bytes": 8866424
+      },
+      "component_checks": "Five ABI invariants,22native+4callback exact reference cases and guards PASS; non-authorfive+smokePASS",
+      "new_game_execution": false,
+      "audit": {
+        "path": ".local/phase-3-continuation/coordinator-validation/rebuilt-native-v4/source-compiler-audit.json",
+        "sha256": "40b5066e7a3ffdf731e98b40920f49acf60d0347e3becd3871bc9d651dcc489e"
+      }
+    },
+    "personal_local_series": {
+      "scope": "Two local tested component checkpoints; combined worktree was verified by the preserved94 suite before commits. First isolated commit was not independently rerun. Runtime adapter/Phase3 gameplay remain pending.",
+      "base": "c1feb24d40bf125d8eacad16a7eea4b82e03b897",
+      "commits": [
+        {
+          "commit": "42c8dc3856b771bcae8f7fe4307d1106d2ffef9c",
+          "tree": "0494f7d0fb37a7e876fdc0a00dbc954dd608f762",
+          "subject": "Separate stable Sunrise callers from the accepted nightly physics"
+        },
+        {
+          "commit": "b74251ac5a7b6878826b16fac03752b77cbefe37",
+          "tree": "e26899b1766d5db619648ca09efc39943f6b326b",
+          "subject": "Track real host lifecycle outcomes without owning live payloads"
+        }
+      ],
+      "receipt": ".local/phase-3-continuation/personal-series/receipt.json",
+      "receipt_sha256": "3f6031943d5ab238065feb6e05e36728a86648edc9c6d8dd73798d90d192eb8d",
+      "published": false
+    },
+    "lower_player_save_validation": {
+      "scope": "Coordinator non-author actual lower playerdata41 (7new common queue)/one explicit aggregateignored plus real filesystem9; no compiler/Game/common Game decision/transfer/fullworld/window proof.",
+      "binary_sha256": "537485d669cd4c8fe68feaf4e37bbb95f466957cec37070fd1087dcb8068e91e",
+      "playerdata_passed": 41,
+      "new_common_queue_tests": 7,
+      "aggregate_budget_test_ignored": 1,
+      "filesystem_passed": 9,
+      "resource_manifest_sha256": "9d2cdb3a151530dce0b7fa911e3e7b239f6cb51e421550c60ee019d31ce70b59",
+      "independent_receipt": ".local/phase-3-continuation/coordinator-validation/playerdata-lower-independent/receipt.json",
+      "independent_receipt_sha256": "56d97f986494585a3257ba53274aff9928883c521a264b35cc2c78386cc1b94d",
+      "source_attribution": "Exact frozen own three files+handwritten nonGame map and archived generated inputs; concurrent Game discovery was not a fulltree snapshot. Engine source may now evolve independently.",
+      "game_integration_proved": false
+    },
+    "durable_game_check7": {
+      "scope": "Exact bounded frozen actualGamecheck7 source/build/0-of-9-failed-run logs retained; no failure rewritten and no new test run. OSfence child observed success but overall fresh-process recoveryfailed. Budget-neutral executable move before rebuild; no game/world/resource/cache copy.",
+      "binary_sha256": "88d97895d4b2544bebf9e16b405f551fc9fb3b970cba3f7f67d92940d63e5c69",
+      "retained_binary": "/Users/delete/projects/create2rust_port/sable-rust/.local/phase-3-continuation/engine-evidence/retained-test-executables/sunrise_client-38b164d88a68bacf",
+      "actual_cases_passed": 0,
+      "actual_cases_failed": 9,
+      "whole_fresh_process_recovery_passed": false,
+      "partial_os_fence_phase_observed": true,
+      "evidence": ".local/phase-3-continuation/engine-evidence/durable-game-check7-failures/coordinator-copy.json",
+      "evidence_sha256": "1d85e53f5c787ab6adfdedfdb3fb822fb548a0cb0c795e43cacea0f235f5f7b4",
+      "corrected_source_tests_pending": true,
+      "physical_demo_proved": false
+    },
+    "durable_game_check8": {
+      "scope": "Frozen actual Game nine-case author run 5PASS/4FAIL; coordinator independently executed exact binary five passing cases. Corrected source remains pending; no normal SDK/window/physical demo proof.",
+      "binary_sha256": "3267d8760a71c4489fd9b21df8e57861cbf900a1eef5284988a3b6dd42fbbff0",
+      "retained_binary": "/Users/delete/projects/create2rust_port/sable-rust/.local/phase-3-continuation/engine-evidence/retained-test-executables/check8-sunrise_client-38b164d88a68bacf",
+      "author_cases_passed": 5,
+      "author_cases_failed": 4,
+      "independent_cases_passed": 5,
+      "whole_fresh_process_recovery_passed": false,
+      "evidence": ".local/phase-3-continuation/engine-evidence/durable-game-check8/coordinator-copy.json",
+      "evidence_sha256": "a58970252051ffa26568e331422421c523eb609493a6e96e541625350160a02e",
+      "independent_receipt": ".local/phase-3-continuation/coordinator-validation/durable-game-check8-independent/receipt.json",
+      "independent_receipt_sha256": "c3d07b7dc8e8638b7eae035784e57e326970acc991a9cec0711f71e66b69d54d",
+      "physical_demo_proved": false
+    },
+    "durable_game_check9": {
+      "scope": "Frozen actual Game nine-case author run 8PASS/1FAIL; coordinator independently executed exact binary eight passing cases. Sole canonical stock-factory transfer admission failure retained; correction pending. No normal SDK/window/physical demo proof.",
+      "binary_sha256": "5269cecc906a80128681ecc4f24a7b4f6acc389d3431bc40f76aeb8684122170",
+      "retained_binary": "/Users/delete/projects/create2rust_port/sable-rust/.local/phase-3-continuation/engine-evidence/retained-test-executables/check9-sunrise_client-38b164d88a68bacf",
+      "author_cases_passed": 8,
+      "author_cases_failed": 1,
+      "independent_cases_passed": 8,
+      "whole_fresh_process_recovery_passed": true,
+      "evidence": ".local/phase-3-continuation/engine-evidence/durable-game-check9/coordinator-copy.json",
+      "evidence_sha256": "e0018e4270624a5e0844eb03aa3b8920c46a19197dd37d02ea2907792174d82a",
+      "independent_receipt": ".local/phase-3-continuation/coordinator-validation/durable-game-check9-independent/receipt.json",
+      "independent_receipt_sha256": "b8cbeb88848694423a10b3916efb64baa3d8577139f6a97529dcf2a570907a2b",
+      "physical_demo_proved": false
+    },
+    "sdk_rust_source_component": {
+      "scope": "Official exact SDK Rust1.99.1 source-only component installed; existing compiler and compiled libraries unchanged. No wasm build or runtime claim.",
+      "version": "1.99.1",
+      "archive_sha256": "e485a88c45db546b73571df7bebfcb4454ba4fb552c492e25fc5b00eeb5bf22d",
+      "source_files": 3689,
+      "source_bytes": 72825366,
+      "existing_binary_files": 130,
+      "existing_binary_bytes_unchanged": true,
+      "compiler_upgraded": false,
+      "acquisition_receipt": ".local/phase-3-continuation/sdk-inputs/rust-src-1.99.1/acquisition.json",
+      "acquisition_receipt_sha256": "be17c5a67610a67387b4866fba042852e79594bd8c4c9c576ca5e10a074d13d0",
+      "installation_receipt": ".local/phase-3-continuation/sdk-inputs/rust-src-1.99.1/installation.json",
+      "installation_receipt_sha256": "8518c92e3bb25b7714f8a79deb94ff96785487d5beab2314499d4b1ecd1ce53d",
+      "wasm_compile_executed": false
+    },
+    "durable_game_check10": {
+      "scope": "Author actual Game8PASS1FAIL. Canonicalstockfactory/occupiedbatchrefusal nowpasses; subsequentpublicprepareBusyfailure independentlyreproduced101, NOT a test pass. No SDK/window/physical demo.",
+      "binary_sha256": "72ce07e3fe6a851304ddfd9f8df2fb4176ca5e9686c6aac19303be1c7d5703cb",
+      "author_cases_passed": 8,
+      "author_cases_failed": 1,
+      "non_author_known_failure_reproduced": true,
+      "non_author_cases_passed": 0,
+      "evidence": ".local/phase-3-continuation/engine-evidence/durable-game-check10/coordinator-copy.json",
+      "evidence_sha256": "4e63b976427ecd5f7815d0a05c8229f0aec5ea14edd4177fa7f1ce773590561e",
+      "non_author_receipt": ".local/phase-3-continuation/coordinator-validation/durable-game-check10-independent/receipt.json",
+      "non_author_receipt_sha256": "b8c8abe015138afc379d85d65037180079ffd4789a7bd98806b7219a21febdb4",
+      "physical_demo_proved": false
+    },
+    "durable_game_check15": {
+      "scope": "Complete actual public transferPASS; fullselectedfamily21PASS1obsoletecallback-retirementassertFAIL reproducednon-author, client1/parked2PASS. Correctedassertion+trustpolicytestawaitfinalartifact. No normalSDK/window/physicaldemo.",
+      "binary_sha256": "b3d7d7eb489e0468f56d2dc105dad3e0e24e37ffd2f287822ae96c9c74711c27",
+      "public_transfer_passed": true,
+      "selected_family_passed": 21,
+      "selected_family_failed": 1,
+      "client_capacity_passed": 1,
+      "parked_readiness_passed": 2,
+      "full_family_passed": false,
+      "evidence": ".local/phase-3-continuation/engine-evidence/durable-game-check15/coordinator-copy.json",
+      "evidence_sha256": "6cad71d823aebb316cd5c323374f21cddd47cb980c6d57dc9a11def7e4932973",
+      "non_author_receipt": ".local/phase-3-continuation/coordinator-validation/durable-game-check15-independent/receipt.json",
+      "non_author_receipt_sha256": "7a6ca925b56d984e2afaf2cbf6867b9b01e3af08d738c15d47cf26f28ba85517",
+      "physical_demo_proved": false
+    },
+    "prior_official_rechecks": [
+      {
+        "main": "4f80f416ae19fc60cc2125b54ec4ff0fde713a1e",
+        "committer_date": "2026-11-19T20:01:32Z",
+        "ahead_of_development_base": 132,
+        "development_base_preserved": true,
+        "latest_main_fit_tested": false,
+        "issue_1022": "open, claimed label, no assignee; no public coordination performed"
+      },
+      {
+        "main": "94256510f74e6843754e0a93fd9e4da7e45b1056",
+        "committer_date": "2026-11-19T23:45:48Z",
+        "observed_at": "2026-11-20T01:19:31.063Z",
+        "development_base_preserved": true,
+        "latest_main_fit_tested": false,
+        "source_audit": ".local/phase-3-continuation/latest-main-942-source-audit.json",
+        "pending_audit": ".local/phase-3-continuation/upstream-current-942-pending.json",
+        "issue_1022": "open, claimed label, no assignee; bounded comments/searches are not a census; no public coordination"
+      }
+    ],
+    "durable_lower_final": {
+      "scope": "Frozen final-lower exactedbb12filesystem+41playerdata/1explicitaggregateignored independentlyPASS with preparedresources/empty stderr; internalAPI native/wasm checks separatelyPASS, not normalSDK/window.",
+      "binary_sha256": "edbb411733d8081c4360bd2da60d7c56e349f4a577c112d5875f5840d623f4cd",
+      "filesystem_passed": 12,
+      "playerdata_passed": 41,
+      "aggregate_ignored": 1,
+      "evidence": ".local/phase-3-continuation/engine-evidence/durable-lower-final/coordinator-copy.json",
+      "evidence_sha256": "69bbf307172e87daec086f298bfd8f71f7fa1cee81be5ee62f37d7cfd7df858f",
+      "non_author_receipt": ".local/phase-3-continuation/coordinator-validation/durable-lower-final-independent/receipt.json",
+      "non_author_receipt_sha256": "c8a6291e51b87b17467ea2428227a66a9f7f702bcec6cb49c9e7953bf5f58bd0",
+      "gameplay_proved": false
+    },
+    "readiness_4e304766": {
+      "source_commit": "4e304766528935f3c37708a137d2248eff66a76a",
+      "evidence": ".local/phase-3-continuation/engine-evidence/pr-ready-4e304766/coordinator-copy.json",
+      "official_command_exit": 1,
+      "workspace_and_server_clippy": "PASS",
+      "game_unit_selection": {
+        "passed": 1965,
+        "failed": 1,
+        "failed_scope": "Unchanged invalid-UTF8 directory host filesystem test; complementary selected crates pending"
+      },
+      "doc_tests_passed": 107,
+      "dispatch_tests_passed": 49,
+      "python": {
+        "run": 2081,
+        "failures": 17,
+        "errors": 13,
+        "skipped": 33
+      },
+      "format": "Known tuple-only test formatting failure; corrected in follow-up, explicit format_scan passed",
+      "actual_game_final_three": {
+        "passed": 2,
+        "failed": 1,
+        "failed_scope": "External policy fixture unavailable before first default projection, policy itself not exercised"
+      },
+      "non_author_receipt": ".local/phase-3-continuation/coordinator-validation/final-three-4e-independent/receipt.json",
+      "normal_sdk_or_window_evidence": false
+    },
+    "physical_demo_passed": true,
+    "clean_whole_world_shutdown_passed": true,
+    "normal_sdk_checkpoint": {
+      "commit": "87e9a3ae80dfd56603b4b52a1e9e6e8fd9419f32",
+      "tree": "eff11cfcf160ffa2b6fc947e0997a7275bdb611a",
+      "receipt": {
+        "path": ".local/phase-3-continuation/sdk-export/checkpoint-87e9a3a/receipt.json",
+        "sha256": "d2e914502569ba77396e29bfc65a1a9a9273833d57e31a26788747680b4f8cbf"
+      },
+      "local_ephemeral_signature": true,
+      "official_signature": false,
+      "published_sdk": false,
+      "pipeline_commands_passed": 9
+    },
+    "normal_personal_adapter_checkpoint": {
+      "source_draft": "0023",
+      "sdk_commit": "87e9a3ae80dfd56603b4b52a1e9e6e8fd9419f32",
+      "receipt": {
+        "path": ".local/phase-3-continuation/sdk-export/personal-87e9-draft0023/receipt.json",
+        "sha256": "378e2b41b0db25f1746091005708a243819970c7a062502f22bb395d478ba5ad"
+      },
+      "runtime": {
+        "path": ".local/phase-3-continuation/sdk-export/runtime-87e9-personal0023.json",
+        "sha256": "1aa16b366f80d938886806aca75b92f1f621c7941bea6ec0e2df751a1784ff4f"
+      },
+      "source_manifest": {
+        "path": ".local/phase-3-continuation/sdk-export/source-draft-0023.json",
+        "sha256": "dd1b505a7d4b001e62b2d3ccad69627a127a424a422cf210ccb1347c9c006330"
+      },
+      "unit_tests": 39,
+      "strict_clippy_diagnostics": 0,
+      "normal_pipeline_commands_passed": 10,
+      "native_library_sha256": "f90e515b1e0dee23f504698bad13db425d4a96d7be9453c2955bd7ea3cac63b1",
+      "independent_same_source_review": {
+        "path": ".local/phase-3-continuation/independent-validation/postcommit-owned-fresh-receipt-draft0023-review/review.json",
+        "sha256": "02d9630221821b5823c81dac5d0eac58ead1f998be194873393dece1baceeba5"
+      },
+      "independent_transition_review": {
+        "path": ".local/phase-3-continuation/independent-validation/sdk21-actual-transition-review/receipt.json",
+        "sha256": "4996b031aafffe94457b7a514d7c2e693aa641e652b5ca5e029ce2732e600b85"
+      },
+      "gameplay_complete": false
+    },
+    "actual_window_observations": {
+      "recovery_readback": {
+        "path": ".local/phase-3-continuation/instance/recovery-860-0013/report.json",
+        "sha256": "09dfcc7bea128b359ecb18ff4390da7b47fefc6e4c33a6b663b284d959671335"
+      },
+      "explicit_reset_readback": {
+        "path": ".local/phase-3-continuation/instance/operator-reset-860-0014-2/report.json",
+        "sha256": "83a5f17fa1a281c9b7f2c912218a08979194f7ca05dbd6cc0d3357c34d893e20"
+      },
+      "historical_shutdown_reports_incomplete": {
+        "path": ".local/phase-3-continuation/coordinator-validation/shutdown-error-discovery/receipt.json",
+        "sha256": "ef73dae815934d416a0cfa122775507acc9af2cffdb0cb81fe1cf9ded65b5ca3"
+      },
+      "actual_contact_publication_failure": {
+        "path": ".local/phase-3-continuation/instance/native-contact-menu-860-0014/report.json",
+        "sha256": "9ab1c4f2851a1b5df76e6267c34bd3e938be8f6507b5cf050261b365c35c4969"
+      },
+      "ordinary_chest_slots_and_carry_failure": {
+        "path": ".local/phase-3-continuation/instance/native-menu-support-860-0014-3/report.json",
+        "sha256": "475a980bbe17311885431615bdc9337c57377ab2335eb35f1d62badc400e4e6f"
+      },
+      "standing_without_menu": {
+        "path": ".local/phase-3-continuation/instance/support-without-menu-860-0014/report.json",
+        "sha256": "6e1ce618f901aaa0e11c727733732210324a9978b980d9c9aabdd7b5ac5e8554"
+      },
+      "scope": "Historical860 fatal shutdowns remain failures. Current74 bounded runs observe clean kernel exits; actualpartialpasses/failures retained separately. No oldtokenreplay/reseed/terrainreplacement.",
+      "native_fall_contact_74": {
+        "report": {
+          "path": ".local/phase-3-continuation/instance/native-world-74b-0014/report.json",
+          "sha256": "29d061e77ecfd962e7c0f6d85767f0192b6a42cb96deeb75607ac4cc511092f8"
+        },
+        "partial_scope": "First2scenes37+33assertionsPASS: genuine native200coherentrest; wholeprocesscleanquit observed. LaterfirstmenuOtherFAIL; fullrun/restart not passed."
+      },
+      "actual_chest_probe_74": {
+        "report": {
+          "path": ".local/phase-3-continuation/instance/chest-pick-74b/report.json",
+          "sha256": "ff64655001ab634d5267d148131f8484ce0a8f052959bcc61d0922c1b0911b8c"
+        },
+        "partial_scope": "Actual ordinary rightclick opens SourceChest7diamonds; no slotwrites; cleanfullprocessquit; diagnostic-only2healthassertions."
+      },
+      "native_wait_race_74": {
+        "report": {
+          "path": ".local/phase-3-continuation/instance/native-world-74b-0014-2/report.json",
+          "sha256": "bcca07d679ec1738dd4ba8b2af3a1566330ded2f3c6644272352b4ead0e4636f"
+        },
+        "partial_scope": "FAIL tooearly actualNative2/y32.593 after fixed8clienttick wait; preserved source/tool timing failure, not solver change."
+      },
+      "native_support_74": {
+        "path": ".local/phase-3-continuation/instance/native-world-74b-0014-3/report.json",
+        "sha256": "32e68cb8916bf253a413d9641853f0391c5181ba6670d322820870e8c7cdde3c"
+      },
+      "return64_74": {
+        "path": ".local/phase-3-continuation/instance/return-budget-74b-0015/report.json",
+        "sha256": "1f03430301f88e27bba5b62aa8eb3ce3b97ffa24cf919bb0668526b82451fc53"
+      },
+      "retired_restore_old_guard_failure": {
+        "path": ".local/phase-3-continuation/instance/continued-return-budget-74b-0015/report.json",
+        "sha256": "34c9a4a21e248375b7c8a0e07702fec59244c973e4e016eb83cf63d3cf9b7296"
+      },
+      "retired_restore0016_then_rearm_refusal": {
+        "path": ".local/phase-3-continuation/instance/continued-return-74b-0016/report.json",
+        "sha256": "a9b12c81cba813ba2b957403ec22fd7daae80e687d385933dd88014b78b846e2"
+      },
+      "new_rearm0017": {
+        "path": ".local/phase-3-continuation/instance/continued-return-74b-0017/report.json",
+        "sha256": "525df6ec875968fdb9acb1f4f1c5ba6e9de957546020f6d787770985a1022b79"
+      },
+      "rotating_sparse0017": {
+        "path": ".local/phase-3-continuation/instance/rotating-sparse-74b-0017/report.json",
+        "sha256": "0fc516109bd1bce09600768044d5da58381228a8d838bab818259cbc3fca07a4"
+      },
+      "rotating_sparse_independent_review": {
+        "path": ".local/phase-3-continuation/independent-validation/rotating-sparse-runtime-input/execution-0017/receipt.json",
+        "sha256": "4cf8e312058a45cd2c5ea5e290daf30b740d1c6cb76b7be87ba7b487daa9a67e"
+      }
+    },
+    "previous_normal_sdk_checkpoints": [
+      {
+        "commit": "860fd62195b09a521c3eec2d27692ee278b1e235",
+        "receipt": {
+          "path": ".local/phase-3-continuation/sdk-export/checkpoint-860fd62/receipt.json",
+          "sha256": "4eafdd7fe03af3d03c621ef74374fdfb6fba5d9e99f669bf3efc51dacfd0d9d9"
+        },
+        "local_ephemeral_signature": true,
+        "official_signature": false,
+        "published_sdk": false
+      },
+      {
+        "commit": "74b542724f3aff1da3927f585fc06fbc35f7f2c6",
+        "receipt": {
+          "path": ".local/phase-3-continuation/sdk-export/checkpoint-74b5427/receipt.json",
+          "sha256": "0cc3b53dc9fdd53f266555bc6fafe06d8ff8fad84aaafc5fd4794936e7f68198"
+        },
+        "local_ephemeral_signature": true,
+        "official_signature": false,
+        "published_sdk": false,
+        "tree": "f3c9a640b3605beac4440cacdceeaa56546c251d"
+      },
+      {
+        "commit": "e0620feaa4d63c0cd2e14a971ce9aa596df80131",
+        "tree": "e9213765a2e8744f0a0190d7a94a0a0766acaf5d",
+        "receipt": {
+          "path": ".local/phase-3-continuation/sdk-export/checkpoint-e0620fe/receipt.json",
+          "sha256": "8d76ecfce706bd245581917aed94724e4dded6c55a0d61917221a50efbf79cda"
+        },
+        "local_ephemeral_signature": true,
+        "official_signature": false,
+        "published_sdk": false,
+        "pipeline_commands_passed": 9
+      }
+    ],
+    "previous_personal_adapter_checkpoints": [
+      {
+        "source_draft": "0014",
+        "receipt": {
+          "path": ".local/phase-3-continuation/sdk-export/personal-860-draft0014/receipt.json",
+          "sha256": "79d79f4a102cff9acf661d275b6d9c20bf71a9bce81b0791c33f5eca8db28514"
+        },
+        "runtime": {
+          "path": ".local/phase-3-continuation/sdk-export/runtime-860-dynamic-limits.json",
+          "sha256": "1cf237b275a7cc371eecddf2d9a3e0c9b4fdb3faedd751bf04123c48cb0721bb"
+        },
+        "native_library_sha256": "f90e515b1e0dee23f504698bad13db425d4a96d7be9453c2955bd7ea3cac63b1",
+        "unit_tests": 17,
+        "strict_clippy_diagnostics": 0,
+        "gameplay_complete": false
+      },
+      {
+        "source_draft": "0014",
+        "receipt": {
+          "path": ".local/phase-3-continuation/sdk-export/personal-74b-draft0014/receipt.json",
+          "sha256": "fae7f724a4435510e31422efdafbd70c61c335338916078b16772e89c459bc6a"
+        },
+        "runtime": {
+          "path": ".local/phase-3-continuation/sdk-export/runtime-74b-physical.json",
+          "sha256": "d01cc0f8832c0ae955adf3cb1a0fe524fbcc4e8640fc1433a7940f5676af473b"
+        },
+        "native_library_sha256": "f90e515b1e0dee23f504698bad13db425d4a96d7be9453c2955bd7ea3cac63b1",
+        "unit_tests": 17,
+        "strict_clippy_diagnostics": 0,
+        "gameplay_complete": false
+      },
+      {
+        "source_draft": "0016",
+        "receipt": {
+          "path": ".local/phase-3-continuation/sdk-export/personal-74b-draft0016/receipt.json",
+          "sha256": "a67e268d4b2d9bb501b98d446f0fbeb42f2d001411e03f9f8cec8068002b548d"
+        },
+        "runtime": {
+          "path": ".local/phase-3-continuation/sdk-export/runtime-74b-inactive-restore.json",
+          "sha256": "5a113325911445147ae35cf7b6238f0e6d3231953f6b67bb046b11e488c7468c"
+        },
+        "native_library_sha256": "f90e515b1e0dee23f504698bad13db425d4a96d7be9453c2955bd7ea3cac63b1",
+        "unit_tests": 21,
+        "strict_clippy_diagnostics": 0,
+        "gameplay_complete": false
+      },
+      {
+        "source_draft": "0017",
+        "receipt": {
+          "path": ".local/phase-3-continuation/sdk-export/personal-74b-draft0017/receipt.json",
+          "sha256": "927859545336771ebdf1dd6dcede4733bf0b6cbc61a2bd719fce6a60f29c7bac"
+        },
+        "runtime": {
+          "path": ".local/phase-3-continuation/sdk-export/runtime-74b-capture-frontier.json",
+          "sha256": "fe11bea8c2a0f17bb58e9306b665d24e8f1ee85f981d313a3ff611d6cd4f758f"
+        },
+        "native_library_sha256": "f90e515b1e0dee23f504698bad13db425d4a96d7be9453c2955bd7ea3cac63b1",
+        "unit_tests": 25,
+        "strict_clippy_diagnostics": 0,
+        "gameplay_complete": false,
+        "independent_unit_replay": {
+          "path": ".local/phase-3-continuation/bridge/capture-frontier-0017-independent/receipt.json",
+          "sha256": "9e76fd7fe513b465c475ae6d8cb8418180277b5da7a9ae97b9d2f208f1522124"
+        }
+      },
+      {
+        "source_draft": "0017",
+        "receipt": {
+          "path": ".local/phase-3-continuation/sdk-export/personal-e062-draft0017/receipt.json",
+          "sha256": "2da614cb9c3a4a98d5ec310b4fd191323d919e5fd2edd00b3484ed2e68bef7e6"
+        },
+        "runtime": {
+          "path": ".local/phase-3-continuation/sdk-export/runtime-e062-personal0017.json",
+          "sha256": "b21b04ca6d7bed4da2b12315ac154cf29a04c68a10c422e66558403db2959955"
+        },
+        "native_library_sha256": "f90e515b1e0dee23f504698bad13db425d4a96d7be9453c2955bd7ea3cac63b1",
+        "unit_tests": 25,
+        "strict_clippy_diagnostics": 0,
+        "gameplay_complete": false,
+        "independent_unit_replay": {
+          "path": ".local/phase-3-continuation/bridge/capture-frontier-0017-independent/receipt.json",
+          "sha256": "9e76fd7fe513b465c475ae6d8cb8418180277b5da7a9ae97b9d2f208f1522124"
+        },
+        "sdk_commit": "e0620feaa4d63c0cd2e14a971ce9aa596df80131"
+      },
+      {
+        "source_draft": "0019",
+        "receipt": {
+          "path": ".local/phase-3-continuation/sdk-export/personal-e062-draft0019/receipt.json",
+          "sha256": "a2822bfe07cd7f206285c46ab9d7ce5cb631f5ca293f9365afbb76da13685ad4"
+        },
+        "runtime": {
+          "path": ".local/phase-3-continuation/sdk-export/runtime-e062-personal0019.json",
+          "sha256": "c10c232c7fc652cb09ddc075b0e08250a0020f74c7e37750f0bd514abbc56b0a"
+        },
+        "native_library_sha256": "f90e515b1e0dee23f504698bad13db425d4a96d7be9453c2955bd7ea3cac63b1",
+        "unit_tests": 32,
+        "strict_clippy_diagnostics": 0,
+        "gameplay_complete": false,
+        "independent_unit_replay": {
+          "path": ".local/phase-3-continuation/independent-validation/personal-draft0019-units/receipt.json",
+          "sha256": "e41061e8bc1f7a3ea5b290dccdffb55eaaab06662c21bae09285eeb6c46dc712"
+        },
+        "sdk_commit": "e0620feaa4d63c0cd2e14a971ce9aa596df80131"
+      },
+      {
+        "source_draft": "0023",
+        "receipt": {
+          "path": ".local/phase-3-continuation/sdk-export/personal-e062-draft0023/receipt.json",
+          "sha256": "7ef8454999592a8388c4d1f41ad45ed5bdfd343cd14e61305809f63c6a34cfe2"
+        },
+        "runtime": {
+          "path": ".local/phase-3-continuation/sdk-export/runtime-e062-personal0023.json",
+          "sha256": "730f0502ea05011b1493afb8d1993e68b71dc0be6a0434707d6f8a2ba54eca6a"
+        },
+        "source_manifest": {
+          "path": ".local/phase-3-continuation/sdk-export/source-draft-0023.json",
+          "sha256": "dd1b505a7d4b001e62b2d3ccad69627a127a424a422cf210ccb1347c9c006330"
+        },
+        "unit_tests": 39,
+        "strict_clippy_diagnostics": 0,
+        "normal_pipeline_commands_passed": 10,
+        "native_library_sha256": "f90e515b1e0dee23f504698bad13db425d4a96d7be9453c2955bd7ea3cac63b1",
+        "independent_unit_replay": {
+          "path": ".local/phase-3-continuation/independent-validation/personal-draft0023-units/receipt.json",
+          "sha256": "c065851bc6189e182db49394f3c5933ab96f396dff5bdd02be3a28443201a6a0"
+        },
+        "independent_source_review": {
+          "path": ".local/phase-3-continuation/independent-validation/postcommit-owned-fresh-receipt-draft0023-review/review.json",
+          "sha256": "02d9630221821b5823c81dac5d0eac58ead1f998be194873393dece1baceeba5"
+        },
+        "sdk_commit": "e0620feaa4d63c0cd2e14a971ce9aa596df80131",
+        "gameplay_complete": false
+      }
+    ],
+    "current_lifecycle_boundary": {
+      "private_source_draft": "0023",
+      "active_native_app": "runtime-e062-personal0023.json",
+      "source_observed_members": {
+        "translate": 138,
+        "yaw": 138,
+        "pitch": 138,
+        "dynamic": 7
+      },
+      "controlled_saved_paused": true,
+      "controlled_saved_native_epoch": 0,
+      "gravity_saved_paused": true,
+      "gravity_saved_native_epoch": 0,
+      "r5_actual_same_process_completed": true,
+      "r5_actual_barrier": 963,
+      "r5_original_runner_passed": false,
+      "r5_original_failure": "Two obsolete26 expectations; actualmoved126/child126. Original report preserved FAILED.",
+      "r5_completion": {
+        "path": ".local/phase-3-continuation/bridge/r5-963-sameprocess-completion/completion.json",
+        "sha256": "e2056affc300c9d107ecf6d6fac774f0a9093ea5f82c19fa8aaa6df4476e8e42"
+      },
+      "r5_independent_actual_audit": {
+        "path": ".local/phase-3-continuation/independent-validation/r5-963-sameprocess-actual-audit/receipt.json",
+        "sha256": "6dbd4c104bc0f8131e11c8c252b65955c449bab1a3a3a884a05e8b034d93dfd8"
+      },
+      "r5_completion_return_review": {
+        "path": ".local/phase-3-continuation/independent-validation/r5-963-completion-return-v4-review/review.json",
+        "sha256": "23757d4e75867bacc653f0d174b0803992711a0caa923b80a33c7e7a050db2c9"
+      },
+      "child_chest_observe": {
+        "path": ".local/phase-3-continuation/instance/r5-e062-child126-chest-observe23/report.json",
+        "sha256": "40d4152ce8ec294d7e02b30835f7ced14ac1c7cc628da4192429576892060c5c"
+      },
+      "child_chest_roundtrip": {
+        "path": ".local/phase-3-continuation/instance/r5-e062-child126-chest-roundtrip23/report.json",
+        "sha256": "75431a97b19055e5588098f5298873dbcd07607eb91ed672f2a858ed38b30a03"
+      },
+      "child_furnace_cadence": {
+        "path": ".local/phase-3-continuation/instance/r5-e062-real-child-cadence23/report.json",
+        "sha256": "1d02325166cbf05adb68f25fe2c53868f2406265be800eb065b7d119083c0f87"
+      },
+      "child_moving_restore": {
+        "path": ".local/phase-3-continuation/instance/r5-e062-child-moving238-restart23/report.json",
+        "sha256": "edf2ccccb9c641ae9e48e3c9560a354976ab3a93ec8a83cb582bc8539507c1e1"
+      },
+      "moving_assertions": 238,
+      "current_original421_rearm": {
+        "path": ".local/phase-3-continuation/instance/r5-e062-completed963-repair-original421/report.json",
+        "sha256": "64dafc903b416b2345ebf12ee2bb9fbf508230b21458ee6a721a86de26319368"
+      },
+      "last_counted_four_repair_items_consumed": true,
+      "iron_units": 73,
+      "diamonds": 21,
+      "owner_handoff_ready": false,
+      "note": "Historical Original421 checkpoint after963 repair208. Later actual phases are recorded in latest_completed_runtime_boundary; this object preserves that earlier evidence."
+    },
+    "independent_generic_build_checkpoint": {
+      "sdk_commit": "e0620feaa4d63c0cd2e14a971ce9aa596df80131",
+      "fixture_commit": "f47486986666887072901ffaa5b04dc53a01b1a5",
+      "receipt": {
+        "path": ".local/phase-3-continuation/sdk-export/generic-e062-api-example-fixture18/receipt.json",
+        "sha256": "ccedd932a4904ee2e8d0271be5d1fbae7901318c0ba7b37fd922adc1189569c9"
+      },
+      "normal_native_and_wasm_build_passed": true,
+      "matching_wasm_std_build_passed": true,
+      "actual_game_loading_executed": true,
+      "compiler_and_accepted_physics_unchanged": true,
+      "native_fixture16_loaded": true,
+      "native_fixture16_first_initialization_passed": false,
+      "source_marker": "Projected27cells/currentidentity afteractualNativeReturn/reopen/recapture; legacyWASMgroupstopsbeforeSourceopen",
+      "wasm_game_loading_executed": true,
+      "new_negative_unit": {
+        "path": ".local/phase-3-continuation/coordinator-validation/generic-fixture17-negative-unit/receipt.json",
+        "sha256": "8798071fdfb593843598f96dd8bee15d334cbc460d3be0a49ebe4ac77d9d9f47"
+      },
+      "dormant_personal_data_preserved": true,
+      "dormant_generic_data_preserved_on_personal_restore": true,
+      "explicit_resume17_attempt_executed": true,
+      "explicit_resume17_attempt_passed": false,
+      "transient_first_failure_reason_captured": true,
+      "native_fixture18_actual_passed": true,
+      "native_actual_assertions": 665,
+      "native_full_processes": 3,
+      "native_observed_review": {
+        "path": ".local/phase-3-continuation/bridge/generic-e062-clock20-independent/receipt.json",
+        "sha256": "6ba4e32c6bbf324d7b2f1574b795d9667d0ca499c9da4242d240a9cc0d5237aa"
+      },
+      "explicit_resume18_passed": true,
+      "wasm_game_loading_passed": false,
+      "wasm_failure": "TicketController registration-return Wire decode before guest controller table installation; pre-feature Load panic",
+      "wasm_runtime_report": {
+        "path": ".local/phase-3-continuation/instance/generic-74b-fixture18-source-context-wasm/report.json",
+        "sha256": "a587261b21ec8ea51cbf0891652940bc1f202262b267400b8ec68583e5788031"
+      },
+      "legacy_wasm_preserved_not_revived": true,
+      "source_initialization_status": "explicitresume18completed inproperSourcecallback",
+      "seed_scope_diagnosis": "GlobalServerTickStart noncurrentSource set_blockUnavailable; fixture18properSourcecallbacksolved; source-tracedcontract +actualNative661",
+      "latest_native_report": {
+        "path": ".local/phase-3-continuation/instance/generic-e062-projected-reopen-native-clock20/report.json",
+        "sha256": "aa127f0b53204e424b84e44342457efe687a79baa8130304e68f89508a235983"
+      },
+      "latest_run_initialization_or_resume_requested": false
+    },
+    "current_control_census_validation": {
+      "synthetic_tests": 101,
+      "original73_preserved": true,
+      "normal_backup_classification": "exact valid current+attachments.dat_old; backup nonauthoritative; unknown/orphan/corrupt suffixes refused",
+      "independent": {
+        "path": ".local/phase-3-continuation/coordinator-validation/failure-diagnostics-independent/receipt.json",
+        "sha256": "e2f681c83143e372e613df25d4a30065b5a12dc3824a07e3079d5177930ff41c"
+      },
+      "original78_preserved": true,
+      "failure_diagnostic": "one boundedknownmodreadonlystatus beforefailed ownedprocessshutdown; originalfailure/passcountsunchanged",
+      "original86_preserved": true,
+      "exact_server_clock_delta_guard": true,
+      "clock_guard_independent": {
+        "path": ".local/phase-3-continuation/bridge/clock-poll-independent-review/receipt.json",
+        "sha256": "bede1c4e70eeb1940602b8e94d91df0d7bceb82cd7522d29ddbbab7000e50fab"
+      },
+      "original96_preserved": true,
+      "single_cell_readonly_poll": true,
+      "single_cell_independent": {
+        "path": ".local/phase-3-continuation/bridge/cell-poll-independent/receipt.json",
+        "sha256": "f6828b26d54c50cfadf4c8e5b42ca48c2873f75ebfd5b72a06aa5a456a8a550f"
+      }
+    },
+    "installed_review_variant": {
+      "runtime": {
+        "path": ".local/phase-3-continuation/sdk-export/runtime-87e9-personal0023.json",
+        "sha256": "1aa16b366f80d938886806aca75b92f1f621c7941bea6ec0e2df751a1784ff4f"
+      },
+      "module": "sable_port",
+      "native_app_files": 51,
+      "personal_physics_enabled": true,
+      "safe_personal_owner_handoff": true,
+      "latest_actual": {
+        "path": ".local/phase-3-continuation/instance/owner-sessions/independent-owner-final-sdk21/verification/owner-observations.json",
+        "sha256": "24492e4a9809b440b34b97b74425da790097d84364817026378330bf9f0029d0"
+      },
+      "note": "Actualindependent owner-command launch/currentSource421/native0/raw/CURRENT/freshInitial/postACKUID/inventory1/safeCreativefloor/savequit/finalnoWAL census PASS. Current77/157+383/rearmrecovery retain exactscope; full16/wholepr_ready/externalacceptance not claimed."
+    },
+    "regression_artifact_storage": {
+      "scope": "Only ten cold historical candidate test executables were losslessly compressed after full decoded SHA/size verification. Historical retained_binary paths remain historical; the receipt maps them to exact restorable archives. Source, worlds, receipts, goldens, references and current/final test binaries are outside those mutation targets.",
+      "receipt": ".local/phase-3-continuation/coordinator-validation/cold-test-lossless-archives/receipt.json",
+      "receipt_sha256": "cb25ba69f7943f742bf69664e3ca011f6983710cfd28e9eba078e089253f02cb",
+      "independent_receipt": ".local/phase-3-continuation/bridge/cold-test-archive-source-review/actual-independent/receipt.json",
+      "independent_receipt_sha256": "a68fad96a7de386501512736ef00060c51429c64b3b541420600911ecbb42924",
+      "archives": 10,
+      "original_bytes": 7616427568,
+      "archive_bytes": 1302209015,
+      "reclaimed_allocated_bytes": 6270017536,
+      "explicit_protected_hashes_unchanged": true,
+      "exact_decoded_contents_independently_verified": true
+    },
+    "upright_carry_pre_fix_checkpoint": {
+      "scope": "Sunrise-only component evidence, before new normal SDK/window integration. Immutable source6 binary887: all old40 and6 new checks PASS, one newly stricter signed-reversal position assertion FAIL. Source7 actual ordinary no-projection control PASS; actual flag-storing Item Skip/ground contract defect FAIL, both independently replayed. Source8 correction is under review/build, not passed.",
+      "bounded_evidence": ".local/phase-3-continuation/engine-evidence/upright-pre-cancel-4294/coordinator-copy.json",
+      "bounded_evidence_sha256": "cd2434439fc48a26ae39de2907dac79264ed8735dd5027e07102c53306d7f72f",
+      "independent_receipt": ".local/phase-3-continuation/coordinator-validation/carry-source7-independent-modern/receipt.json",
+      "independent_receipt_sha256": "9f1631e0982a757a1998c6a5d932c2078a365614b7442eefa37d931cb1693943",
+      "pre_fix_binary_sha256": "4294d1c7e03a9d95b38f7e6590dba1084ac41f9d17b83be8bb62b99bda75937c",
+      "pre_fix_retained_binary": ".local/phase-3-continuation/engine-evidence/retained-test-executables/pre-cancel-fix-4294-sunrise_client-6802b6a82b5e0b45",
+      "new_sdk_built": false
+    },
+    "upright_carry_component_checkpoint": {
+      "commit": "e0620feaa4d63c0cd2e14a971ce9aa596df80131",
+      "tree": "e9213765a2e8744f0a0190d7a94a0a0766acaf5d",
+      "retained_evidence": {
+        "path": ".local/phase-3-continuation/engine-evidence/upright-final-e0620fe/coordinator-copy.json",
+        "sha256": "53fcb44733343fd2cf472f9d117ba21c078b8bc53c478ab037d879332958854e"
+      },
+      "author_unique_selected_passed": 52,
+      "extra_aggregate_refusal_passed": true,
+      "independent_selected_passed": 6,
+      "independent_receipt": {
+        "path": ".local/phase-3-continuation/coordinator-validation/carry-source8-independent/receipt.json",
+        "sha256": "a35bc4306c3ae4a9cede592d25451707be521ea2d167a6e961d008c57022b5cc"
+      },
+      "strict_clippy_both_client_crates": true,
+      "strict_clippy_seconds": 586.12,
+      "format_daily_inventory_public_tree_hooks_passed": true,
+      "original_zero_test_selector_and_all_prior_failures_retained": true,
+      "final_body_equivalence": "All source8 Rust function bodies unchanged; later aggregate ignore-reason literal and daily-row/docs metadata only. Actual precommit hooks ran on both commits; no standalone intermediate-tree runtime claim.",
+      "new_normal_sdk_build_started": true,
+      "new_normal_sdk_build_passed": true,
+      "new_interactive_runtime_passed": true,
+      "final_test_executable_relocation": ".local/phase-3-continuation/coordinator-validation/final-carry-e062-test-relocation/receipt.json"
+    },
+    "previous_generic_build_checkpoints": [
+      {
+        "sdk_commit": "74b542724f3aff1da3927f585fc06fbc35f7f2c6",
+        "fixture_commit": "f47486986666887072901ffaa5b04dc53a01b1a5",
+        "receipt": {
+          "path": ".local/phase-3-continuation/sdk-export/generic-74b-api-example-fixture18-source-context/receipt.json",
+          "sha256": "f74f38690acc227003515198221b028ebe0adad286bbd8b103f36cbe4d92d472"
+        },
+        "normal_native_and_wasm_build_passed": true,
+        "matching_wasm_std_build_passed": true,
+        "actual_game_loading_executed": true,
+        "compiler_and_accepted_physics_unchanged": true,
+        "native_fixture16_loaded": true,
+        "native_fixture16_first_initialization_passed": false,
+        "source_marker": "Projected27cells/currentidentity afteractualNativeReturn/reopen/recapture; legacyWASMgroupstopsbeforeSourceopen",
+        "wasm_game_loading_executed": true,
+        "new_negative_unit": {
+          "path": ".local/phase-3-continuation/coordinator-validation/generic-fixture17-negative-unit/receipt.json",
+          "sha256": "8798071fdfb593843598f96dd8bee15d334cbc460d3be0a49ebe4ac77d9d9f47"
+        },
+        "dormant_personal_data_preserved": true,
+        "dormant_generic_data_preserved_on_personal_restore": true,
+        "explicit_resume17_attempt_executed": true,
+        "explicit_resume17_attempt_passed": false,
+        "transient_first_failure_reason_captured": true,
+        "native_fixture18_actual_passed": true,
+        "native_actual_assertions": 661,
+        "native_full_processes": 3,
+        "native_observed_review": {
+          "path": ".local/phase-3-continuation/coordinator-validation/generic18-native-observed-review/receipt.json",
+          "sha256": "f05fb96807317ba789d35592d1847148d6fae1d18e648866d8c5bbc97742f336"
+        },
+        "explicit_resume18_passed": true,
+        "wasm_game_loading_passed": false,
+        "wasm_failure": "TicketController registration-return Wire decode before guest controller table installation; pre-feature Load panic",
+        "wasm_runtime_report": {
+          "path": ".local/phase-3-continuation/instance/generic-74b-fixture18-source-context-wasm/report.json",
+          "sha256": "a587261b21ec8ea51cbf0891652940bc1f202262b267400b8ec68583e5788031"
+        },
+        "legacy_wasm_preserved_not_revived": true,
+        "source_initialization_status": "explicitresume18completed inproperSourcecallback",
+        "seed_scope_diagnosis": "GlobalServerTickStart noncurrentSource set_blockUnavailable; fixture18properSourcecallbacksolved; source-tracedcontract +actualNative661"
+      }
+    ],
+    "previous_installed_review_variants": [
+      {
+        "runtime": {
+          "path": ".local/phase-3-continuation/sdk-export/runtime-generic-74b-fixture18-native-restored.json",
+          "sha256": "a5106cb604a57ed5819052c788e5a3efc1c1e5099529cf0820df7ffdc1329730"
+        },
+        "module": "live_world_fixture",
+        "native_app_files": 21,
+        "personal_physics_enabled": false,
+        "game_process_running": false,
+        "latest_native_passed": {
+          "path": ".local/phase-3-continuation/instance/generic-74b-fixture18-source-context-native/report.json",
+          "sha256": "7489607b38603a7f5258cef46cf1ee5d53f23129a5b63f69a5d5312fd32d72c0"
+        },
+        "latest_wasm_failed": {
+          "path": ".local/phase-3-continuation/instance/generic-74b-fixture18-source-context-wasm/report.json",
+          "sha256": "a587261b21ec8ea51cbf0891652940bc1f202262b267400b8ec68583e5788031"
+        },
+        "personal_dormant_source_preserved": {
+          "path": ".local/phase-3-continuation/coordinator-validation/post-generic18-wasm-load-failure-census.json",
+          "sha256": "17d2d0985020e2cfadc30c8a16ffacd0757984ac5b105950f0272de53d1ec1a2"
+        },
+        "safe_personal_owner_handoff": false
+      },
+      {
+        "runtime": {
+          "path": ".local/phase-3-continuation/sdk-export/runtime-e062-personal0017.json",
+          "sha256": "b21b04ca6d7bed4da2b12315ac154cf29a04c68a10c422e66558403db2959955"
+        },
+        "module": "sable_port",
+        "native_app_files": 51,
+        "personal_physics_enabled": true,
+        "safe_personal_owner_handoff": false,
+        "last_completed_safe_run": {
+          "path": ".local/phase-3-continuation/instance/active-support-e062-0017/report.json",
+          "sha256": "6888789242bd2135f849769a0941781e712983caa021d349102f0130a046145e"
+        },
+        "note": "Interactive validation continues. Process state is not inferred from this source record."
+      },
+      {
+        "runtime": {
+          "path": ".local/phase-3-continuation/sdk-export/runtime-e062-personal0019.json",
+          "sha256": "c10c232c7fc652cb09ddc075b0e08250a0020f74c7e37750f0bd514abbc56b0a"
+        },
+        "module": "sable_port",
+        "native_app_files": 51,
+        "personal_physics_enabled": true,
+        "safe_personal_owner_handoff": false,
+        "latest_actual": {
+          "path": ".local/phase-3-continuation/instance/r5-e062-cleanup-return134-v3/report.json",
+          "sha256": "ee41bb52c13caa9cc681e7e189964bf987fe5f9e15c82e2ad73c5486e4313ced"
+        },
+        "note": "Actual first4scenes3676PASS include acknowledged Return134; later ordinary-menu camera aim FAIL. No ready-world or complete cleanup claim."
+      },
+      {
+        "runtime": {
+          "path": ".local/phase-3-continuation/sdk-export/runtime-e062-personal0023.json",
+          "sha256": "730f0502ea05011b1493afb8d1993e68b71dc0be6a0434707d6f8a2ba54eca6a"
+        },
+        "module": "sable_port",
+        "native_app_files": 51,
+        "personal_physics_enabled": true,
+        "safe_personal_owner_handoff": false,
+        "latest_actual": {
+          "path": ".local/phase-3-continuation/instance/r5-e062-repaired126-normal-restore23/report.json",
+          "sha256": "03164453329b1d3de4d64136d7ff8fcbfe72483fc1a805a5d0ae6248948d43b4"
+        },
+        "note": "Actual metadata-only repair11PASS/ACK842 and separateNORMAL41PASS with exact canonical raw+native velocity bits, Source8/126/138/7. FullOriginal421 owner handoff and clean future-operation R5 stillpending."
+      }
+    ],
+    "sdk20_runtime_observations": {
+      "generic": {
+        "path": ".local/phase-3-continuation/instance/generic-e062-projected-reopen-native-clock20/report.json",
+        "sha256": "aa127f0b53204e424b84e44342457efe687a79baa8130304e68f89508a235983"
+      },
+      "generic_assertions": 665,
+      "personal_primary": {
+        "path": ".local/phase-3-continuation/instance/native-world-e062-0017/report.json",
+        "sha256": "e6f1f2725f84f2d4611f9a5c8209288adb3d8a2b46985cd8a989c959c7b4ac36"
+      },
+      "personal_primary_assertions": 240,
+      "rotating_sparse_non_author": {
+        "path": ".local/phase-3-continuation/instance/rotating-sparse-e062-0017/report.json",
+        "sha256": "8c19ac9f71ec3cf214a284b1f3443b27d50bd51ecc093957ce7bd715f92e7cb6"
+      },
+      "rotating_sparse_assertions": 59,
+      "active_support_non_author": {
+        "path": ".local/phase-3-continuation/instance/active-support-e062-0017/report.json",
+        "sha256": "6888789242bd2135f849769a0941781e712983caa021d349102f0130a046145e"
+      },
+      "active_support_assertions": 129,
+      "clock_completion_failure_retained": {
+        "path": ".local/phase-3-continuation/instance/generic-e062-projected-reopen-native/report.json",
+        "sha256": "82bac31f0b7fcdde4d5266d45f2bd812d94ca79c04e6f5bfc4e59246ad2b9215"
+      },
+      "recording_input_failure_retained": {
+        "path": ".local/phase-3-continuation/instance/continuous-fall-e062-0017/report.json",
+        "sha256": "98340f10e5195418f22ddcc632703ccf5703c5aa8e7ea9fe6d1cfe6edd050c4e"
+      },
+      "furnace_pregrant_collection": {
+        "path": ".local/phase-3-continuation/instance/furnace-e062-stage-a/report.json",
+        "sha256": "d579cd79776d2d0d23f99c2d3394203681a341ccea46762b443d37d2985969f4"
+      },
+      "pregrant_collection_assertions": 172,
+      "pregrant_admitted": true,
+      "inventory_additions_executed": true,
+      "scope": "Actual bounded runtime invariants/media: generic665, personal240/59/129, continuousfall77, movingrestart223, furnace386+139. R5 run fails Revision after four planned cuts; no whole-phase acceptance, new Java golden or ready-world claim.",
+      "continuous_fall": {
+        "path": ".local/phase-3-continuation/instance/continuous-fall-e062-0017-2/report.json",
+        "sha256": "247f194e8141a3bc883bdb6c9b6f82ebd6abec9e476f511aabebadbf3a7caaf3"
+      },
+      "continuous_fall_assertions": 77,
+      "genuine_fall_gif": {
+        "path": ".local/phase-3-continuation/instance/continuous-fall-e062-0017-2/media-fall/receipt.json",
+        "sha256": "3428ed6389f55982d0c1479e6c08b2bc6f8fd95ea18a9b72fd38b9e061518462"
+      },
+      "moving_restart": {
+        "path": ".local/phase-3-continuation/instance/moving-restart-e062-0017/report.json",
+        "sha256": "db429821b2754a9ed6cc7d79b1ab1efa8ce605e0284e9c7e8dfe291f85f233d0"
+      },
+      "moving_restart_assertions": 223,
+      "non_author_execution_audit": {
+        "path": ".local/phase-3-continuation/independent-validation/e062-personal-execution-audit/receipt.json",
+        "sha256": "1f64090540a2bf8eb83b1591edb714acc197095632bd86677ab6852ab862dfb6"
+      },
+      "once_counted_inventory_inputs": {
+        "minecraft:raw_iron": 64,
+        "minecraft:coal_block": 1
+      },
+      "actual_furnace_stage_b": {
+        "path": ".local/phase-3-continuation/instance/furnace-e062-stage-b-v4-socket/report.json",
+        "sha256": "4dda4d2cff02d3597c5721415c651cb021cf0f8ac2a5a473b039c53d9e8cf408"
+      },
+      "actual_furnace_stage_b_assertions": 386,
+      "actual_furnace_gui_cadence": {
+        "path": ".local/phase-3-continuation/instance/furnace-e062-gui-cadence-v4/report.json",
+        "sha256": "b301eb77dddf86d08b1f17f3d644850f8d2a34d5e3f0b571f4269c8b8a58824f"
+      },
+      "actual_furnace_gui_cadence_assertions": 139,
+      "actual_furnace_audit": {
+        "path": ".local/phase-3-continuation/bridge/furnace-actual-v4/receipt.json",
+        "sha256": "bebc3e34088f3e87dd7adda0ca23453fbcfded0cd54bacd4506b5ee39caecd60"
+      },
+      "exact_frame_admission": {
+        "path": ".local/phase-3-continuation/bridge/active-furnace-ordinary-gui-plan-v4/receipt.json",
+        "sha256": "320996689b2163c3a8f9d5c3d299ae13b5293f7bb01e894fcda05dcdcbe417e0"
+      },
+      "r5_admission": {
+        "path": ".local/phase-3-continuation/instance/r5-e062-admission/report.json",
+        "sha256": "cc7f005db6a51f1ebca74357cf75091748ab2e238a0b56eab7330aa1dbaac470"
+      },
+      "r5_failure": {
+        "path": ".local/phase-3-continuation/instance/r5-e062-real-73/report.json",
+        "sha256": "8622e25211acea4054ce9b900e430177edc04881d08a7fbf6ba77253c34773f1"
+      },
+      "r5_refusal_fresh_restore": {
+        "path": ".local/phase-3-continuation/instance/r5-e062-refusal-fresh-restore/report.json",
+        "sha256": "1bbd571abcec90a7a9051bd8e4ca3fd60c347100c38d8b0b4119ee9e647f3cf8"
+      },
+      "r5_refusal_fresh_restore_assertions": 91,
+      "cleanup_v2_lit_failure": {
+        "path": ".local/phase-3-continuation/instance/r5-e062-cleanup-return134/report.json",
+        "sha256": "3d1b987fd6ec7ca411e00081b69632b805cf81db1962feb5e4c98a4db46d04b0"
+      },
+      "cleanup_v3_return134_then_aim_failure": {
+        "path": ".local/phase-3-continuation/instance/r5-e062-cleanup-return134-v3/report.json",
+        "sha256": "ee41bb52c13caa9cc681e7e189964bf987fe5f9e15c82e2ad73c5486e4313ced"
+      },
+      "cleanup_v3_acknowledged_return_assertions": 3676
+    },
+    "previous_lifecycle_boundaries": [
+      {
+        "source_cells": 421,
+        "ordinary_parent_returned_cells": 0,
+        "total_fixture_cells": 421,
+        "private_source_draft": "0017",
+        "active_native_app": "runtime-74b-capture-frontier.json",
+        "pending_common_journal": false,
+        "restore_after_Return_passed": true,
+        "new_rearm_passed": true,
+        "rearm_assertions": 89,
+        "old_unconfirmed_token_replayed": false,
+        "current_gameplay_failure": "Player loses support on slow horizontal-axis Z rotation",
+        "controlled_saved_paused": false,
+        "controlled_saved_native_epoch": 2,
+        "gravity_saved_paused": true,
+        "gravity_saved_native_epoch": 0,
+        "owner_handoff_ready": false,
+        "census": {
+          "path": ".local/phase-3-continuation/coordinator-validation/post-pitch-failure-0017-stopped-census.json",
+          "sha256": "5eddfd2a76e99afe483766cd8fc4370735fb3b39bbdcc5f9095c78030f58bbdf"
+        }
+      },
+      {
+        "private_source_draft": "0019",
+        "active_native_app": "runtime-e062-personal0019.json",
+        "current_gameplay_failure": "Menu camera aimed before player settled: ray hit floor instead of returned chest; no menu/item action executed",
+        "r5_split_passed": false,
+        "r5_revision_hypothesis_fix_built": true,
+        "r5_corrected_diagnostic_pending": "Four X2 cuts; accepted heat root8 retained, child126 contains genuine chest/furnace/slab. Core policy unchanged.",
+        "source_observed_members": {
+          "translate": 0,
+          "yaw": 0,
+          "pitch": 138,
+          "dynamic": 7
+        },
+        "ordinary_parent_returned_members": {
+          "translate": 134,
+          "yaw": 138
+        },
+        "diagnostic_cells_missing": {
+          "seam_x": 6,
+          "y": 24,
+          "z": [
+            0,
+            1,
+            2,
+            3
+          ],
+          "count": 4
+        },
+        "repair_items_granted": false,
+        "controlled_saved_paused": true,
+        "controlled_saved_native_epoch": 0,
+        "gravity_saved_paused": true,
+        "gravity_saved_native_epoch": 0,
+        "ordinary_freeze_was_executed_before_menu_failure": true,
+        "explicit_unfreeze_after_that_failure_executed": false,
+        "owner_handoff_ready": false,
+        "last_actual_report": {
+          "path": ".local/phase-3-continuation/instance/r5-e062-cleanup-return134-v3/report.json",
+          "sha256": "ee41bb52c13caa9cc681e7e189964bf987fe5f9e15c82e2ad73c5486e4313ced"
+        },
+        "census": {
+          "path": ".local/phase-3-continuation/coordinator-validation/post-return134-sdk19-stopped-census.json",
+          "sha256": "c2a2060dc513f66162506b96c4c220239795e30b1c6b5023f9d03c10d654be86"
+        },
+        "pending_common_journal": false,
+        "note": "No old transfer token replay and no second Return after acknowledged134. New continuation must observe returned Parent menus/ledger and explicitly unfreeze before one counted4-stack grant/repair."
+      },
+      {
+        "private_source_draft": "0019",
+        "active_native_app": "runtime-e062-personal0019.json",
+        "r5_split_passed": false,
+        "source_observed_members": {
+          "translate": 137,
+          "yaw": 0,
+          "pitch": 138,
+          "dynamic": 7
+        },
+        "ordinary_parent_returned_members": {
+          "yaw": 138
+        },
+        "actual_missing_x2_source_cell": [
+          1034,
+          128,
+          1032
+        ],
+        "controlled_saved_paused": true,
+        "controlled_saved_native_epoch": 0,
+        "gravity_saved_paused": true,
+        "gravity_saved_native_epoch": 0,
+        "repair_previous_x6_completed": true,
+        "previous_one_grant4_consumed": true,
+        "ordinary_ticks_explicitly_unfrozen": true,
+        "owner_handoff_ready": false,
+        "last_actual_report": {
+          "path": ".local/phase-3-continuation/instance/r5-e062-cut137-fresh-inspector-v2/report.json",
+          "sha256": "274aaa0950aac2695d685dc1c2f3d249210c4bc093efd9b8c28d7d0ac424faa0"
+        },
+        "note": "Prior X6 holes repaired with exactly one counted4 stack, Original138 rearmed. New X2 trial removed only first seam cell, second intention uncommitted. Fresh readonly14PASS confirms exact137/current contents; remaining3 not retried yet."
+      },
+      {
+        "private_source_draft": "0019",
+        "active_native_app": "runtime-e062-personal0019.json",
+        "r5_split_passed": false,
+        "actual_host_transfer_acknowledged": true,
+        "actual_moved_cells": 126,
+        "actual_transfer_barrier": 785,
+        "preserved_raw_log": {
+          "path": ".local/phase-3-continuation/instance/r5-e062-remaining-three-root/0232.stdout",
+          "sha256": "7d575cb1c45caf454095d54bc526f16f8817c18f0305427f886c0e41ad71b359"
+        },
+        "actual_transfer_report_failed": {
+          "path": ".local/phase-3-continuation/instance/r5-e062-remaining-three-root/report.json",
+          "sha256": "96e8ba66de4d268472de12987bc99ffff8140aafeba56a72fe93788fec184383"
+        },
+        "prior_assertions_passed": 672,
+        "fresh_restore_failed": {
+          "path": ".local/phase-3-continuation/instance/r5-e062-committed126-fresh-restore/report.json",
+          "sha256": "be58a422f8b742202b68d95b983692cb62b0a9a1af62f17aa7a866fde41c5641"
+        },
+        "canonical_source_members": {
+          "translate": 8,
+          "yaw": 126,
+          "pitch": 138,
+          "dynamic": 7
+        },
+        "parent_and_child_canonical_phase": "owned_unprojected",
+        "retained_parent_actual_saved_binding_members": 8,
+        "retained_parent_actual_saved_pose_revision": 1,
+        "child_actual_saved_binding": null,
+        "child_retired_generation": 185,
+        "child_retired_members": null,
+        "current_gameplay_failure": "Split committed126, but retained parent incorrectly staged OwnedUnprojected and reconciliation applies no-binding/retired-binding guards to it. Fresh startup also refuses Stale querying old retired descriptor for the nonempty unprojected child. No transfer replay; explicit bounded metadata repair and normal phase-aware activation are being prepared.",
+        "census": {
+          "path": ".local/phase-3-continuation/coordinator-validation/post-r5-fresh-restore-refusal-stopped-census.json",
+          "sha256": "46feda7895f92e36d3c183053787802b759892e6213321e688cb19d55ee9e1e9"
+        },
+        "pending_common_journal": false,
+        "owner_handoff_ready": false
+      },
+      {
+        "private_source_draft": "0023",
+        "active_native_app": "runtime-e062-personal0023.json",
+        "r5_split_passed": false,
+        "prior_actual_host_transfer_acknowledged": true,
+        "prior_actual_moved_cells": 126,
+        "prior_actual_transfer_barrier": 785,
+        "explicit_phase_only_repair": {
+          "path": ".local/phase-3-continuation/instance/r5-e062-explicit-phase-repair23/report.json",
+          "sha256": "f4365d923f45606e832cae7c7aa93ca39e2b1b1a4bc0c6c0bb2ff2ed0be50198"
+        },
+        "repair_ack_barrier": 842,
+        "repair_assertions": 11,
+        "typed_only_parent_phase_change_verified": {
+          "path": ".local/phase-3-continuation/coordinator-validation/explicit-committed126-phase-repair/actual-validation.json",
+          "sha256": "acd3da0ff16ac9bfac3a7ec8e4b034ffa5f07240d69bf2057cc3d0a2fc2c8a1b"
+        },
+        "normal_no_recovery_restore": {
+          "path": ".local/phase-3-continuation/instance/r5-e062-repaired126-normal-restore23/report.json",
+          "sha256": "03164453329b1d3de4d64136d7ff8fcbfe72483fc1a805a5d0ae6248948d43b4"
+        },
+        "normal_restore_assertions": 41,
+        "source_observed_members": {
+          "translate": 8,
+          "yaw": 126,
+          "pitch": 138,
+          "dynamic": 7
+        },
+        "ordinary_parent_returned_members": {
+          "old_yaw": 138
+        },
+        "canonical_parent_child_phases": "projected",
+        "controlled_saved_paused": true,
+        "controlled_saved_native_epoch": 1,
+        "gravity_saved_paused": true,
+        "gravity_saved_native_epoch": 0,
+        "census": {
+          "path": ".local/phase-3-continuation/coordinator-validation/post-repaired126-normal-restore23-stopped-census.json",
+          "sha256": "beb7952db5dc598d6efc0e84e6fa1378f2e3314ccd763449edd7c964123da406"
+        },
+        "pending_common_journal": false,
+        "owner_handoff_ready": false,
+        "note": "World healthy after narrowly scoped real phase promotion and normal reopen. Return8+126/menus/countedX2repair, future positivefullR5 and remaining lifecycle not yet executed. No old transfer replay."
+      },
+      {
+        "stage": "ordinary_far_Return3_persisted_then_disposal_storage_refusal",
+        "source_members": {
+          "translate": 0,
+          "yaw": 0,
+          "pitch": 0,
+          "dynamic": 0
+        },
+        "ordinary_original_parent_members": {
+          "translate": 138,
+          "yaw": 138,
+          "pitch": 138,
+          "dynamic": 7
+        },
+        "ordinary_extra_diagnostic_data": {
+          "negative": 135,
+          "returned_tiny": 1,
+          "far": 3
+        },
+        "far_static_repair_return": {
+          "path": ".local/phase-3-continuation/instance/late-e062-far-static-repair-return23/report.json",
+          "sha256": "84b9268ce16c942c73743b437d0f9f85955be88300f10de0b946e827c2558c95"
+        },
+        "far_Return_barrier": 2148,
+        "later_projection_record_barrier": 2184,
+        "far_native_translation_passed": false,
+        "stationary_far_failure": {
+          "path": ".local/phase-3-continuation/coordinator-validation/far-f32-stationary23/failure.json",
+          "sha256": "401805fad88cfe4d0c18a3624a8eb521464895c1ee8d77f1726b15647df0e1e7"
+        },
+        "original_native_precision_probe": {
+          "path": ".local/phase-3-continuation/independent-validation/original-far-linear-precision/receipt.json",
+          "sha256": "78da2073bb4e7475867608b2616ab24575ff787da4afd2cf08d891c0b5171686"
+        },
+        "grant_completion": {
+          "path": ".local/phase-3-continuation/independent-validation/far-one-counted-grant-completion/completion.json",
+          "sha256": "09b59760812f496b4309d3bbb899812319cfc4e70e5b92cd659e68658c72c3f1"
+        },
+        "grant_original_runner_passed": false,
+        "disposal_report": {
+          "path": ".local/phase-3-continuation/instance/late-e062-dispose-near-reload23/report.json",
+          "sha256": "5c48490f1f583b48de0b84ba43dc68a8578c4b5897a0b2b8821b5113d5ee3e9a"
+        },
+        "disposal_passed": false,
+        "disposal_failure": "Storage: common journal64MiB byte budget before unload/drop; ordinary shutdown save also refused. No F3T/bench/restart executed.",
+        "stopped_storage_audit": {
+          "path": ".local/phase-3-continuation/bridge/disposal-storage-failure23/receipt.json",
+          "sha256": "621f2c0c349a99f2037aaded3f35f0d7169ea94b7c35465e9dc033e1b5c43b09"
+        },
+        "stopped_census": {
+          "path": ".local/phase-3-continuation/coordinator-validation/disposal-storage-failure23-stopped-census.json",
+          "sha256": "9eba334d7178b25026999eb444da80da52889660e07575ab314f3db4f537fa2c"
+        },
+        "pending_common_wal": false,
+        "iron_units": 73,
+        "diamonds": 21,
+        "persisted_player": {
+          "position": [
+            18,
+            21,
+            36
+          ],
+          "mode": "Survival",
+          "flying": false,
+          "blackstone": 1
+        },
+        "owner_handoff_ready": false,
+        "occupied_diagnostic_reset_supported": false,
+        "next_scenario": "Fresh Sunrise-only bounded common-save fix, exact SDK21 build/runtime transition, then disposal/rearm/current physical capture/orientation/actual owner launch.",
+        "note": "Historical SDK20 disposal Storage failure preserved. SDK21 actual disposal308/fullreopen and stopped fullParent/BEs/noWAL audit now pass; final Original421 rearm/current physical/owner proof in progress."
+      },
+      {
+        "stage": "SDK21_partial_original_rearm_dynamic_Revision_pending",
+        "report": {
+          "path": ".local/phase-3-continuation/instance/late-87e9-final-rearm23/report.json",
+          "sha256": "db45103cb29d9d6ad6ec567c28329b6f652e84e26096debc2b6af0c99843ae8c"
+        },
+        "runner_passed": false,
+        "prior_assertions_passed": 118,
+        "source_members_observed": {
+          "translate": 138,
+          "yaw": 138,
+          "pitch": 138,
+          "dynamic": 0
+        },
+        "native_bodies_observed": {
+          "controlled": 3,
+          "gravity": 0
+        },
+        "native_epochs_observed": 0,
+        "lifecycle": {
+          "action": "Rearm { slot: 3 }",
+          "phase": "unreconciled",
+          "error": "Revision",
+          "pending": true,
+          "planned_epoch": 2247,
+          "barrier_epoch": null,
+          "attempts": 5
+        },
+        "full_game_process_cleanly_exited": true,
+        "owner_handoff_ready": false,
+        "note": "Three captures executed; one dynamic rearm attempted, NOT replayed. New stopped Source/Parent/canonical census and private policy diagnosis pending before any continuation. Old disposal308/pass and original Storage109/failure remain separate evidence."
+      }
+    ],
+    "split_frontier_correction": {
+      "source_draft": "0019",
+      "source_manifest": {
+        "path": ".local/phase-3-continuation/sdk-export/source-draft-0019.json",
+        "sha256": "8b7c52cbf671340a75b71d95802fed71034b7e6b7bdfbac9c47e89961b523047"
+      },
+      "author": {
+        "path": ".local/phase-3-continuation/bridge/source-draft-0019/receipt.json",
+        "sha256": "491c5e3766a79735e640f35c4e029deab493112ff5f50747370d7387ce0196cd"
+      },
+      "independent_source_review": {
+        "path": ".local/phase-3-continuation/independent-validation/source-draft-0019-review/receipt.json",
+        "sha256": "c71f163254a3258319019e3ed6414b3ee47796db70fd39978e5b95fc4f77efcd"
+      },
+      "independent_32_unit_execution": {
+        "path": ".local/phase-3-continuation/independent-validation/personal-draft0019-units/receipt.json",
+        "sha256": "e41061e8bc1f7a3ea5b290dccdffb55eaaab06662c21bae09285eeb6c46dc712"
+      },
+      "scope": "Explicit common checkpoint before NEW split plan/token plus fresh actual canonical OWNER/REGISTRY checks across callbacks/before metadata writes. All25 prior tests plus7new PASS; normal10command pipeline and strictClippy PASS. Exact old pre-Prepared Revision predicate remains unobserved; actual corrected split not yet run. Actual SDK19 Return134 acknowledged, later camera setup fails separately.",
+      "draft18_source_finding_preserved": {
+        "path": ".local/phase-3-continuation/independent-validation/source-draft-0018-review/receipt.json",
+        "sha256": "04808a80ac525053b85bd8bbdaeed25c05f8eaa48fdb9dce685b5d33ef7b0ba3"
+      },
+      "source18_built": false,
+      "core_physics_or_goldens_changed": false
+    },
+    "pending_split_phase_candidate": {
+      "draft": "0020",
+      "compiled": false,
+      "applied_to_working_source": true,
+      "author": {
+        "path": ".local/phase-3-continuation/adapter/postcommit-split-phase-draft0020/receipt.json",
+        "sha256": "3c486830894c6f3273b44ae4f9e98b234c8bac6d6325e3ed7963aea3fe96db27"
+      },
+      "independent_source": {
+        "path": ".local/phase-3-continuation/independent-validation/postcommit-split-phase-draft0020-review/review.json",
+        "sha256": "1aecff4b03bcd9907edf2062e49745bf1631735d1bf33608a6f4b637bc7ed744"
+      },
+      "scope": "Future phase-aware retained-parent split and narrow nonempty Owned/retired descriptor activation; cumulative explicit world repair21 in preparation. No runtime fix claimed.",
+      "compiled_as_part_of": "0023"
+    },
+    "late_free_boundary": {
+      "initial_runtime_report": {
+        "path": ".local/phase-3-continuation/instance/late-e062-grounded-free23/report.json",
+        "sha256": "2d4e678403b516c33d9c319bc22ec7e9ccf4a6e64836e4ce3c9387a45410590f"
+      },
+      "initial_report_passed": false,
+      "reason": "ImmediatepostONEcreativebreak read stillStone; originalfailed129preserved. FreshreadonlyrawAIR, no secondbreak or Return replay.",
+      "completion": {
+        "path": ".local/phase-3-continuation/bridge/late-free-completion23-v2/completion.json",
+        "sha256": "bf938639c219748f32326b24030bb9814f08c53faf4160ff684e82e49f286f11"
+      },
+      "remaining_actual_menus": {
+        "path": ".local/phase-3-continuation/instance/late-e062-free-remaining-menus23/report.json",
+        "sha256": "2086ec1bbd455a8eac7197fc040dd13cebc322ea7d790316cacdf84e50523b99"
+      },
+      "remaining_actual_assertions": 196,
+      "current_source_members": {
+        "translate": 138,
+        "yaw": 0,
+        "pitch": 0,
+        "dynamic": 7
+      },
+      "ordinary_returned": {
+        "yaw": 138,
+        "pitch": 138
+      },
+      "ordinary_ticks_explicitly_unfrozen": true,
+      "native_scenes_paused_at": 0,
+      "owner_handoff_ready": false,
+      "negative135_setup_in_progress": false,
+      "note": "Historical completed Free boundary. Negative135 subsequently captured and restored; see latest_completed_runtime_boundary."
+    },
+    "latest_completed_runtime_boundary": {
+      "stage": "SDK21_bounded_Phase3_ready_for_external_review_owner_launch_passed",
+      "runtime": {
+        "path": ".local/phase-3-continuation/sdk-export/runtime-87e9-personal0023.json",
+        "sha256": "1aa16b366f80d938886806aca75b92f1f621c7941bea6ec0e2df751a1784ff4f"
+      },
+      "final_safe_report": {
+        "path": ".local/phase-3-continuation/instance/final-safe-87e9-0023/report.json",
+        "sha256": "27f9151ec7aa75936bd7cf8e990076d378e6948a51c5aff241f64887aafa3f10"
+      },
+      "final_safe_assertions": 383,
+      "full_processes": 2,
+      "original_vertical_report": {
+        "path": ".local/phase-3-continuation/instance/vertical-final-87e9-0023/report.json",
+        "sha256": "b515c6ac92c3ecbe269b320e5648a995a3c78186072e31385de0a1230024a7ed"
+      },
+      "original_vertical_runner_passed": false,
+      "orientation_assertions_passed": 157,
+      "orientation_degrees": 93.96685,
+      "orientation_native_epoch": 164,
+      "remaining_safe_completion": {
+        "path": ".local/phase-3-continuation/bridge/vertical-final-safe-remainder87/actual-completion.json",
+        "sha256": "4af1fc2864b318889ad55f6d4942483c8d1268979b0e0790ac0fa5162627af92"
+      },
+      "independent_final_review": {
+        "path": ".local/phase-3-continuation/bridge/vertical-final-safe-remainder87/final-review-receipt.json",
+        "sha256": "7776c7b2544f23e76e45f44c051afedee18a2ce37cc52bbf2505af742a14ef15"
+      },
+      "stopped_census": {
+        "path": ".local/phase-3-continuation/coordinator-validation/final-safe-sdk21-stopped-census.json",
+        "sha256": "19a023865be99b7c3e9bea6d732ce270c2da0586a24fe660cb2583096e3bc459"
+      },
+      "stopped_inventory_state": {
+        "path": ".local/phase-3-continuation/bridge/vertical-final-safe-remainder87/final-stopped-state.json",
+        "sha256": "296f8035ddcf7c83136f5ce9b85e7673ec7aaa6a4487e076cbf91da65a6f5b52"
+      },
+      "source_members": {
+        "translate": 138,
+        "yaw": 138,
+        "pitch": 138,
+        "dynamic": 7
+      },
+      "canonical_registry_entries": 4,
+      "both_native_scenes_paused": true,
+      "native_epochs": 0,
+      "iron_units": 73,
+      "diamonds": 21,
+      "retained_player_items": {
+        "minecraft:blackstone": 1
+      },
+      "player": {
+        "mode": "creative",
+        "position": [
+          18.0,
+          21.0,
+          36.0
+        ],
+        "flying": false
+      },
+      "pending_common_wal": false,
+      "rearm_original_runner_passed": false,
+      "rearm_explicit_completion": {
+        "path": ".local/phase-3-continuation/adapter/final-rearm87-remaining-d/actual-completion23.json",
+        "sha256": "26176316f0fb9eb314507fcac2c81cd54876f54f3af0256370ebfb8ae35bdb99"
+      },
+      "owner_handoff_ready": true,
+      "far_native_translation_passed": false,
+      "occupied_diagnostic_reset_supported": false,
+      "external_acceptance": false,
+      "owner_launch": {
+        "path": ".local/phase-3-continuation/instance/owner-sessions/independent-owner-final-sdk21/verification/owner-observations.json",
+        "sha256": "24492e4a9809b440b34b97b74425da790097d84364817026378330bf9f0029d0"
+      },
+      "final_stopped_census": {
+        "path": ".local/phase-3-continuation/independent-validation/final-owner-launch-preparation/actual-stopped-census-sdk21.json",
+        "sha256": "83f23f22a5dd15e8d5f427ad2c9ac3790a1419984f11d7cb25327ff78a1e3381"
+      }
+    },
+    "review_driver_loaded_poll_checkpoint": {
+      "source": {
+        "path": "tools/phase3_continuation/run_review.py",
+        "sha256": "5829d9ae622a602a5e4e5216aa7e36114cd3eaec14bf56553290a75fc3cdba57"
+      },
+      "new_test": {
+        "path": "tools/phase3_continuation/test_loaded_poll.py",
+        "sha256": "e6c24d984ef832699199eed3c3a056516228200157dce773742746af3e4baf69"
+      },
+      "previous_runner_sha256": "1a725b8128ba1808b08ce1d77d590c6698c8f2cdfedbe7df22f0d2b8c7b07ef7",
+      "actual_receipt": {
+        "path": ".local/phase-3-continuation/independent-validation/loaded-poll-tooling/receipt.json",
+        "sha256": "28206e5459012713744b0555c26ed22a1582590344ca044c2139e627cd0e17a5"
+      },
+      "non_author_review": {
+        "path": ".local/phase-3-continuation/bridge/loaded-only-poll-independent/receipt.json",
+        "sha256": "b230f473879cc1f33c79fd52b42b012b2a844d2e1b43fb778066670503018768"
+      },
+      "tests": 107,
+      "prior_test_methods_preserved": 101,
+      "scope": "Only terminal canonical-int32 execute if loaded triplet gains bounded readonly polling. Mutation polling unchanged/refused; no SDK/private source/physics update."
+    },
+    "runtime20_historical_archive": {
+      "path": ".local/phase-3-continuation/coordinator-validation/runtime20-pre-journal-fix-archive/manifest.json",
+      "sha256": "b7c78a572f6b31cd72a66698bf685a4410c6bf8ee5649a1c242a527e09ad2cdd"
+    },
+    "sdk21_common_save_candidate": {
+      "commit": "87e9a3ae80dfd56603b4b52a1e9e6e8fd9419f32",
+      "tree": "eff11cfcf160ffa2b6fc947e0997a7275bdb611a",
+      "source_clean": true,
+      "source_and_checks": {
+        "path": ".local/phase-3-continuation/engine-evidence/common-budget-87e9/coordinator-copy.json",
+        "sha256": "6026782d70760d71445d981ca59bc15f37b1a641b476551feca3cc5012ed5b39"
+      },
+      "independent41": {
+        "path": ".local/phase-3-continuation/bridge/upstream21-binary-independent/receipt.json",
+        "sha256": "d8be34e3363ca0bd05d9bfe8ca1c89cbca947b553faa2a2c4430bc6bfb5136c9"
+      },
+      "selected_tests_passed": 41,
+      "strict_clippy_passed": true,
+      "format_daily_index_hook_passed": true,
+      "normal_sdk_export": "PASS normalSDK9/fourstrictconsumers/private10/39strict0/install51; actualoldworlddisposal308/fullreopen andcurrent77/safe383 separatelypassed.",
+      "actual_original_world_storage_fixed": true,
+      "public_mod_surface": "Actual86b exported surface byte-identical; complete declaration delta empty,1495vocab Rs identical/fourstrictconsumers PASS. Internal Rust layout/helpers changed and fully rebuilt; no binary compatibility claim",
+      "caps_changed": false,
+      "old_failed_runtime": {
+        "path": ".local/phase-3-continuation/sdk-export/runtime-e062-personal0023.json",
+        "sha256": "730f0502ea05011b1493afb8d1993e68b71dc0be6a0434707d6f8a2ba54eca6a"
+      },
+      "transition": {
+        "path": ".local/phase-3-continuation/coordinator-validation/sdk21-transition/manifest.json",
+        "sha256": "8725ef81a24268c1ba041e7ad3b225ee7e5309881a5fc40ecab84fb7903cbd6a"
+      },
+      "independent_export_review": {
+        "path": ".local/phase-3-continuation/bridge/sdk21-public-surface-prep/actual87-independent-review.json",
+        "sha256": "843b65b00640b37414b86859f51df83a33c62db271ec60196b0ac3a8fbca56f0"
+      },
+      "independent_transition": {
+        "path": ".local/phase-3-continuation/independent-validation/sdk21-actual-transition-review/receipt.json",
+        "sha256": "4996b031aafffe94457b7a514d7c2e693aa641e652b5ca5e029ce2732e600b85"
+      },
+      "actual_disposal": {
+        "path": ".local/phase-3-continuation/instance/late-87e9-dispose-reload23/report.json",
+        "sha256": "24964a9528e4a5beb00aaa0a95ee011ae7d1705256a7281205342f0fcb58f274"
+      },
+      "actual_disposal_assertions": 308,
+      "actual_disposal_full_processes": 2,
+      "stopped_source_census": {
+        "path": ".local/phase-3-continuation/coordinator-validation/disposal-sdk21-stopped-census.json",
+        "sha256": "f733da6ed187d0fd4ff636d1aba70ada876bfaa3d4754d390a9087a7fd185fda"
+      },
+      "stopped_parent_inventory_readcheck": {
+        "path": ".local/phase-3-continuation/bridge/sdk21-dispose-prep/actual87-stopped-storage-readcheck.json",
+        "sha256": "661a52e9afd16ae1ac8a0250b2cbe205872a7296d5941a451413a9098d999681"
+      },
+      "reload_visual_review": {
+        "path": ".local/phase-3-continuation/coordinator-validation/sdk21-disposal-image-review.json",
+        "sha256": "35eb21b3efb8cf59a5e760bfcbf1d8cfae8e28eb5e23fbf4eafcc312060519dd"
+      },
+      "reload_scope": "ActualF3T requested; genuinePNG isloadingoverlay, notcachecompletion. Raw3s zeroowner sample overlaps reload, no steadyFPS/TPS/causalclaim."
+    },
+    "previous_official_audits": [
+      {
+        "main": "dc934ffaab2c65bcb0df7fb4ff04cbf5306427cf",
+        "committer_date": "2026-11-20T16:00:44Z",
+        "observed_at": "2026-11-20T16:14:51.659233+00:00",
+        "development_base_preserved": true,
+        "latest_main_fit_tested": false,
+        "scope": "Selected ticket-registration/transport/policy source audit; not a complete new live-world API or pending-code census",
+        "source_audit": {
+          "path": ".local/phase-3-continuation/bridge/generic-wasm-ticket-load-review/official-overlap/receipt.json",
+          "sha256": "8aaa52cff048a2392702c48bb89d0ef3b4f86f44d9133ca8acaa207a738416c8"
+        },
+        "native_only_main": true,
+        "latest_visible_published_sdk": {
+          "tag_name": "sdk-94256510f74e6843754e0a93fd9e4da7e45b1056",
+          "published_at": "2026-11-20T01:12:24Z",
+          "url": "https://github.com/sunrise-org/sunrise/releases/tag/sdk-94256510f74e6843754e0a93fd9e4da7e45b1056"
+        },
+        "published_sdk_runtime_tested": false,
+        "publication_or_coordination_performed": false
+      }
+    ],
+    "current_build_physical_demo": {
+      "report": {
+        "path": ".local/phase-3-continuation/instance/continuous-fall-87e9-0023/report.json",
+        "sha256": "d19ad0810552a7e5929b6af76f0eacdd379cc03e3c7516112dd79a7b96b472f8"
+      },
+      "assertions": 77,
+      "exact_historical_input_sha256": "ecdee545788271f33c78ba529212b10ef26d9c4d844a2130a6b0553f812fc385",
+      "actual_spacing_media": {
+        "path": ".local/phase-3-continuation/instance/continuous-fall-87e9-0023/media-fall/receipt.json",
+        "sha256": "6192fa4bf1315b44e9c1bf9c4c5d9e25a92b02676095c5a87180ba278fc8aa6a"
+      },
+      "coordinator_image_review": {
+        "path": ".local/phase-3-continuation/coordinator-validation/current-sdk21-fall-image-review.json",
+        "sha256": "5358069dc93bc0a16a12ba3e3c11df3495692beeb13b99b2fb18f73c63c361f7"
+      },
+      "scope": "Current SDK21/private23 actual native gravity/contact/angular response; matching station floor, unchanged accepted F90/fork/compiler/config. No scripted trajectory or new Java golden."
+    },
+    "final_owner_launch": {
+      "observations": {
+        "path": ".local/phase-3-continuation/instance/owner-sessions/independent-owner-final-sdk21/verification/owner-observations.json",
+        "sha256": "24492e4a9809b440b34b97b74425da790097d84364817026378330bf9f0029d0"
+      },
+      "stopped_census": {
+        "path": ".local/phase-3-continuation/independent-validation/final-owner-launch-preparation/actual-stopped-census-sdk21.json",
+        "sha256": "83f23f22a5dd15e8d5f427ad2c9ac3790a1419984f11d7cb25327ff78a1e3381"
+      },
+      "actual_visible_launcher": "tools/phase3_continuation/open_review.py",
+      "session": "independent-owner-final-sdk21",
+      "owned_game_pid": 6487,
+      "all_source_members": 421,
+      "native_epochs": 0,
+      "player_inventory": {
+        "minecraft:blackstone": 1
+      },
+      "safe_creative_grounded_not_flying": true,
+      "full_native_raw_current_initial_saved_witness_checked": true,
+      "whole_process_kernel_exit_observed": true,
+      "fatal_errors": [],
+      "pending_common_wal": false,
+      "scope": "Non-author actual owner-command launch, readbacks, screenshot, normal save and kernel-observed quit, final stopped census. No init/recovery/migration/pause/reset/tp/give; F1 capture pair only.",
+      "independent_completion": {
+        "path": ".local/phase-3-continuation/independent-validation/final-owner-launch-preparation/actual-owner-completion.json",
+        "sha256": "67b48772044881b51571a12bc9e4973e9a6b2e0a4206a37977389e8d00b328e8"
+      }
+    },
+    "bounded_review_world_ready": true,
+    "all_sixteen_scenes_passed": false,
+    "completed_local_date": "2026-11-21",
+    "open_daylight_followup": {
+      "date": "2026-11-21",
+      "status": "Bounded open-drop result for external review; owner accepts physics and selected a new saved view; Phase4 not started",
+      "result_document": "docs/phase-3-open-demo-review.md",
+      "evidence_index": {
+        "path": "docs/phase-3-open-demo-evidence.json",
+        "sha256": "2421daa6a43899c719e9c7d24fd812eaca106431ca3e19377849ca56a50a1501",
+        "bytes": 4682
+      },
+      "source_draft": {
+        "path": ".local/phase-3-continuation/sdk-export/source-draft-0027.json",
+        "sha256": "f39202fadaa4ca0fcef7df761ef31a67d5b6556a4f71a8826a4373b543aa1aa9",
+        "bytes": 2691
+      },
+      "runtime": {
+        "path": ".local/phase-3-continuation/sdk-export/runtime-87e9-open0027.json",
+        "sha256": "904db0f5da1cad5ab1e48f70ef3069098fbd3e9fca950c4aa116bd1666335741",
+        "bytes": 16502
+      },
+      "engine_commit": "87e9a3ae80dfd56603b4b52a1e9e6e8fd9419f32",
+      "engine_tree": "eff11cfcf160ffa2b6fc947e0997a7275bdb611a",
+      "native_sha256": "f90e515b1e0dee23f504698bad13db425d4a96d7be9453c2955bd7ea3cac63b1",
+      "old_regressions_preserved": true,
+      "old_complete_phase3_acceptance": false,
+      "external_acceptance": false,
+      "publication": false,
+      "port_commit": "347de3c"
+    }
+  },
+  "phase3_rendering_followup_20261121": {
+    "scope": "General common-stream retirement fix and actual projection-motion regression; external review pending, broader self-check remains red.",
+    "engine_before": "239e0912dfa3a3ba3cdaa461f4f2257271b25825",
+    "engine_after": "840a418cfcc4834a31bc792d76e972a646b4913e",
+    "engine_after_tree": "b41552dadf9457225b9e75191ea3e3885fb7e88c",
+    "evidence": {
+      "path": "docs/phase-3-render-evidence.json",
+      "sha256": "912bf6682be7b6fe80310bfadf5ff4516ea7f7d44bc9e4a16530b2cc54d99283",
+      "bytes": 8365
+    },
+    "runtime": {
+      "path": ".local/phase-3-continuation/sdk-export/runtime-840-renderfix0032.json",
+      "sha256": "3f9b57716fc75f9c5de77f296eb2ff6138987dc30f041d075b44a6a7c4b7ba08",
+      "bytes": 16514
+    },
+    "production_fix": "General Streaming deferred full/proto retirement remains due until a fresh checkpointed plan can actually retire it. No interpolation/physics/demo command change.",
+    "focused_runtime_checks_passed": true,
+    "full_selfcheck_all_green": false,
+    "external_acceptance": false,
+    "phase4_started": false,
+    "installed_profile_updated": false,
+    "publication": false
+  }
+}

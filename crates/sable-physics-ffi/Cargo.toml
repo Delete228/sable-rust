@@ -1,0 +1,13 @@
+[package]
+name = "sable-physics-ffi"
+version = "0.1.0"
+edition = "2024"
+publish = false
+license-file = "../sable-physics/LICENSE-SABLE.md"
+
+[lib]
+crate-type = ["cdylib", "rlib"]
+
+[dependencies]
+sable-physics = { path = "../sable-physics" }
+sable-bridge = { path = "../sable-bridge" }

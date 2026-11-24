@@ -1,0 +1,186 @@
+{
+  "repository": "https://github.com/ryanhcode/sable",
+  "revision": "9b1a3d1555d35db9fb7b1103701e7490f0a968b9",
+  "license": "PolyForm Shield 1.0.0",
+  "files": [
+    {
+      "original_path": "sable_rapier/src/main/rust/rapier/src/algo.rs",
+      "sha256": "610419b9f2f5a701d06af0c210f38ce02145284375af1c17b290865834b162ad",
+      "destination": "src/algo.rs",
+      "original_line_range": [
+        1,
+        274
+      ],
+      "modifications": "Preserve original voxel pair traversal/parallel cutoff; replace unchecked node read with checked indexing; formatting/provenance header only otherwise."
+    },
+    {
+      "original_path": "sable_rapier/src/main/rust/rapier/src/buoyancy.rs",
+      "sha256": "1a736d2538f03c67dbc3a05bef531706fd04e6e107df421a7b307244b764382a",
+      "destination": "src/buoyancy.rs",
+      "original_line_range": [
+        1,
+        190
+      ],
+      "modifications": "Original solver/geometry/event algorithm retained; provenance header and rustfmt only."
+    },
+    {
+      "original_path": "sable_rapier/src/main/rust/rapier/src/collider.rs",
+      "sha256": "a6046b1857742d0ba811399dbfc3527c9d197bf8f700a7b1a4ad8182d5e8fcfe",
+      "destination": "src/collider.rs",
+      "original_line_range": [
+        1,
+        140
+      ],
+      "modifications": "Original solver/geometry/event algorithm retained; provenance header and rustfmt only."
+    },
+    {
+      "original_path": "sable_rapier/src/main/rust/rapier/src/dispatcher.rs",
+      "sha256": "e04023073cff3cfee72b07a3079cbcc51366e1c23602b75f33d0b705014f39c2",
+      "destination": "src/dispatcher.rs",
+      "original_line_range": [
+        1,
+        853
+      ],
+      "modifications": "Original solver/geometry/event algorithm retained; provenance header and rustfmt only."
+    },
+    {
+      "original_path": "sable_rapier/src/main/rust/rapier/src/event_handler.rs",
+      "sha256": "c2c4625a2bbfc7c6bfa37c0cd7e5b930c0be4ae29d3374d2d9ff227a92c5a6b6",
+      "destination": "src/event_handler.rs",
+      "original_line_range": [
+        1,
+        72
+      ],
+      "modifications": "Original solver/geometry/event algorithm retained; provenance header and rustfmt only."
+    },
+    {
+      "original_path": "sable_rapier/src/main/rust/rapier/src/groups.rs",
+      "sha256": "495bf637585f15394b4d216fa99f80e69ae1b547b8164960111fd70282ba02c0",
+      "destination": "src/groups.rs",
+      "original_line_range": [
+        1,
+        9
+      ],
+      "modifications": "Original solver/geometry/event algorithm retained; provenance header and rustfmt only."
+    },
+    {
+      "original_path": "sable_rapier/src/main/rust/marten/src/octree.rs",
+      "sha256": "00ce4c27f76ccda62ceeae071605fe3e356eda2529018c339db2ff5f40eefc4b",
+      "destination": "marten/src/octree.rs",
+      "original_line_range": [
+        1,
+        271
+      ],
+      "modifications": "Preserve octree insert/query/remove/merge algorithms and layout; validate constructor log size 0..30 and replace unchecked buffer reads with checked indexing, giving safe panics for malformed internal data."
+    },
+    {
+      "original_path": "sable_rapier/src/main/rust/marten/src/lib.rs",
+      "sha256": "9d92b7b32b33e61dc787f7d658fc56ade4242645db4109a28a13e4722898f458",
+      "destination": "marten/src/lib.rs",
+      "original_line_range": [
+        1,
+        4
+      ],
+      "modifications": "Retain original module declarations and Real=f32 scalar alias unchanged; no JNI or physics operation bodies existed in this four-line file."
+    },
+    {
+      "original_path": "sable_rapier/src/main/rust/marten/src/level.rs",
+      "sha256": "ea30d305e45f44b7c4f8cc157346b7b7c5239a34b0f2b1687d721e12ab4dbbaf",
+      "destination": "marten/src/level.rs",
+      "original_line_range": [
+        1,
+        151
+      ],
+      "modifications": "Remove JNI GlobalRef/method IDs, replace with Arc ContactPolicy; add explicit contact request/response and call-local world service; validate chunk coordinates and use checked indexing. Original 4096-element constructor check retained unchanged."
+    },
+    {
+      "original_path": "sable_rapier/src/main/rust/rapier/src/hooks.rs",
+      "sha256": "eccac7e1c6980c1b18fa59a3bfd6b4c831ed388f2e5a33cf2f2f735ada5661a3",
+      "destination": "src/hooks.rs",
+      "original_line_range": [
+        1,
+        276
+      ],
+      "modifications": "Preserve contact calculations/order/friction/restitution/tangent transform; replace cached JNI invocation with synchronous ContactPolicy and call-local ContactWorld read/removal service at same hook location. Reject unsafe engine re-acquisition while allowing immediate original block edits."
+    },
+    {
+      "original_path": "sable_rapier/src/main/rust/rapier/src/scene.rs",
+      "sha256": "fc58a4232682a04e5099ec009f0f06841e9bb64d9670e97f805c75c7bb7c0fd6",
+      "destination": "src/scene.rs",
+      "original_line_range": [
+        1,
+        155
+      ],
+      "modifications": "Remove JavaVM retention; replace RefCell plus unsafe Sync collision buffer with Mutex preserving append/truncate/drain order; retain scene locks and global integration/material arrangement."
+    },
+    {
+      "original_path": "sable_rapier/src/main/rust/rapier/src/voxel_collider.rs",
+      "sha256": "f578dd459377ee9c41a2f3231319d61fe3cb48fe8af24d8ee98c1958bcf22da7",
+      "destination": "src/voxel_collider.rs",
+      "original_line_range": [
+        1,
+        138
+      ],
+      "modifications": "Retain original process-global material map/dynamic fallback; replace JNI registration functions with validated owned material inputs in boundary.rs."
+    },
+    {
+      "original_path": "sable_rapier/src/main/rust/rapier/src/boxes.rs",
+      "sha256": "2320cb1b8ca4c4a60a8c10c2163ea6701275ffeeb73f598ade2562660b72b3b3",
+      "destination": "src/boxes.rs",
+      "original_line_range": [
+        1,
+        96
+      ],
+      "modifications": "Retain original box lifecycle and numeric operations; JNI marshalled pose becomes owned [f64;7], raw scene handle becomes borrowed PhysicsScene."
+    },
+    {
+      "original_path": "sable_rapier/src/main/rust/rapier/src/config.rs",
+      "sha256": "79c06d4e3e44634d9d0f96cb5c44566e8800b8b1496f52aae1934289d1bd1bec",
+      "destination": "src/config.rs",
+      "original_line_range": [
+        1,
+        60
+      ],
+      "modifications": "Retain original process-global setters and spring constants; remove JNI prefix parameters and convert scalar aliases to Rust primitives."
+    },
+    {
+      "original_path": "sable_rapier/src/main/rust/rapier/src/joints.rs",
+      "sha256": "dbd1d2f7690de5258f8a050eff3a4f36b143adda26c4c0ff4f5e295286e4f910",
+      "destination": "src/joints.rs",
+      "original_line_range": [
+        1,
+        720
+      ],
+      "modifications": "Retain original joint algorithms, f64 anchors, f32 orientations and tick adjustment; JNI exports become crate-private Rust functions; array readback becomes fixed Rust output; add backend-valid guard for stale-joint safety."
+    },
+    {
+      "original_path": "sable_rapier/src/main/rust/rapier/src/rope.rs",
+      "sha256": "c1fb46fca1920f97f31c35a057c61779c8ada3a2c89826d53a06983f61af8355",
+      "destination": "src/rope.rs",
+      "original_line_range": [
+        1,
+        564
+      ],
+      "modifications": "Retain original rope state and pre-step maintenance only; omit JNI rope construction/mutation exports from this accepted slice. No rope parity claim."
+    },
+    {
+      "original_path": "sable_rapier/src/main/rust/rapier/src/lib.rs",
+      "sha256": "286d165e3f4017d6bbc9baee0e1bf5e46acd511baad238ef241e6f1be902a473",
+      "destination": "src/lib.rs",
+      "original_line_range": [
+        1,
+        1455
+      ],
+      "modifications": "Retain original scene/body/mass/chunk/block/force arithmetic; JNI exports become crate-private Rust functions with owned fixed-size arrays and borrowed scene references; remove JVM/logging/bootstrap/raw-pointer handles and exception marshalling; preserve tick/step ordering; owned public boundary is new code."
+    }
+  ],
+  "modifications": "JNI removed; owned array boundary and synchronous contact service; safe typed handles and collision-buffer mutex; solver algorithms retained. See docs/phase-1-extraction.md.",
+  "additional_original_notices": [
+    "LICENSE-SABLE.md (verbatim pinned Sable license)",
+    "LICENSE-RAPIER (verbatim pinned fork license; dependency code not copied)"
+  ],
+  "new_files": {
+    "src/boundary.rs": "New owned engine interface, generation-checked handles and validated inputs; derived primitive operation order references lib.rs above.",
+    "tests/boundary.rs": "New safety and synchronous policy regressions plus independent impulse invariant; no native golden generation."
+  }
+}

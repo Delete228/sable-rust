@@ -1,0 +1,9 @@
+[package]
+name = "sable-sunrise"
+version = "0.1.0"
+edition = "2024"
+description = "Personal Sunrise adapter contracts and integration boundary"
+
+[dependencies]
+sable-core = { path = "../sable-core", default-features = false }
+sable-bridge = { path = "../sable-bridge" }

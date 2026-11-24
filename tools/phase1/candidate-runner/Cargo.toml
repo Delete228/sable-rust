@@ -1,0 +1,12 @@
+[package]
+name = "sable-physics-reference-runner"
+version = "0.1.0"
+edition = "2024"
+publish = false
+[dependencies]
+sable-physics = { path = "../../../crates/sable-physics" }
+serde_json = "=1.0.149"
+serde = "=1.0.228"
+[[bin]]
+name = "native-candidate"
+path = "src/main.rs"

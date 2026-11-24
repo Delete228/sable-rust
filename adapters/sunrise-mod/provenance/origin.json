@@ -1,0 +1,23 @@
+{
+  "schema": "sable.personal.adapter.provenance",
+  "version": 1,
+  "scope": "Concrete native-to-canonical-host pose mapping in src/frames.rs; no physics algorithm or Sunrise-private dependency is imported.",
+  "observed_commit": "22ff5f84d105a5726a11c87a043cf9d7cffa637d",
+  "observed_working_tree": true,
+  "files": [
+    {
+      "path": "crates/sunrise-world/src/carrier/contact.rs",
+      "sha256": "3253184f2596467689fb6997c4c09d4541cb539cb32ee0b7814c1ef64025070f"
+    },
+    {
+      "path": "crates/sunrise-client/src/game/modding/native_live_worlds.rs",
+      "sha256": "5d66a4291a20dc8d847e1c4f57a406cec52d3d83c4edbab3045f5eafb1504b71"
+    },
+    {
+      "path": "LICENSE",
+      "sha256": "2157e2cb85e759b7fef2f7878c9a7f6a94c1a349c1cf5aa0f76421cb544d1085"
+    }
+  ],
+  "license": "Sunrise PolyForm Shield; full original Required Notice and license retained in LICENSE-SUNRISE",
+  "publication": "not authorized"
+}

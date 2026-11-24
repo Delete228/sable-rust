@@ -1,0 +1,7612 @@
+{
+  "schema": "sable.native_scenarios",
+  "schema_version": 1,
+  "configuration_name": "unchanged native / ABI-adapted fixture",
+  "units": {
+    "position": "m",
+    "velocity": "m/s",
+    "angular_velocity": "rad/s",
+    "impulse": "native mass unit*m/s",
+    "inertia": "native mass unit*m^2"
+  },
+  "frames": {
+    "pose": "world COM position + xyzw quaternion",
+    "chunks": "plot/world integer coordinates x-fastest then z then y",
+    "inertia": "local COM; column-major9"
+  },
+  "discrete_equality": [
+    "material indices",
+    "body IDs",
+    "scene/joint aliases",
+    "event order",
+    "joint validity",
+    "contact record count/IDs; investigate observed variation"
+  ],
+  "numeric_policy": "Repeat first, retain every outlier; choose scoped tolerances only after actual observations. No universal epsilon.",
+  "scenarios": [
+    {
+      "id": "mass-boundaries-activation",
+      "repeat_count": 5,
+      "timeout_seconds": 20,
+      "acceptance_scope": [
+        "box transforms at negative,15/16,31/32,far-origin coordinates",
+        "explicit native sublevel mass and rotated inertia impulse handling",
+        "observed activation order retained",
+        "remove and reuse body ID",
+        "no voxel or callback claim"
+      ],
+      "actions": [
+        {
+          "op": "scene",
+          "scene": "a",
+          "gravity": [
+            0,
+            -9.81,
+            0
+          ],
+          "drag": 0
+        },
+        {
+          "op": "scene",
+          "scene": "b",
+          "gravity": [
+            0,
+            0,
+            0
+          ],
+          "drag": 0
+        },
+        {
+          "op": "config",
+          "iterations": [
+            18,
+            2,
+            2
+          ],
+          "frequency": [
+            40,
+            5
+          ],
+          "min_island": 128
+        },
+        {
+          "op": "box",
+          "scene": "a",
+          "id": 1,
+          "mass": 8,
+          "half_extents": [
+            0.25,
+            0.5,
+            0.75
+          ],
+          "pose": [
+            -16.25,
+            4.5,
+            -32.125,
+            0,
+            0,
+            0,
+            1
+          ]
+        },
+        {
+          "op": "sample",
+          "scene": "a",
+          "id": 1,
+          "label": "boundary-create"
+        },
+        {
+          "op": "box",
+          "scene": "a",
+          "id": 2,
+          "mass": 8,
+          "half_extents": [
+            0.25,
+            0.5,
+            0.75
+          ],
+          "pose": [
+            15,
+            16,
+            31,
+            0,
+            0,
+            0,
+            1
+          ]
+        },
+        {
+          "op": "sample",
+          "scene": "a",
+          "id": 2,
+          "label": "boundary-create"
+        },
+        {
+          "op": "box",
+          "scene": "a",
+          "id": 3,
+          "mass": 8,
+          "half_extents": [
+            0.25,
+            0.5,
+            0.75
+          ],
+          "pose": [
+            16,
+            31,
+            32,
+            0,
+            0,
+            0,
+            1
+          ]
+        },
+        {
+          "op": "sample",
+          "scene": "a",
+          "id": 3,
+          "label": "boundary-create"
+        },
+        {
+          "op": "box",
+          "scene": "a",
+          "id": 4,
+          "mass": 8,
+          "half_extents": [
+            0.25,
+            0.5,
+            0.75
+          ],
+          "pose": [
+            30000000.25,
+            80.125,
+            -30000000.75,
+            0,
+            0,
+            0,
+            1
+          ]
+        },
+        {
+          "op": "sample",
+          "scene": "a",
+          "id": 4,
+          "label": "boundary-create"
+        },
+        {
+          "op": "sublevel",
+          "scene": "b",
+          "id": 10,
+          "pose": [
+            0,
+            5,
+            0,
+            0,
+            0,
+            0.7071067811865475,
+            0.7071067811865476
+          ],
+          "center": [
+            -16.5,
+            0.5,
+            31.5
+          ],
+          "bounds": [
+            -17,
+            0,
+            31,
+            32,
+            2,
+            32
+          ],
+          "mass": 8,
+          "inertia": [
+            3,
+            1,
+            0,
+            1,
+            3,
+            0,
+            0,
+            0,
+            8
+          ]
+        },
+        {
+          "op": "sample",
+          "scene": "b",
+          "id": 10,
+          "label": "mass-before-activation"
+        },
+        {
+          "op": "impulse",
+          "scene": "b",
+          "id": 10,
+          "linear": [
+            4,
+            -8,
+            12
+          ],
+          "angular": [
+            2,
+            4,
+            8
+          ],
+          "wake": true
+        },
+        {
+          "op": "sample",
+          "scene": "b",
+          "id": 10,
+          "label": "impulse-before-activation"
+        },
+        {
+          "op": "step",
+          "scene": "b",
+          "dt": 0.025,
+          "count": 1,
+          "sample_every": 1,
+          "label": "activate"
+        },
+        {
+          "op": "impulse",
+          "scene": "b",
+          "id": 10,
+          "linear": [
+            4,
+            -8,
+            12
+          ],
+          "angular": [
+            2,
+            4,
+            8
+          ],
+          "wake": true
+        },
+        {
+          "op": "sample",
+          "scene": "b",
+          "id": 10,
+          "label": "impulse-after-activation"
+        },
+        {
+          "op": "step",
+          "scene": "b",
+          "dt": 0.025,
+          "count": 2,
+          "sample_every": 1,
+          "label": "impulse-integrate"
+        },
+        {
+          "op": "step",
+          "scene": "a",
+          "dt": 0.025,
+          "count": 1,
+          "sample_every": 1,
+          "label": "scene-a-interleaved"
+        },
+        {
+          "op": "body_remove",
+          "scene": "b",
+          "id": 10,
+          "kind": "sublevel"
+        },
+        {
+          "op": "sublevel",
+          "scene": "b",
+          "id": 10,
+          "pose": [
+            2,
+            5,
+            0,
+            0,
+            0,
+            0,
+            1
+          ],
+          "center": [
+            64.5,
+            0.5,
+            64.5
+          ],
+          "bounds": [
+            64,
+            0,
+            64,
+            64,
+            0,
+            64
+          ],
+          "mass": 1,
+          "inertia": [
+            0.16666666666666666,
+            0,
+            0,
+            0,
+            0.16666666666666666,
+            0,
+            0,
+            0,
+            0.16666666666666666
+          ]
+        },
+        {
+          "op": "sample",
+          "scene": "b",
+          "id": 10,
+          "label": "reused-id"
+        },
+        {
+          "op": "dispose",
+          "scene": "b"
+        },
+        {
+          "op": "dispose",
+          "scene": "a"
+        }
+      ]
+    },
+    {
+      "id": "floor-cube-dynamic-false",
+      "repeat_count": 10,
+      "timeout_seconds": 20,
+      "acceptance_scope": [
+        "only floor-cube-dynamic-false actions and captured channels at recorded selected-scenario hash",
+        "registered fixture geometry/materials and actual recorded contacts, when nonempty",
+        "unchanged native / ABI-adapted fixture; no Minecraft or unmodified declared Java ABI claim"
+      ],
+      "actions": [
+        {
+          "op": "scene",
+          "scene": "a",
+          "gravity": [
+            0,
+            -9.81,
+            0
+          ],
+          "drag": 0
+        },
+        {
+          "op": "config",
+          "iterations": [
+            18,
+            2,
+            2
+          ],
+          "frequency": [
+            40,
+            5
+          ],
+          "min_island": 128
+        },
+        {
+          "op": "material",
+          "material": "solid",
+          "friction": 1,
+          "volume": 1,
+          "restitution": 0,
+          "fluid": false,
+          "dynamic": false,
+          "boxes": [
+            [
+              0,
+              0,
+              0,
+              1,
+              1,
+              1
+            ]
+          ]
+        },
+        {
+          "op": "material",
+          "material": "body",
+          "friction": 1,
+          "volume": 1,
+          "restitution": 0,
+          "fluid": false,
+          "dynamic": false,
+          "boxes": [
+            [
+              0,
+              0,
+              0,
+              1,
+              1,
+              1
+            ]
+          ]
+        },
+        {
+          "op": "chunk",
+          "scene": "a",
+          "global": true,
+          "id": -1,
+          "chunk": [
+            0,
+            0,
+            0
+          ],
+          "cells": [
+            {
+              "local": [
+                0,
+                0,
+                0
+              ],
+              "material": "solid",
+              "state": 3
+            },
+            {
+              "local": [
+                0,
+                0,
+                1
+              ],
+              "material": "solid",
+              "state": 3
+            },
+            {
+              "local": [
+                0,
+                0,
+                2
+              ],
+              "material": "solid",
+              "state": 3
+            },
+            {
+              "local": [
+                0,
+                0,
+                3
+              ],
+              "material": "solid",
+              "state": 3
+            },
+            {
+              "local": [
+                1,
+                0,
+                0
+              ],
+              "material": "solid",
+              "state": 3
+            },
+            {
+              "local": [
+                1,
+                0,
+                1
+              ],
+              "material": "solid",
+              "state": 3
+            },
+            {
+              "local": [
+                1,
+                0,
+                2
+              ],
+              "material": "solid",
+              "state": 3
+            },
+            {
+              "local": [
+                1,
+                0,
+                3
+              ],
+              "material": "solid",
+              "state": 3
+            },
+            {
+              "local": [
+                2,
+                0,
+                0
+              ],
+              "material": "solid",
+              "state": 3
+            },
+            {
+              "local": [
+                2,
+                0,
+                1
+              ],
+              "material": "solid",
+              "state": 3
+            },
+            {
+              "local": [
+                2,
+                0,
+                2
+              ],
+              "material": "solid",
+              "state": 3
+            },
+            {
+              "local": [
+                2,
+                0,
+                3
+              ],
+              "material": "solid",
+              "state": 3
+            },
+            {
+              "local": [
+                3,
+                0,
+                0
+              ],
+              "material": "solid",
+              "state": 3
+            },
+            {
+              "local": [
+                3,
+                0,
+                1
+              ],
+              "material": "solid",
+              "state": 3
+            },
+            {
+              "local": [
+                3,
+                0,
+                2
+              ],
+              "material": "solid",
+              "state": 3
+            },
+            {
+              "local": [
+                3,
+                0,
+                3
+              ],
+              "material": "solid",
+              "state": 3
+            }
+          ]
+        },
+        {
+          "op": "sublevel",
+          "scene": "a",
+          "id": 1,
+          "pose": [
+            0.5,
+            3,
+            0.5,
+            0,
+            0,
+            0,
+            1
+          ],
+          "center": [
+            64.5,
+            0.5,
+            64.5
+          ],
+          "bounds": [
+            64,
+            0,
+            64,
+            64,
+            0,
+            64
+          ],
+          "mass": 1,
+          "inertia": [
+            0.16666666666666666,
+            0,
+            0,
+            0,
+            0.16666666666666666,
+            0,
+            0,
+            0,
+            0.16666666666666666
+          ]
+        },
+        {
+          "op": "chunk",
+          "scene": "a",
+          "global": false,
+          "id": 1,
+          "chunk": [
+            4,
+            0,
+            4
+          ],
+          "cells": [
+            {
+              "local": [
+                0,
+                0,
+                0
+              ],
+              "material": "body",
+              "state": 3
+            }
+          ]
+        },
+        {
+          "op": "sample",
+          "scene": "a",
+          "id": 1,
+          "label": "initial"
+        },
+        {
+          "op": "step",
+          "scene": "a",
+          "dt": 0.025,
+          "count": 80,
+          "sample_every": 20,
+          "label": "settle"
+        },
+        {
+          "op": "dispose",
+          "scene": "a"
+        }
+      ]
+    },
+    {
+      "id": "floor-slab-dynamic-false",
+      "repeat_count": 10,
+      "timeout_seconds": 20,
+      "acceptance_scope": [
+        "only floor-slab-dynamic-false actions and captured channels at recorded selected-scenario hash",
+        "registered fixture geometry/materials and actual recorded contacts, when nonempty",
+        "unchanged native / ABI-adapted fixture; no Minecraft or unmodified declared Java ABI claim"
+      ],
+      "actions": [
+        {
+          "op": "scene",
+          "scene": "a",
+          "gravity": [
+            0,
+            -9.81,
+            0
+          ],
+          "drag": 0
+        },
+        {
+          "op": "config",
+          "iterations": [
+            18,
+            2,
+            2
+          ],
+          "frequency": [
+            40,
+            5
+          ],
+          "min_island": 128
+        },
+        {
+          "op": "material",
+          "material": "solid",
+          "friction": 1,
+          "volume": 1,
+          "restitution": 0,
+          "fluid": false,
+          "dynamic": false,
+          "boxes": [
+            [
+              0,
+              0,
+              0,
+              1,
+              0.5,
+              1
+            ]
+          ]
+        },
+        {
+          "op": "material",
+          "material": "body",
+          "friction": 1,
+          "volume": 1,
+          "restitution": 0,
+          "fluid": false,
+          "dynamic": false,
+          "boxes": [
+            [
+              0,
+              0,
+              0,
+              1,
+              1,
+              1
+            ]
+          ]
+        },
+        {
+          "op": "chunk",
+          "scene": "a",
+          "global": true,
+          "id": -1,
+          "chunk": [
+            0,
+            0,
+            0
+          ],
+          "cells": [
+            {
+              "local": [
+                0,
+                0,
+                0
+              ],
+              "material": "solid",
+              "state": 3
+            },
+            {
+              "local": [
+                0,
+                0,
+                1
+              ],
+              "material": "solid",
+              "state": 3
+            },
+            {
+              "local": [
+                0,
+                0,
+                2
+              ],
+              "material": "solid",
+              "state": 3
+            },
+            {
+              "local": [
+                0,
+                0,
+                3
+              ],
+              "material": "solid",
+              "state": 3
+            },
+            {
+              "local": [
+                1,
+                0,
+                0
+              ],
+              "material": "solid",
+              "state": 3
+            },
+            {
+              "local": [
+                1,
+                0,
+                1
+              ],
+              "material": "solid",
+              "state": 3
+            },
+            {
+              "local": [
+                1,
+                0,
+                2
+              ],
+              "material": "solid",
+              "state": 3
+            },
+            {
+              "local": [
+                1,
+                0,
+                3
+              ],
+              "material": "solid",
+              "state": 3
+            },
+            {
+              "local": [
+                2,
+                0,
+                0
+              ],
+              "material": "solid",
+              "state": 3
+            },
+            {
+              "local": [
+                2,
+                0,
+                1
+              ],
+              "material": "solid",
+              "state": 3
+            },
+            {
+              "local": [
+                2,
+                0,
+                2
+              ],
+              "material": "solid",
+              "state": 3
+            },
+            {
+              "local": [
+                2,
+                0,
+                3
+              ],
+              "material": "solid",
+              "state": 3
+            },
+            {
+              "local": [
+                3,
+                0,
+                0
+              ],
+              "material": "solid",
+              "state": 3
+            },
+            {
+              "local": [
+                3,
+                0,
+                1
+              ],
+              "material": "solid",
+              "state": 3
+            },
+            {
+              "local": [
+                3,
+                0,
+                2
+              ],
+              "material": "solid",
+              "state": 3
+            },
+            {
+              "local": [
+                3,
+                0,
+                3
+              ],
+              "material": "solid",
+              "state": 3
+            }
+          ]
+        },
+        {
+          "op": "sublevel",
+          "scene": "a",
+          "id": 1,
+          "pose": [
+            0.5,
+            3,
+            0.5,
+            0,
+            0,
+            0,
+            1
+          ],
+          "center": [
+            64.5,
+            0.5,
+            64.5
+          ],
+          "bounds": [
+            64,
+            0,
+            64,
+            64,
+            0,
+            64
+          ],
+          "mass": 1,
+          "inertia": [
+            0.16666666666666666,
+            0,
+            0,
+            0,
+            0.16666666666666666,
+            0,
+            0,
+            0,
+            0.16666666666666666
+          ]
+        },
+        {
+          "op": "chunk",
+          "scene": "a",
+          "global": false,
+          "id": 1,
+          "chunk": [
+            4,
+            0,
+            4
+          ],
+          "cells": [
+            {
+              "local": [
+                0,
+                0,
+                0
+              ],
+              "material": "body",
+              "state": 3
+            }
+          ]
+        },
+        {
+          "op": "sample",
+          "scene": "a",
+          "id": 1,
+          "label": "initial"
+        },
+        {
+          "op": "step",
+          "scene": "a",
+          "dt": 0.025,
+          "count": 80,
+          "sample_every": 20,
+          "label": "settle"
+        },
+        {
+          "op": "dispose",
+          "scene": "a"
+        }
+      ]
+    },
+    {
+      "id": "floor-cube-dynamic-true",
+      "repeat_count": 10,
+      "timeout_seconds": 20,
+      "acceptance_scope": [
+        "only floor-cube-dynamic-true actions and captured channels at recorded selected-scenario hash",
+        "registered fixture geometry/materials and actual recorded contacts, when nonempty",
+        "unchanged native / ABI-adapted fixture; no Minecraft or unmodified declared Java ABI claim"
+      ],
+      "actions": [
+        {
+          "op": "scene",
+          "scene": "a",
+          "gravity": [
+            0,
+            -9.81,
+            0
+          ],
+          "drag": 0
+        },
+        {
+          "op": "config",
+          "iterations": [
+            18,
+            2,
+            2
+          ],
+          "frequency": [
+            40,
+            5
+          ],
+          "min_island": 128
+        },
+        {
+          "op": "material",
+          "material": "solid",
+          "friction": 1,
+          "volume": 1,
+          "restitution": 0,
+          "fluid": false,
+          "dynamic": true,
+          "boxes": [
+            [
+              0,
+              0,
+              0,
+              1,
+              1,
+              1
+            ]
+          ]
+        },
+        {
+          "op": "material",
+          "material": "body",
+          "friction": 1,
+          "volume": 1,
+          "restitution": 0,
+          "fluid": false,
+          "dynamic": false,
+          "boxes": [
+            [
+              0,
+              0,
+              0,
+              1,
+              1,
+              1
+            ]
+          ]
+        },
+        {
+          "op": "chunk",
+          "scene": "a",
+          "global": true,
+          "id": -1,
+          "chunk": [
+            0,
+            0,
+            0
+          ],
+          "cells": [
+            {
+              "local": [
+                0,
+                0,
+                0
+              ],
+              "material": "solid",
+              "state": 3
+            },
+            {
+              "local": [
+                0,
+                0,
+                1
+              ],
+              "material": "solid",
+              "state": 3
+            },
+            {
+              "local": [
+                0,
+                0,
+                2
+              ],
+              "material": "solid",
+              "state": 3
+            },
+            {
+              "local": [
+                0,
+                0,
+                3
+              ],
+              "material": "solid",
+              "state": 3
+            },
+            {
+              "local": [
+                1,
+                0,
+                0
+              ],
+              "material": "solid",
+              "state": 3
+            },
+            {
+              "local": [
+                1,
+                0,
+                1
+              ],
+              "material": "solid",
+              "state": 3
+            },
+            {
+              "local": [
+                1,
+                0,
+                2
+              ],
+              "material": "solid",
+              "state": 3
+            },
+            {
+              "local": [
+                1,
+                0,
+                3
+              ],
+              "material": "solid",
+              "state": 3
+            },
+            {
+              "local": [
+                2,
+                0,
+                0
+              ],
+              "material": "solid",
+              "state": 3
+            },
+            {
+              "local": [
+                2,
+                0,
+                1
+              ],
+              "material": "solid",
+              "state": 3
+            },
+            {
+              "local": [
+                2,
+                0,
+                2
+              ],
+              "material": "solid",
+              "state": 3
+            },
+            {
+              "local": [
+                2,
+                0,
+                3
+              ],
+              "material": "solid",
+              "state": 3
+            },
+            {
+              "local": [
+                3,
+                0,
+                0
+              ],
+              "material": "solid",
+              "state": 3
+            },
+            {
+              "local": [
+                3,
+                0,
+                1
+              ],
+              "material": "solid",
+              "state": 3
+            },
+            {
+              "local": [
+                3,
+                0,
+                2
+              ],
+              "material": "solid",
+              "state": 3
+            },
+            {
+              "local": [
+                3,
+                0,
+                3
+              ],
+              "material": "solid",
+              "state": 3
+            }
+          ]
+        },
+        {
+          "op": "sublevel",
+          "scene": "a",
+          "id": 1,
+          "pose": [
+            0.5,
+            3,
+            0.5,
+            0,
+            0,
+            0,
+            1
+          ],
+          "center": [
+            64.5,
+            0.5,
+            64.5
+          ],
+          "bounds": [
+            64,
+            0,
+            64,
+            64,
+            0,
+            64
+          ],
+          "mass": 1,
+          "inertia": [
+            0.16666666666666666,
+            0,
+            0,
+            0,
+            0.16666666666666666,
+            0,
+            0,
+            0,
+            0.16666666666666666
+          ]
+        },
+        {
+          "op": "chunk",
+          "scene": "a",
+          "global": false,
+          "id": 1,
+          "chunk": [
+            4,
+            0,
+            4
+          ],
+          "cells": [
+            {
+              "local": [
+                0,
+                0,
+                0
+              ],
+              "material": "body",
+              "state": 3
+            }
+          ]
+        },
+        {
+          "op": "sample",
+          "scene": "a",
+          "id": 1,
+          "label": "initial"
+        },
+        {
+          "op": "step",
+          "scene": "a",
+          "dt": 0.025,
+          "count": 80,
+          "sample_every": 20,
+          "label": "settle"
+        },
+        {
+          "op": "dispose",
+          "scene": "a"
+        }
+      ],
+      "dynamic_comparison": true
+    },
+    {
+      "id": "floor-slab-dynamic-true",
+      "repeat_count": 10,
+      "timeout_seconds": 20,
+      "acceptance_scope": [
+        "only floor-slab-dynamic-true actions and captured channels at recorded selected-scenario hash",
+        "registered fixture geometry/materials and actual recorded contacts, when nonempty",
+        "unchanged native / ABI-adapted fixture; no Minecraft or unmodified declared Java ABI claim"
+      ],
+      "actions": [
+        {
+          "op": "scene",
+          "scene": "a",
+          "gravity": [
+            0,
+            -9.81,
+            0
+          ],
+          "drag": 0
+        },
+        {
+          "op": "config",
+          "iterations": [
+            18,
+            2,
+            2
+          ],
+          "frequency": [
+            40,
+            5
+          ],
+          "min_island": 128
+        },
+        {
+          "op": "material",
+          "material": "solid",
+          "friction": 1,
+          "volume": 1,
+          "restitution": 0,
+          "fluid": false,
+          "dynamic": true,
+          "boxes": [
+            [
+              0,
+              0,
+              0,
+              1,
+              0.5,
+              1
+            ]
+          ]
+        },
+        {
+          "op": "material",
+          "material": "body",
+          "friction": 1,
+          "volume": 1,
+          "restitution": 0,
+          "fluid": false,
+          "dynamic": false,
+          "boxes": [
+            [
+              0,
+              0,
+              0,
+              1,
+              1,
+              1
+            ]
+          ]
+        },
+        {
+          "op": "chunk",
+          "scene": "a",
+          "global": true,
+          "id": -1,
+          "chunk": [
+            0,
+            0,
+            0
+          ],
+          "cells": [
+            {
+              "local": [
+                0,
+                0,
+                0
+              ],
+              "material": "solid",
+              "state": 3
+            },
+            {
+              "local": [
+                0,
+                0,
+                1
+              ],
+              "material": "solid",
+              "state": 3
+            },
+            {
+              "local": [
+                0,
+                0,
+                2
+              ],
+              "material": "solid",
+              "state": 3
+            },
+            {
+              "local": [
+                0,
+                0,
+                3
+              ],
+              "material": "solid",
+              "state": 3
+            },
+            {
+              "local": [
+                1,
+                0,
+                0
+              ],
+              "material": "solid",
+              "state": 3
+            },
+            {
+              "local": [
+                1,
+                0,
+                1
+              ],
+              "material": "solid",
+              "state": 3
+            },
+            {
+              "local": [
+                1,
+                0,
+                2
+              ],
+              "material": "solid",
+              "state": 3
+            },
+            {
+              "local": [
+                1,
+                0,
+                3
+              ],
+              "material": "solid",
+              "state": 3
+            },
+            {
+              "local": [
+                2,
+                0,
+                0
+              ],
+              "material": "solid",
+              "state": 3
+            },
+            {
+              "local": [
+                2,
+                0,
+                1
+              ],
+              "material": "solid",
+              "state": 3
+            },
+            {
+              "local": [
+                2,
+                0,
+                2
+              ],
+              "material": "solid",
+              "state": 3
+            },
+            {
+              "local": [
+                2,
+                0,
+                3
+              ],
+              "material": "solid",
+              "state": 3
+            },
+            {
+              "local": [
+                3,
+                0,
+                0
+              ],
+              "material": "solid",
+              "state": 3
+            },
+            {
+              "local": [
+                3,
+                0,
+                1
+              ],
+              "material": "solid",
+              "state": 3
+            },
+            {
+              "local": [
+                3,
+                0,
+                2
+              ],
+              "material": "solid",
+              "state": 3
+            },
+            {
+              "local": [
+                3,
+                0,
+                3
+              ],
+              "material": "solid",
+              "state": 3
+            }
+          ]
+        },
+        {
+          "op": "sublevel",
+          "scene": "a",
+          "id": 1,
+          "pose": [
+            0.5,
+            3,
+            0.5,
+            0,
+            0,
+            0,
+            1
+          ],
+          "center": [
+            64.5,
+            0.5,
+            64.5
+          ],
+          "bounds": [
+            64,
+            0,
+            64,
+            64,
+            0,
+            64
+          ],
+          "mass": 1,
+          "inertia": [
+            0.16666666666666666,
+            0,
+            0,
+            0,
+            0.16666666666666666,
+            0,
+            0,
+            0,
+            0.16666666666666666
+          ]
+        },
+        {
+          "op": "chunk",
+          "scene": "a",
+          "global": false,
+          "id": 1,
+          "chunk": [
+            4,
+            0,
+            4
+          ],
+          "cells": [
+            {
+              "local": [
+                0,
+                0,
+                0
+              ],
+              "material": "body",
+              "state": 3
+            }
+          ]
+        },
+        {
+          "op": "sample",
+          "scene": "a",
+          "id": 1,
+          "label": "initial"
+        },
+        {
+          "op": "step",
+          "scene": "a",
+          "dt": 0.025,
+          "count": 80,
+          "sample_every": 20,
+          "label": "settle"
+        },
+        {
+          "op": "dispose",
+          "scene": "a"
+        }
+      ],
+      "dynamic_comparison": true
+    },
+    {
+      "id": "friction-0",
+      "repeat_count": 10,
+      "timeout_seconds": 20,
+      "acceptance_scope": [
+        "only friction-0 actions and captured channels at recorded selected-scenario hash",
+        "registered fixture geometry/materials and actual recorded contacts, when nonempty",
+        "unchanged native / ABI-adapted fixture; no Minecraft or unmodified declared Java ABI claim"
+      ],
+      "actions": [
+        {
+          "op": "scene",
+          "scene": "a",
+          "gravity": [
+            0,
+            -9.81,
+            0
+          ],
+          "drag": 0
+        },
+        {
+          "op": "config",
+          "iterations": [
+            18,
+            2,
+            2
+          ],
+          "frequency": [
+            40,
+            5
+          ],
+          "min_island": 128
+        },
+        {
+          "op": "material",
+          "material": "solid",
+          "friction": 0,
+          "volume": 1,
+          "restitution": 0,
+          "fluid": false,
+          "dynamic": false,
+          "boxes": [
+            [
+              0,
+              0,
+              0,
+              1,
+              1,
+              1
+            ]
+          ]
+        },
+        {
+          "op": "material",
+          "material": "body",
+          "friction": 1,
+          "volume": 1,
+          "restitution": 0,
+          "fluid": false,
+          "dynamic": false,
+          "boxes": [
+            [
+              0,
+              0,
+              0,
+              1,
+              1,
+              1
+            ]
+          ]
+        },
+        {
+          "op": "chunk",
+          "scene": "a",
+          "global": true,
+          "id": -1,
+          "chunk": [
+            0,
+            0,
+            0
+          ],
+          "cells": [
+            {
+              "local": [
+                0,
+                0,
+                0
+              ],
+              "material": "solid",
+              "state": 3
+            },
+            {
+              "local": [
+                0,
+                0,
+                1
+              ],
+              "material": "solid",
+              "state": 3
+            },
+            {
+              "local": [
+                0,
+                0,
+                2
+              ],
+              "material": "solid",
+              "state": 3
+            },
+            {
+              "local": [
+                0,
+                0,
+                3
+              ],
+              "material": "solid",
+              "state": 3
+            },
+            {
+              "local": [
+                1,
+                0,
+                0
+              ],
+              "material": "solid",
+              "state": 3
+            },
+            {
+              "local": [
+                1,
+                0,
+                1
+              ],
+              "material": "solid",
+              "state": 3
+            },
+            {
+              "local": [
+                1,
+                0,
+                2
+              ],
+              "material": "solid",
+              "state": 3
+            },
+            {
+              "local": [
+                1,
+                0,
+                3
+              ],
+              "material": "solid",
+              "state": 3
+            },
+            {
+              "local": [
+                2,
+                0,
+                0
+              ],
+              "material": "solid",
+              "state": 3
+            },
+            {
+              "local": [
+                2,
+                0,
+                1
+              ],
+              "material": "solid",
+              "state": 3
+            },
+            {
+              "local": [
+                2,
+                0,
+                2
+              ],
+              "material": "solid",
+              "state": 3
+            },
+            {
+              "local": [
+                2,
+                0,
+                3
+              ],
+              "material": "solid",
+              "state": 3
+            },
+            {
+              "local": [
+                3,
+                0,
+                0
+              ],
+              "material": "solid",
+              "state": 3
+            },
+            {
+              "local": [
+                3,
+                0,
+                1
+              ],
+              "material": "solid",
+              "state": 3
+            },
+            {
+              "local": [
+                3,
+                0,
+                2
+              ],
+              "material": "solid",
+              "state": 3
+            },
+            {
+              "local": [
+                3,
+                0,
+                3
+              ],
+              "material": "solid",
+              "state": 3
+            }
+          ]
+        },
+        {
+          "op": "sublevel",
+          "scene": "a",
+          "id": 1,
+          "pose": [
+            1.5,
+            2,
+            1.5,
+            0,
+            0,
+            0,
+            1
+          ],
+          "center": [
+            64.5,
+            0.5,
+            64.5
+          ],
+          "bounds": [
+            64,
+            0,
+            64,
+            64,
+            0,
+            64
+          ],
+          "mass": 1,
+          "inertia": [
+            0.16666666666666666,
+            0,
+            0,
+            0,
+            0.16666666666666666,
+            0,
+            0,
+            0,
+            0.16666666666666666
+          ]
+        },
+        {
+          "op": "chunk",
+          "scene": "a",
+          "global": false,
+          "id": 1,
+          "chunk": [
+            4,
+            0,
+            4
+          ],
+          "cells": [
+            {
+              "local": [
+                0,
+                0,
+                0
+              ],
+              "material": "body",
+              "state": 3
+            }
+          ]
+        },
+        {
+          "op": "step",
+          "scene": "a",
+          "dt": 0.025,
+          "count": 60,
+          "sample_every": 30,
+          "label": "settle"
+        },
+        {
+          "op": "velocity",
+          "scene": "a",
+          "id": 1,
+          "linear": [
+            2,
+            0,
+            0
+          ],
+          "angular": [
+            0,
+            0,
+            0
+          ],
+          "wake": true
+        },
+        {
+          "op": "step",
+          "scene": "a",
+          "dt": 0.025,
+          "count": 20,
+          "sample_every": 5,
+          "label": "slide"
+        },
+        {
+          "op": "dispose",
+          "scene": "a"
+        }
+      ]
+    },
+    {
+      "id": "friction-2",
+      "repeat_count": 10,
+      "timeout_seconds": 20,
+      "acceptance_scope": [
+        "only friction-2 actions and captured channels at recorded selected-scenario hash",
+        "registered fixture geometry/materials and actual recorded contacts, when nonempty",
+        "unchanged native / ABI-adapted fixture; no Minecraft or unmodified declared Java ABI claim"
+      ],
+      "actions": [
+        {
+          "op": "scene",
+          "scene": "a",
+          "gravity": [
+            0,
+            -9.81,
+            0
+          ],
+          "drag": 0
+        },
+        {
+          "op": "config",
+          "iterations": [
+            18,
+            2,
+            2
+          ],
+          "frequency": [
+            40,
+            5
+          ],
+          "min_island": 128
+        },
+        {
+          "op": "material",
+          "material": "solid",
+          "friction": 2,
+          "volume": 1,
+          "restitution": 0,
+          "fluid": false,
+          "dynamic": false,
+          "boxes": [
+            [
+              0,
+              0,
+              0,
+              1,
+              1,
+              1
+            ]
+          ]
+        },
+        {
+          "op": "material",
+          "material": "body",
+          "friction": 1,
+          "volume": 1,
+          "restitution": 0,
+          "fluid": false,
+          "dynamic": false,
+          "boxes": [
+            [
+              0,
+              0,
+              0,
+              1,
+              1,
+              1
+            ]
+          ]
+        },
+        {
+          "op": "chunk",
+          "scene": "a",
+          "global": true,
+          "id": -1,
+          "chunk": [
+            0,
+            0,
+            0
+          ],
+          "cells": [
+            {
+              "local": [
+                0,
+                0,
+                0
+              ],
+              "material": "solid",
+              "state": 3
+            },
+            {
+              "local": [
+                0,
+                0,
+                1
+              ],
+              "material": "solid",
+              "state": 3
+            },
+            {
+              "local": [
+                0,
+                0,
+                2
+              ],
+              "material": "solid",
+              "state": 3
+            },
+            {
+              "local": [
+                0,
+                0,
+                3
+              ],
+              "material": "solid",
+              "state": 3
+            },
+            {
+              "local": [
+                1,
+                0,
+                0
+              ],
+              "material": "solid",
+              "state": 3
+            },
+            {
+              "local": [
+                1,
+                0,
+                1
+              ],
+              "material": "solid",
+              "state": 3
+            },
+            {
+              "local": [
+                1,
+                0,
+                2
+              ],
+              "material": "solid",
+              "state": 3
+            },
+            {
+              "local": [
+                1,
+                0,
+                3
+              ],
+              "material": "solid",
+              "state": 3
+            },
+            {
+              "local": [
+                2,
+                0,
+                0
+              ],
+              "material": "solid",
+              "state": 3
+            },
+            {
+              "local": [
+                2,
+                0,
+                1
+              ],
+              "material": "solid",
+              "state": 3
+            },
+            {
+              "local": [
+                2,
+                0,
+                2
+              ],
+              "material": "solid",
+              "state": 3
+            },
+            {
+              "local": [
+                2,
+                0,
+                3
+              ],
+              "material": "solid",
+              "state": 3
+            },
+            {
+              "local": [
+                3,
+                0,
+                0
+              ],
+              "material": "solid",
+              "state": 3
+            },
+            {
+              "local": [
+                3,
+                0,
+                1
+              ],
+              "material": "solid",
+              "state": 3
+            },
+            {
+              "local": [
+                3,
+                0,
+                2
+              ],
+              "material": "solid",
+              "state": 3
+            },
+            {
+              "local": [
+                3,
+                0,
+                3
+              ],
+              "material": "solid",
+              "state": 3
+            }
+          ]
+        },
+        {
+          "op": "sublevel",
+          "scene": "a",
+          "id": 1,
+          "pose": [
+            1.5,
+            2,
+            1.5,
+            0,
+            0,
+            0,
+            1
+          ],
+          "center": [
+            64.5,
+            0.5,
+            64.5
+          ],
+          "bounds": [
+            64,
+            0,
+            64,
+            64,
+            0,
+            64
+          ],
+          "mass": 1,
+          "inertia": [
+            0.16666666666666666,
+            0,
+            0,
+            0,
+            0.16666666666666666,
+            0,
+            0,
+            0,
+            0.16666666666666666
+          ]
+        },
+        {
+          "op": "chunk",
+          "scene": "a",
+          "global": false,
+          "id": 1,
+          "chunk": [
+            4,
+            0,
+            4
+          ],
+          "cells": [
+            {
+              "local": [
+                0,
+                0,
+                0
+              ],
+              "material": "body",
+              "state": 3
+            }
+          ]
+        },
+        {
+          "op": "step",
+          "scene": "a",
+          "dt": 0.025,
+          "count": 60,
+          "sample_every": 30,
+          "label": "settle"
+        },
+        {
+          "op": "velocity",
+          "scene": "a",
+          "id": 1,
+          "linear": [
+            2,
+            0,
+            0
+          ],
+          "angular": [
+            0,
+            0,
+            0
+          ],
+          "wake": true
+        },
+        {
+          "op": "step",
+          "scene": "a",
+          "dt": 0.025,
+          "count": 20,
+          "sample_every": 5,
+          "label": "slide"
+        },
+        {
+          "op": "dispose",
+          "scene": "a"
+        }
+      ]
+    },
+    {
+      "id": "restitution-0",
+      "repeat_count": 10,
+      "timeout_seconds": 20,
+      "acceptance_scope": [
+        "only restitution-0 actions and captured channels at recorded selected-scenario hash",
+        "registered fixture geometry/materials and actual recorded contacts, when nonempty",
+        "unchanged native / ABI-adapted fixture; no Minecraft or unmodified declared Java ABI claim"
+      ],
+      "actions": [
+        {
+          "op": "scene",
+          "scene": "a",
+          "gravity": [
+            0,
+            -9.81,
+            0
+          ],
+          "drag": 0
+        },
+        {
+          "op": "config",
+          "iterations": [
+            18,
+            2,
+            2
+          ],
+          "frequency": [
+            40,
+            5
+          ],
+          "min_island": 128
+        },
+        {
+          "op": "material",
+          "material": "solid",
+          "friction": 1,
+          "volume": 1,
+          "restitution": 0,
+          "fluid": false,
+          "dynamic": false,
+          "boxes": [
+            [
+              0,
+              0,
+              0,
+              1,
+              1,
+              1
+            ]
+          ]
+        },
+        {
+          "op": "material",
+          "material": "body",
+          "friction": 1,
+          "volume": 1,
+          "restitution": 0,
+          "fluid": false,
+          "dynamic": false,
+          "boxes": [
+            [
+              0,
+              0,
+              0,
+              1,
+              1,
+              1
+            ]
+          ]
+        },
+        {
+          "op": "chunk",
+          "scene": "a",
+          "global": true,
+          "id": -1,
+          "chunk": [
+            0,
+            0,
+            0
+          ],
+          "cells": [
+            {
+              "local": [
+                0,
+                0,
+                0
+              ],
+              "material": "solid",
+              "state": 3
+            },
+            {
+              "local": [
+                0,
+                0,
+                1
+              ],
+              "material": "solid",
+              "state": 3
+            },
+            {
+              "local": [
+                0,
+                0,
+                2
+              ],
+              "material": "solid",
+              "state": 3
+            },
+            {
+              "local": [
+                0,
+                0,
+                3
+              ],
+              "material": "solid",
+              "state": 3
+            },
+            {
+              "local": [
+                1,
+                0,
+                0
+              ],
+              "material": "solid",
+              "state": 3
+            },
+            {
+              "local": [
+                1,
+                0,
+                1
+              ],
+              "material": "solid",
+              "state": 3
+            },
+            {
+              "local": [
+                1,
+                0,
+                2
+              ],
+              "material": "solid",
+              "state": 3
+            },
+            {
+              "local": [
+                1,
+                0,
+                3
+              ],
+              "material": "solid",
+              "state": 3
+            },
+            {
+              "local": [
+                2,
+                0,
+                0
+              ],
+              "material": "solid",
+              "state": 3
+            },
+            {
+              "local": [
+                2,
+                0,
+                1
+              ],
+              "material": "solid",
+              "state": 3
+            },
+            {
+              "local": [
+                2,
+                0,
+                2
+              ],
+              "material": "solid",
+              "state": 3
+            },
+            {
+              "local": [
+                2,
+                0,
+                3
+              ],
+              "material": "solid",
+              "state": 3
+            },
+            {
+              "local": [
+                3,
+                0,
+                0
+              ],
+              "material": "solid",
+              "state": 3
+            },
+            {
+              "local": [
+                3,
+                0,
+                1
+              ],
+              "material": "solid",
+              "state": 3
+            },
+            {
+              "local": [
+                3,
+                0,
+                2
+              ],
+              "material": "solid",
+              "state": 3
+            },
+            {
+              "local": [
+                3,
+                0,
+                3
+              ],
+              "material": "solid",
+              "state": 3
+            }
+          ]
+        },
+        {
+          "op": "sublevel",
+          "scene": "a",
+          "id": 1,
+          "pose": [
+            1.5,
+            3,
+            1.5,
+            0,
+            0,
+            0,
+            1
+          ],
+          "center": [
+            64.5,
+            0.5,
+            64.5
+          ],
+          "bounds": [
+            64,
+            0,
+            64,
+            64,
+            0,
+            64
+          ],
+          "mass": 1,
+          "inertia": [
+            0.16666666666666666,
+            0,
+            0,
+            0,
+            0.16666666666666666,
+            0,
+            0,
+            0,
+            0.16666666666666666
+          ]
+        },
+        {
+          "op": "chunk",
+          "scene": "a",
+          "global": false,
+          "id": 1,
+          "chunk": [
+            4,
+            0,
+            4
+          ],
+          "cells": [
+            {
+              "local": [
+                0,
+                0,
+                0
+              ],
+              "material": "body",
+              "state": 3
+            }
+          ]
+        },
+        {
+          "op": "step",
+          "scene": "a",
+          "dt": 0.025,
+          "count": 60,
+          "sample_every": 5,
+          "label": "drop-bounce"
+        },
+        {
+          "op": "dispose",
+          "scene": "a"
+        }
+      ]
+    },
+    {
+      "id": "restitution-0-8",
+      "repeat_count": 10,
+      "timeout_seconds": 20,
+      "acceptance_scope": [
+        "only restitution-0-8 actions and captured channels at recorded selected-scenario hash",
+        "registered fixture geometry/materials and actual recorded contacts, when nonempty",
+        "unchanged native / ABI-adapted fixture; no Minecraft or unmodified declared Java ABI claim"
+      ],
+      "actions": [
+        {
+          "op": "scene",
+          "scene": "a",
+          "gravity": [
+            0,
+            -9.81,
+            0
+          ],
+          "drag": 0
+        },
+        {
+          "op": "config",
+          "iterations": [
+            18,
+            2,
+            2
+          ],
+          "frequency": [
+            40,
+            5
+          ],
+          "min_island": 128
+        },
+        {
+          "op": "material",
+          "material": "solid",
+          "friction": 1,
+          "volume": 1,
+          "restitution": 0.8,
+          "fluid": false,
+          "dynamic": false,
+          "boxes": [
+            [
+              0,
+              0,
+              0,
+              1,
+              1,
+              1
+            ]
+          ]
+        },
+        {
+          "op": "material",
+          "material": "body",
+          "friction": 1,
+          "volume": 1,
+          "restitution": 0,
+          "fluid": false,
+          "dynamic": false,
+          "boxes": [
+            [
+              0,
+              0,
+              0,
+              1,
+              1,
+              1
+            ]
+          ]
+        },
+        {
+          "op": "chunk",
+          "scene": "a",
+          "global": true,
+          "id": -1,
+          "chunk": [
+            0,
+            0,
+            0
+          ],
+          "cells": [
+            {
+              "local": [
+                0,
+                0,
+                0
+              ],
+              "material": "solid",
+              "state": 3
+            },
+            {
+              "local": [
+                0,
+                0,
+                1
+              ],
+              "material": "solid",
+              "state": 3
+            },
+            {
+              "local": [
+                0,
+                0,
+                2
+              ],
+              "material": "solid",
+              "state": 3
+            },
+            {
+              "local": [
+                0,
+                0,
+                3
+              ],
+              "material": "solid",
+              "state": 3
+            },
+            {
+              "local": [
+                1,
+                0,
+                0
+              ],
+              "material": "solid",
+              "state": 3
+            },
+            {
+              "local": [
+                1,
+                0,
+                1
+              ],
+              "material": "solid",
+              "state": 3
+            },
+            {
+              "local": [
+                1,
+                0,
+                2
+              ],
+              "material": "solid",
+              "state": 3
+            },
+            {
+              "local": [
+                1,
+                0,
+                3
+              ],
+              "material": "solid",
+              "state": 3
+            },
+            {
+              "local": [
+                2,
+                0,
+                0
+              ],
+              "material": "solid",
+              "state": 3
+            },
+            {
+              "local": [
+                2,
+                0,
+                1
+              ],
+              "material": "solid",
+              "state": 3
+            },
+            {
+              "local": [
+                2,
+                0,
+                2
+              ],
+              "material": "solid",
+              "state": 3
+            },
+            {
+              "local": [
+                2,
+                0,
+                3
+              ],
+              "material": "solid",
+              "state": 3
+            },
+            {
+              "local": [
+                3,
+                0,
+                0
+              ],
+              "material": "solid",
+              "state": 3
+            },
+            {
+              "local": [
+                3,
+                0,
+                1
+              ],
+              "material": "solid",
+              "state": 3
+            },
+            {
+              "local": [
+                3,
+                0,
+                2
+              ],
+              "material": "solid",
+              "state": 3
+            },
+            {
+              "local": [
+                3,
+                0,
+                3
+              ],
+              "material": "solid",
+              "state": 3
+            }
+          ]
+        },
+        {
+          "op": "sublevel",
+          "scene": "a",
+          "id": 1,
+          "pose": [
+            1.5,
+            3,
+            1.5,
+            0,
+            0,
+            0,
+            1
+          ],
+          "center": [
+            64.5,
+            0.5,
+            64.5
+          ],
+          "bounds": [
+            64,
+            0,
+            64,
+            64,
+            0,
+            64
+          ],
+          "mass": 1,
+          "inertia": [
+            0.16666666666666666,
+            0,
+            0,
+            0,
+            0.16666666666666666,
+            0,
+            0,
+            0,
+            0.16666666666666666
+          ]
+        },
+        {
+          "op": "chunk",
+          "scene": "a",
+          "global": false,
+          "id": 1,
+          "chunk": [
+            4,
+            0,
+            4
+          ],
+          "cells": [
+            {
+              "local": [
+                0,
+                0,
+                0
+              ],
+              "material": "body",
+              "state": 3
+            }
+          ]
+        },
+        {
+          "op": "step",
+          "scene": "a",
+          "dt": 0.025,
+          "count": 60,
+          "sample_every": 5,
+          "label": "drop-bounce"
+        },
+        {
+          "op": "dispose",
+          "scene": "a"
+        }
+      ]
+    },
+    {
+      "id": "voxel-wall",
+      "repeat_count": 10,
+      "timeout_seconds": 20,
+      "acceptance_scope": [
+        "only voxel-wall actions and captured channels at recorded selected-scenario hash",
+        "registered fixture geometry/materials and actual recorded contacts, when nonempty",
+        "unchanged native / ABI-adapted fixture; no Minecraft or unmodified declared Java ABI claim"
+      ],
+      "actions": [
+        {
+          "op": "scene",
+          "scene": "a",
+          "gravity": [
+            0,
+            0,
+            0
+          ],
+          "drag": 0
+        },
+        {
+          "op": "config",
+          "iterations": [
+            18,
+            2,
+            2
+          ],
+          "frequency": [
+            40,
+            5
+          ],
+          "min_island": 128
+        },
+        {
+          "op": "material",
+          "material": "solid",
+          "friction": 1,
+          "volume": 1,
+          "restitution": 0,
+          "fluid": false,
+          "dynamic": false,
+          "boxes": [
+            [
+              0,
+              0,
+              0,
+              1,
+              1,
+              1
+            ]
+          ]
+        },
+        {
+          "op": "material",
+          "material": "body",
+          "friction": 1,
+          "volume": 1,
+          "restitution": 0,
+          "fluid": false,
+          "dynamic": false,
+          "boxes": [
+            [
+              0,
+              0,
+              0,
+              1,
+              1,
+              1
+            ]
+          ]
+        },
+        {
+          "op": "chunk",
+          "scene": "a",
+          "global": true,
+          "id": -1,
+          "chunk": [
+            0,
+            0,
+            0
+          ],
+          "cells": [
+            {
+              "local": [
+                2,
+                0,
+                0
+              ],
+              "material": "solid",
+              "state": 3
+            },
+            {
+              "local": [
+                2,
+                0,
+                1
+              ],
+              "material": "solid",
+              "state": 3
+            },
+            {
+              "local": [
+                2,
+                0,
+                2
+              ],
+              "material": "solid",
+              "state": 3
+            },
+            {
+              "local": [
+                2,
+                1,
+                0
+              ],
+              "material": "solid",
+              "state": 3
+            },
+            {
+              "local": [
+                2,
+                1,
+                1
+              ],
+              "material": "solid",
+              "state": 3
+            },
+            {
+              "local": [
+                2,
+                1,
+                2
+              ],
+              "material": "solid",
+              "state": 3
+            },
+            {
+              "local": [
+                2,
+                2,
+                0
+              ],
+              "material": "solid",
+              "state": 3
+            },
+            {
+              "local": [
+                2,
+                2,
+                1
+              ],
+              "material": "solid",
+              "state": 3
+            },
+            {
+              "local": [
+                2,
+                2,
+                2
+              ],
+              "material": "solid",
+              "state": 3
+            }
+          ]
+        },
+        {
+          "op": "sublevel",
+          "scene": "a",
+          "id": 1,
+          "pose": [
+            0.5,
+            1.5,
+            1.5,
+            0,
+            0,
+            0,
+            1
+          ],
+          "center": [
+            64.5,
+            0.5,
+            64.5
+          ],
+          "bounds": [
+            64,
+            0,
+            64,
+            64,
+            0,
+            64
+          ],
+          "mass": 1,
+          "inertia": [
+            0.16666666666666666,
+            0,
+            0,
+            0,
+            0.16666666666666666,
+            0,
+            0,
+            0,
+            0.16666666666666666
+          ]
+        },
+        {
+          "op": "chunk",
+          "scene": "a",
+          "global": false,
+          "id": 1,
+          "chunk": [
+            4,
+            0,
+            4
+          ],
+          "cells": [
+            {
+              "local": [
+                0,
+                0,
+                0
+              ],
+              "material": "body",
+              "state": 3
+            }
+          ]
+        },
+        {
+          "op": "step",
+          "scene": "a",
+          "dt": 0.025,
+          "count": 1,
+          "sample_every": 1,
+          "label": "activate"
+        },
+        {
+          "op": "velocity",
+          "scene": "a",
+          "id": 1,
+          "linear": [
+            5,
+            0,
+            0
+          ],
+          "angular": [
+            0,
+            0,
+            0
+          ],
+          "wake": true
+        },
+        {
+          "op": "step",
+          "scene": "a",
+          "dt": 0.025,
+          "count": 20,
+          "sample_every": 5,
+          "label": "wall-impact"
+        },
+        {
+          "op": "dispose",
+          "scene": "a"
+        }
+      ]
+    },
+    {
+      "id": "voxel-body-contact",
+      "repeat_count": 10,
+      "timeout_seconds": 20,
+      "acceptance_scope": [
+        "only voxel-body-contact actions and captured channels at recorded selected-scenario hash",
+        "registered fixture geometry/materials and actual recorded contacts, when nonempty",
+        "unchanged native / ABI-adapted fixture; no Minecraft or unmodified declared Java ABI claim"
+      ],
+      "actions": [
+        {
+          "op": "scene",
+          "scene": "a",
+          "gravity": [
+            0,
+            0,
+            0
+          ],
+          "drag": 0
+        },
+        {
+          "op": "config",
+          "iterations": [
+            18,
+            2,
+            2
+          ],
+          "frequency": [
+            40,
+            5
+          ],
+          "min_island": 128
+        },
+        {
+          "op": "material",
+          "material": "body",
+          "friction": 1,
+          "volume": 1,
+          "restitution": 0,
+          "fluid": false,
+          "dynamic": false,
+          "boxes": [
+            [
+              0,
+              0,
+              0,
+              1,
+              1,
+              1
+            ]
+          ]
+        },
+        {
+          "op": "sublevel",
+          "scene": "a",
+          "id": 1,
+          "pose": [
+            -1,
+            1,
+            0,
+            0,
+            0,
+            0,
+            1
+          ],
+          "center": [
+            64.5,
+            0.5,
+            64.5
+          ],
+          "bounds": [
+            64,
+            0,
+            64,
+            64,
+            0,
+            64
+          ],
+          "mass": 1,
+          "inertia": [
+            0.16666666666666666,
+            0,
+            0,
+            0,
+            0.16666666666666666,
+            0,
+            0,
+            0,
+            0.16666666666666666
+          ]
+        },
+        {
+          "op": "chunk",
+          "scene": "a",
+          "global": false,
+          "id": 1,
+          "chunk": [
+            4,
+            0,
+            4
+          ],
+          "cells": [
+            {
+              "local": [
+                0,
+                0,
+                0
+              ],
+              "material": "body",
+              "state": 3
+            }
+          ]
+        },
+        {
+          "op": "sublevel",
+          "scene": "a",
+          "id": 2,
+          "pose": [
+            1,
+            1,
+            0,
+            0,
+            0,
+            0,
+            1
+          ],
+          "center": [
+            80.5,
+            0.5,
+            64.5
+          ],
+          "bounds": [
+            80,
+            0,
+            64,
+            80,
+            0,
+            64
+          ],
+          "mass": 1,
+          "inertia": [
+            0.16666666666666666,
+            0,
+            0,
+            0,
+            0.16666666666666666,
+            0,
+            0,
+            0,
+            0.16666666666666666
+          ]
+        },
+        {
+          "op": "chunk",
+          "scene": "a",
+          "global": false,
+          "id": 2,
+          "chunk": [
+            5,
+            0,
+            4
+          ],
+          "cells": [
+            {
+              "local": [
+                0,
+                0,
+                0
+              ],
+              "material": "body",
+              "state": 3
+            }
+          ]
+        },
+        {
+          "op": "step",
+          "scene": "a",
+          "dt": 0.025,
+          "count": 1,
+          "sample_every": 1,
+          "label": "activate"
+        },
+        {
+          "op": "velocity",
+          "scene": "a",
+          "id": 1,
+          "linear": [
+            2,
+            0,
+            0
+          ],
+          "angular": [
+            0,
+            0,
+            0
+          ],
+          "wake": true
+        },
+        {
+          "op": "velocity",
+          "scene": "a",
+          "id": 2,
+          "linear": [
+            -2,
+            0,
+            0
+          ],
+          "angular": [
+            0,
+            0,
+            0
+          ],
+          "wake": true
+        },
+        {
+          "op": "step",
+          "scene": "a",
+          "dt": 0.025,
+          "count": 30,
+          "sample_every": 5,
+          "label": "body-contact"
+        },
+        {
+          "op": "dispose",
+          "scene": "a"
+        }
+      ]
+    },
+    {
+      "id": "fixed-joint",
+      "repeat_count": 5,
+      "timeout_seconds": 20,
+      "acceptance_scope": [
+        "only fixed-joint actions and captured channels at recorded selected-scenario hash",
+        "registered fixture geometry/materials and actual recorded contacts, when nonempty",
+        "unchanged native / ABI-adapted fixture; no Minecraft or unmodified declared Java ABI claim"
+      ],
+      "actions": [
+        {
+          "op": "scene",
+          "scene": "a",
+          "gravity": [
+            0,
+            0,
+            0
+          ],
+          "drag": 0
+        },
+        {
+          "op": "config",
+          "iterations": [
+            18,
+            2,
+            2
+          ],
+          "frequency": [
+            40,
+            5
+          ],
+          "min_island": 128
+        },
+        {
+          "op": "box",
+          "scene": "a",
+          "id": 1,
+          "mass": 2,
+          "half_extents": [
+            0.5,
+            0.5,
+            0.5
+          ],
+          "pose": [
+            0,
+            3,
+            0,
+            0,
+            0,
+            0,
+            1
+          ]
+        },
+        {
+          "op": "box",
+          "scene": "a",
+          "id": 2,
+          "mass": 2,
+          "half_extents": [
+            0.5,
+            0.5,
+            0.5
+          ],
+          "pose": [
+            2,
+            3,
+            0,
+            0,
+            0,
+            0,
+            1
+          ]
+        },
+        {
+          "op": "fixed_joint",
+          "scene": "a",
+          "joint": "link",
+          "a": 1,
+          "b": 2,
+          "anchors": [
+            1,
+            0,
+            0,
+            -1,
+            0,
+            0
+          ],
+          "orientation": [
+            0,
+            0,
+            0,
+            1
+          ]
+        },
+        {
+          "op": "step",
+          "scene": "a",
+          "dt": 0.025,
+          "count": 1,
+          "sample_every": 1,
+          "label": "joint-activate"
+        },
+        {
+          "op": "impulse",
+          "scene": "a",
+          "id": 1,
+          "linear": [
+            0,
+            2,
+            0
+          ],
+          "angular": [
+            0,
+            0,
+            0
+          ],
+          "wake": true
+        },
+        {
+          "op": "step",
+          "scene": "a",
+          "dt": 0.025,
+          "count": 20,
+          "sample_every": 5,
+          "label": "joint-response"
+        },
+        {
+          "op": "joint_sample",
+          "scene": "a",
+          "joint": "link",
+          "label": "joint-impulses"
+        },
+        {
+          "op": "joint_remove",
+          "scene": "a",
+          "joint": "link"
+        },
+        {
+          "op": "dispose",
+          "scene": "a"
+        }
+      ]
+    },
+    {
+      "id": "two-scene-global-mutation",
+      "repeat_count": 10,
+      "timeout_seconds": 20,
+      "acceptance_scope": [
+        "only two-scene-global-mutation actions and captured channels at recorded selected-scenario hash",
+        "registered fixture geometry/materials and actual recorded contacts, when nonempty",
+        "unchanged native / ABI-adapted fixture; no Minecraft or unmodified declared Java ABI claim"
+      ],
+      "actions": [
+        {
+          "op": "scene",
+          "scene": "a",
+          "gravity": [
+            0,
+            -9.81,
+            0
+          ],
+          "drag": 0
+        },
+        {
+          "op": "scene",
+          "scene": "b",
+          "gravity": [
+            0,
+            -9.81,
+            0
+          ],
+          "drag": 0
+        },
+        {
+          "op": "config",
+          "iterations": [
+            18,
+            2,
+            2
+          ],
+          "frequency": [
+            40,
+            5
+          ],
+          "min_island": 128
+        },
+        {
+          "op": "material",
+          "material": "solid",
+          "friction": 1,
+          "volume": 1,
+          "restitution": 0,
+          "fluid": false,
+          "dynamic": false,
+          "boxes": [
+            [
+              0,
+              0,
+              0,
+              1,
+              1,
+              1
+            ]
+          ]
+        },
+        {
+          "op": "material",
+          "material": "body",
+          "friction": 1,
+          "volume": 1,
+          "restitution": 0,
+          "fluid": false,
+          "dynamic": false,
+          "boxes": [
+            [
+              0,
+              0,
+              0,
+              1,
+              1,
+              1
+            ]
+          ]
+        },
+        {
+          "op": "chunk",
+          "scene": "a",
+          "global": true,
+          "id": -1,
+          "chunk": [
+            0,
+            0,
+            0
+          ],
+          "cells": [
+            {
+              "local": [
+                0,
+                0,
+                0
+              ],
+              "material": "solid",
+              "state": 3
+            },
+            {
+              "local": [
+                0,
+                0,
+                1
+              ],
+              "material": "solid",
+              "state": 3
+            },
+            {
+              "local": [
+                0,
+                0,
+                2
+              ],
+              "material": "solid",
+              "state": 3
+            },
+            {
+              "local": [
+                0,
+                0,
+                3
+              ],
+              "material": "solid",
+              "state": 3
+            },
+            {
+              "local": [
+                1,
+                0,
+                0
+              ],
+              "material": "solid",
+              "state": 3
+            },
+            {
+              "local": [
+                1,
+                0,
+                1
+              ],
+              "material": "solid",
+              "state": 3
+            },
+            {
+              "local": [
+                1,
+                0,
+                2
+              ],
+              "material": "solid",
+              "state": 3
+            },
+            {
+              "local": [
+                1,
+                0,
+                3
+              ],
+              "material": "solid",
+              "state": 3
+            },
+            {
+              "local": [
+                2,
+                0,
+                0
+              ],
+              "material": "solid",
+              "state": 3
+            },
+            {
+              "local": [
+                2,
+                0,
+                1
+              ],
+              "material": "solid",
+              "state": 3
+            },
+            {
+              "local": [
+                2,
+                0,
+                2
+              ],
+              "material": "solid",
+              "state": 3
+            },
+            {
+              "local": [
+                2,
+                0,
+                3
+              ],
+              "material": "solid",
+              "state": 3
+            },
+            {
+              "local": [
+                3,
+                0,
+                0
+              ],
+              "material": "solid",
+              "state": 3
+            },
+            {
+              "local": [
+                3,
+                0,
+                1
+              ],
+              "material": "solid",
+              "state": 3
+            },
+            {
+              "local": [
+                3,
+                0,
+                2
+              ],
+              "material": "solid",
+              "state": 3
+            },
+            {
+              "local": [
+                3,
+                0,
+                3
+              ],
+              "material": "solid",
+              "state": 3
+            }
+          ]
+        },
+        {
+          "op": "sublevel",
+          "scene": "a",
+          "id": 1,
+          "pose": [
+            1.5,
+            2,
+            1.5,
+            0,
+            0,
+            0,
+            1
+          ],
+          "center": [
+            64.5,
+            0.5,
+            64.5
+          ],
+          "bounds": [
+            64,
+            0,
+            64,
+            64,
+            0,
+            64
+          ],
+          "mass": 1,
+          "inertia": [
+            0.16666666666666666,
+            0,
+            0,
+            0,
+            0.16666666666666666,
+            0,
+            0,
+            0,
+            0.16666666666666666
+          ]
+        },
+        {
+          "op": "chunk",
+          "scene": "a",
+          "global": false,
+          "id": 1,
+          "chunk": [
+            4,
+            0,
+            4
+          ],
+          "cells": [
+            {
+              "local": [
+                0,
+                0,
+                0
+              ],
+              "material": "body",
+              "state": 3
+            }
+          ]
+        },
+        {
+          "op": "step",
+          "scene": "a",
+          "dt": 0.025,
+          "count": 50,
+          "sample_every": 25,
+          "label": "before-global-mutation"
+        },
+        {
+          "op": "chunk",
+          "scene": "b",
+          "global": true,
+          "id": -1,
+          "chunk": [
+            0,
+            0,
+            0
+          ],
+          "cells": [
+            {
+              "local": [
+                0,
+                0,
+                0
+              ],
+              "material": "solid",
+              "state": 3
+            },
+            {
+              "local": [
+                0,
+                0,
+                1
+              ],
+              "material": "solid",
+              "state": 3
+            },
+            {
+              "local": [
+                0,
+                0,
+                2
+              ],
+              "material": "solid",
+              "state": 3
+            },
+            {
+              "local": [
+                0,
+                0,
+                3
+              ],
+              "material": "solid",
+              "state": 3
+            },
+            {
+              "local": [
+                1,
+                0,
+                0
+              ],
+              "material": "solid",
+              "state": 3
+            },
+            {
+              "local": [
+                1,
+                0,
+                1
+              ],
+              "material": "solid",
+              "state": 3
+            },
+            {
+              "local": [
+                1,
+                0,
+                2
+              ],
+              "material": "solid",
+              "state": 3
+            },
+            {
+              "local": [
+                1,
+                0,
+                3
+              ],
+              "material": "solid",
+              "state": 3
+            },
+            {
+              "local": [
+                2,
+                0,
+                0
+              ],
+              "material": "solid",
+              "state": 3
+            },
+            {
+              "local": [
+                2,
+                0,
+                1
+              ],
+              "material": "solid",
+              "state": 3
+            },
+            {
+              "local": [
+                2,
+                0,
+                2
+              ],
+              "material": "solid",
+              "state": 3
+            },
+            {
+              "local": [
+                2,
+                0,
+                3
+              ],
+              "material": "solid",
+              "state": 3
+            },
+            {
+              "local": [
+                3,
+                0,
+                0
+              ],
+              "material": "solid",
+              "state": 3
+            },
+            {
+              "local": [
+                3,
+                0,
+                1
+              ],
+              "material": "solid",
+              "state": 3
+            },
+            {
+              "local": [
+                3,
+                0,
+                2
+              ],
+              "material": "solid",
+              "state": 3
+            },
+            {
+              "local": [
+                3,
+                0,
+                3
+              ],
+              "material": "solid",
+              "state": 3
+            }
+          ]
+        },
+        {
+          "op": "sublevel",
+          "scene": "b",
+          "id": 1,
+          "pose": [
+            1.5,
+            2,
+            1.5,
+            0,
+            0,
+            0,
+            1
+          ],
+          "center": [
+            64.5,
+            0.5,
+            64.5
+          ],
+          "bounds": [
+            64,
+            0,
+            64,
+            64,
+            0,
+            64
+          ],
+          "mass": 1,
+          "inertia": [
+            0.16666666666666666,
+            0,
+            0,
+            0,
+            0.16666666666666666,
+            0,
+            0,
+            0,
+            0.16666666666666666
+          ]
+        },
+        {
+          "op": "chunk",
+          "scene": "b",
+          "global": false,
+          "id": 1,
+          "chunk": [
+            4,
+            0,
+            4
+          ],
+          "cells": [
+            {
+              "local": [
+                0,
+                0,
+                0
+              ],
+              "material": "body",
+              "state": 3
+            }
+          ]
+        },
+        {
+          "op": "step",
+          "scene": "b",
+          "dt": 0.025,
+          "count": 50,
+          "sample_every": 25,
+          "label": "before-global-mutation"
+        },
+        {
+          "op": "material_clear",
+          "material": "solid"
+        },
+        {
+          "op": "config",
+          "iterations": [
+            8,
+            1,
+            1
+          ],
+          "frequency": [
+            30,
+            5
+          ],
+          "min_island": 64
+        },
+        {
+          "op": "wake",
+          "scene": "a",
+          "id": 1
+        },
+        {
+          "op": "step",
+          "scene": "a",
+          "dt": 0.025,
+          "count": 20,
+          "sample_every": 10,
+          "label": "after-global-clear"
+        },
+        {
+          "op": "wake",
+          "scene": "b",
+          "id": 1
+        },
+        {
+          "op": "step",
+          "scene": "b",
+          "dt": 0.025,
+          "count": 20,
+          "sample_every": 10,
+          "label": "after-global-clear"
+        },
+        {
+          "op": "material_add_box",
+          "material": "solid",
+          "bounds": [
+            0,
+            0,
+            0,
+            1,
+            1,
+            1
+          ]
+        },
+        {
+          "op": "config",
+          "iterations": [
+            18,
+            2,
+            2
+          ],
+          "frequency": [
+            40,
+            5
+          ],
+          "min_island": 128
+        },
+        {
+          "op": "wake",
+          "scene": "a",
+          "id": 1
+        },
+        {
+          "op": "step",
+          "scene": "a",
+          "dt": 0.0125,
+          "count": 10,
+          "sample_every": 5,
+          "label": "global-restore-interleaved"
+        },
+        {
+          "op": "wake",
+          "scene": "b",
+          "id": 1
+        },
+        {
+          "op": "step",
+          "scene": "b",
+          "dt": 0.0125,
+          "count": 10,
+          "sample_every": 5,
+          "label": "global-restore-interleaved"
+        },
+        {
+          "op": "dispose",
+          "scene": "b"
+        },
+        {
+          "op": "dispose",
+          "scene": "a"
+        }
+      ]
+    },
+    {
+      "id": "voxel-plot-negative",
+      "repeat_count": 10,
+      "timeout_seconds": 20,
+      "acceptance_scope": [
+        "only voxel-plot-negative actions and captured channels at recorded selected-scenario hash",
+        "registered fixture geometry/materials and actual recorded contacts, when nonempty",
+        "unchanged native / ABI-adapted fixture; no Minecraft or unmodified declared Java ABI claim"
+      ],
+      "actions": [
+        {
+          "op": "scene",
+          "scene": "a",
+          "gravity": [
+            0,
+            -9.81,
+            0
+          ],
+          "drag": 0
+        },
+        {
+          "op": "config",
+          "iterations": [
+            18,
+            2,
+            2
+          ],
+          "frequency": [
+            40,
+            5
+          ],
+          "min_island": 128
+        },
+        {
+          "op": "material",
+          "material": "solid",
+          "friction": 1,
+          "volume": 1,
+          "restitution": 0,
+          "fluid": false,
+          "dynamic": false,
+          "boxes": [
+            [
+              0,
+              0,
+              0,
+              1,
+              1,
+              1
+            ]
+          ]
+        },
+        {
+          "op": "material",
+          "material": "body",
+          "friction": 1,
+          "volume": 1,
+          "restitution": 0,
+          "fluid": false,
+          "dynamic": false,
+          "boxes": [
+            [
+              0,
+              0,
+              0,
+              1,
+              1,
+              1
+            ]
+          ]
+        },
+        {
+          "op": "chunk",
+          "scene": "a",
+          "global": true,
+          "id": -1,
+          "chunk": [
+            0,
+            0,
+            0
+          ],
+          "cells": [
+            {
+              "local": [
+                0,
+                0,
+                0
+              ],
+              "material": "solid",
+              "state": 3
+            },
+            {
+              "local": [
+                0,
+                0,
+                1
+              ],
+              "material": "solid",
+              "state": 3
+            },
+            {
+              "local": [
+                0,
+                0,
+                2
+              ],
+              "material": "solid",
+              "state": 3
+            },
+            {
+              "local": [
+                0,
+                0,
+                3
+              ],
+              "material": "solid",
+              "state": 3
+            },
+            {
+              "local": [
+                1,
+                0,
+                0
+              ],
+              "material": "solid",
+              "state": 3
+            },
+            {
+              "local": [
+                1,
+                0,
+                1
+              ],
+              "material": "solid",
+              "state": 3
+            },
+            {
+              "local": [
+                1,
+                0,
+                2
+              ],
+              "material": "solid",
+              "state": 3
+            },
+            {
+              "local": [
+                1,
+                0,
+                3
+              ],
+              "material": "solid",
+              "state": 3
+            },
+            {
+              "local": [
+                2,
+                0,
+                0
+              ],
+              "material": "solid",
+              "state": 3
+            },
+            {
+              "local": [
+                2,
+                0,
+                1
+              ],
+              "material": "solid",
+              "state": 3
+            },
+            {
+              "local": [
+                2,
+                0,
+                2
+              ],
+              "material": "solid",
+              "state": 3
+            },
+            {
+              "local": [
+                2,
+                0,
+                3
+              ],
+              "material": "solid",
+              "state": 3
+            },
+            {
+              "local": [
+                3,
+                0,
+                0
+              ],
+              "material": "solid",
+              "state": 3
+            },
+            {
+              "local": [
+                3,
+                0,
+                1
+              ],
+              "material": "solid",
+              "state": 3
+            },
+            {
+              "local": [
+                3,
+                0,
+                2
+              ],
+              "material": "solid",
+              "state": 3
+            },
+            {
+              "local": [
+                3,
+                0,
+                3
+              ],
+              "material": "solid",
+              "state": 3
+            }
+          ]
+        },
+        {
+          "op": "sublevel",
+          "scene": "a",
+          "id": 1,
+          "pose": [
+            0.5,
+            3,
+            0.5,
+            0,
+            0,
+            0,
+            1
+          ],
+          "center": [
+            -16.5,
+            -0.5,
+            -15.5
+          ],
+          "bounds": [
+            -17,
+            -1,
+            -16,
+            -17,
+            -1,
+            -16
+          ],
+          "mass": 1,
+          "inertia": [
+            0.16666666666666666,
+            0,
+            0,
+            0,
+            0.16666666666666666,
+            0,
+            0,
+            0,
+            0.16666666666666666
+          ]
+        },
+        {
+          "op": "chunk",
+          "scene": "a",
+          "global": false,
+          "id": 1,
+          "chunk": [
+            -2,
+            -1,
+            -1
+          ],
+          "cells": [
+            {
+              "local": [
+                15,
+                15,
+                0
+              ],
+              "material": "body",
+              "state": 3
+            }
+          ]
+        },
+        {
+          "op": "step",
+          "scene": "a",
+          "dt": 0.025,
+          "count": 60,
+          "sample_every": 20,
+          "label": "plot-boundary-contact"
+        },
+        {
+          "op": "dispose",
+          "scene": "a"
+        }
+      ]
+    },
+    {
+      "id": "voxel-plot-15-16",
+      "repeat_count": 10,
+      "timeout_seconds": 20,
+      "acceptance_scope": [
+        "only voxel-plot-15-16 actions and captured channels at recorded selected-scenario hash",
+        "registered fixture geometry/materials and actual recorded contacts, when nonempty",
+        "unchanged native / ABI-adapted fixture; no Minecraft or unmodified declared Java ABI claim"
+      ],
+      "actions": [
+        {
+          "op": "scene",
+          "scene": "a",
+          "gravity": [
+            0,
+            -9.81,
+            0
+          ],
+          "drag": 0
+        },
+        {
+          "op": "config",
+          "iterations": [
+            18,
+            2,
+            2
+          ],
+          "frequency": [
+            40,
+            5
+          ],
+          "min_island": 128
+        },
+        {
+          "op": "material",
+          "material": "solid",
+          "friction": 1,
+          "volume": 1,
+          "restitution": 0,
+          "fluid": false,
+          "dynamic": false,
+          "boxes": [
+            [
+              0,
+              0,
+              0,
+              1,
+              1,
+              1
+            ]
+          ]
+        },
+        {
+          "op": "material",
+          "material": "body",
+          "friction": 1,
+          "volume": 1,
+          "restitution": 0,
+          "fluid": false,
+          "dynamic": false,
+          "boxes": [
+            [
+              0,
+              0,
+              0,
+              1,
+              1,
+              1
+            ]
+          ]
+        },
+        {
+          "op": "chunk",
+          "scene": "a",
+          "global": true,
+          "id": -1,
+          "chunk": [
+            0,
+            0,
+            0
+          ],
+          "cells": [
+            {
+              "local": [
+                0,
+                0,
+                0
+              ],
+              "material": "solid",
+              "state": 3
+            },
+            {
+              "local": [
+                0,
+                0,
+                1
+              ],
+              "material": "solid",
+              "state": 3
+            },
+            {
+              "local": [
+                0,
+                0,
+                2
+              ],
+              "material": "solid",
+              "state": 3
+            },
+            {
+              "local": [
+                0,
+                0,
+                3
+              ],
+              "material": "solid",
+              "state": 3
+            },
+            {
+              "local": [
+                1,
+                0,
+                0
+              ],
+              "material": "solid",
+              "state": 3
+            },
+            {
+              "local": [
+                1,
+                0,
+                1
+              ],
+              "material": "solid",
+              "state": 3
+            },
+            {
+              "local": [
+                1,
+                0,
+                2
+              ],
+              "material": "solid",
+              "state": 3
+            },
+            {
+              "local": [
+                1,
+                0,
+                3
+              ],
+              "material": "solid",
+              "state": 3
+            },
+            {
+              "local": [
+                2,
+                0,
+                0
+              ],
+              "material": "solid",
+              "state": 3
+            },
+            {
+              "local": [
+                2,
+                0,
+                1
+              ],
+              "material": "solid",
+              "state": 3
+            },
+            {
+              "local": [
+                2,
+                0,
+                2
+              ],
+              "material": "solid",
+              "state": 3
+            },
+            {
+              "local": [
+                2,
+                0,
+                3
+              ],
+              "material": "solid",
+              "state": 3
+            },
+            {
+              "local": [
+                3,
+                0,
+                0
+              ],
+              "material": "solid",
+              "state": 3
+            },
+            {
+              "local": [
+                3,
+                0,
+                1
+              ],
+              "material": "solid",
+              "state": 3
+            },
+            {
+              "local": [
+                3,
+                0,
+                2
+              ],
+              "material": "solid",
+              "state": 3
+            },
+            {
+              "local": [
+                3,
+                0,
+                3
+              ],
+              "material": "solid",
+              "state": 3
+            }
+          ]
+        },
+        {
+          "op": "sublevel",
+          "scene": "a",
+          "id": 1,
+          "pose": [
+            0.5,
+            3,
+            0.5,
+            0,
+            0,
+            0,
+            1
+          ],
+          "center": [
+            15.5,
+            0.5,
+            16.5
+          ],
+          "bounds": [
+            15,
+            0,
+            16,
+            15,
+            0,
+            16
+          ],
+          "mass": 1,
+          "inertia": [
+            0.16666666666666666,
+            0,
+            0,
+            0,
+            0.16666666666666666,
+            0,
+            0,
+            0,
+            0.16666666666666666
+          ]
+        },
+        {
+          "op": "chunk",
+          "scene": "a",
+          "global": false,
+          "id": 1,
+          "chunk": [
+            0,
+            0,
+            1
+          ],
+          "cells": [
+            {
+              "local": [
+                15,
+                0,
+                0
+              ],
+              "material": "body",
+              "state": 3
+            }
+          ]
+        },
+        {
+          "op": "step",
+          "scene": "a",
+          "dt": 0.025,
+          "count": 60,
+          "sample_every": 20,
+          "label": "plot-boundary-contact"
+        },
+        {
+          "op": "dispose",
+          "scene": "a"
+        }
+      ]
+    },
+    {
+      "id": "voxel-plot-31-32",
+      "repeat_count": 10,
+      "timeout_seconds": 20,
+      "acceptance_scope": [
+        "only voxel-plot-31-32 actions and captured channels at recorded selected-scenario hash",
+        "registered fixture geometry/materials and actual recorded contacts, when nonempty",
+        "unchanged native / ABI-adapted fixture; no Minecraft or unmodified declared Java ABI claim"
+      ],
+      "actions": [
+        {
+          "op": "scene",
+          "scene": "a",
+          "gravity": [
+            0,
+            -9.81,
+            0
+          ],
+          "drag": 0
+        },
+        {
+          "op": "config",
+          "iterations": [
+            18,
+            2,
+            2
+          ],
+          "frequency": [
+            40,
+            5
+          ],
+          "min_island": 128
+        },
+        {
+          "op": "material",
+          "material": "solid",
+          "friction": 1,
+          "volume": 1,
+          "restitution": 0,
+          "fluid": false,
+          "dynamic": false,
+          "boxes": [
+            [
+              0,
+              0,
+              0,
+              1,
+              1,
+              1
+            ]
+          ]
+        },
+        {
+          "op": "material",
+          "material": "body",
+          "friction": 1,
+          "volume": 1,
+          "restitution": 0,
+          "fluid": false,
+          "dynamic": false,
+          "boxes": [
+            [
+              0,
+              0,
+              0,
+              1,
+              1,
+              1
+            ]
+          ]
+        },
+        {
+          "op": "chunk",
+          "scene": "a",
+          "global": true,
+          "id": -1,
+          "chunk": [
+            0,
+            0,
+            0
+          ],
+          "cells": [
+            {
+              "local": [
+                0,
+                0,
+                0
+              ],
+              "material": "solid",
+              "state": 3
+            },
+            {
+              "local": [
+                0,
+                0,
+                1
+              ],
+              "material": "solid",
+              "state": 3
+            },
+            {
+              "local": [
+                0,
+                0,
+                2
+              ],
+              "material": "solid",
+              "state": 3
+            },
+            {
+              "local": [
+                0,
+                0,
+                3
+              ],
+              "material": "solid",
+              "state": 3
+            },
+            {
+              "local": [
+                1,
+                0,
+                0
+              ],
+              "material": "solid",
+              "state": 3
+            },
+            {
+              "local": [
+                1,
+                0,
+                1
+              ],
+              "material": "solid",
+              "state": 3
+            },
+            {
+              "local": [
+                1,
+                0,
+                2
+              ],
+              "material": "solid",
+              "state": 3
+            },
+            {
+              "local": [
+                1,
+                0,
+                3
+              ],
+              "material": "solid",
+              "state": 3
+            },
+            {
+              "local": [
+                2,
+                0,
+                0
+              ],
+              "material": "solid",
+              "state": 3
+            },
+            {
+              "local": [
+                2,
+                0,
+                1
+              ],
+              "material": "solid",
+              "state": 3
+            },
+            {
+              "local": [
+                2,
+                0,
+                2
+              ],
+              "material": "solid",
+              "state": 3
+            },
+            {
+              "local": [
+                2,
+                0,
+                3
+              ],
+              "material": "solid",
+              "state": 3
+            },
+            {
+              "local": [
+                3,
+                0,
+                0
+              ],
+              "material": "solid",
+              "state": 3
+            },
+            {
+              "local": [
+                3,
+                0,
+                1
+              ],
+              "material": "solid",
+              "state": 3
+            },
+            {
+              "local": [
+                3,
+                0,
+                2
+              ],
+              "material": "solid",
+              "state": 3
+            },
+            {
+              "local": [
+                3,
+                0,
+                3
+              ],
+              "material": "solid",
+              "state": 3
+            }
+          ]
+        },
+        {
+          "op": "sublevel",
+          "scene": "a",
+          "id": 1,
+          "pose": [
+            0.5,
+            3,
+            0.5,
+            0,
+            0,
+            0,
+            1
+          ],
+          "center": [
+            31.5,
+            0.5,
+            32.5
+          ],
+          "bounds": [
+            31,
+            0,
+            32,
+            31,
+            0,
+            32
+          ],
+          "mass": 1,
+          "inertia": [
+            0.16666666666666666,
+            0,
+            0,
+            0,
+            0.16666666666666666,
+            0,
+            0,
+            0,
+            0.16666666666666666
+          ]
+        },
+        {
+          "op": "chunk",
+          "scene": "a",
+          "global": false,
+          "id": 1,
+          "chunk": [
+            1,
+            0,
+            2
+          ],
+          "cells": [
+            {
+              "local": [
+                15,
+                0,
+                0
+              ],
+              "material": "body",
+              "state": 3
+            }
+          ]
+        },
+        {
+          "op": "step",
+          "scene": "a",
+          "dt": 0.025,
+          "count": 60,
+          "sample_every": 20,
+          "label": "plot-boundary-contact"
+        },
+        {
+          "op": "dispose",
+          "scene": "a"
+        }
+      ]
+    },
+    {
+      "id": "dynamic-registration-comparison",
+      "repeat_count": 10,
+      "timeout_seconds": 20,
+      "dynamic_comparison": true,
+      "acceptance_scope": [
+        "explicit material dynamic false versus true with identical static shape inputs",
+        "dynamic=true fallback geometry/material/contact behavior only; no per-coordinate dynamic override API",
+        "unchanged native / ABI-adapted fixture; no full Java/Minecraft claim"
+      ],
+      "actions": [
+        {
+          "op": "scene",
+          "scene": "static",
+          "gravity": [
+            0,
+            -9.81,
+            0
+          ],
+          "drag": 0
+        },
+        {
+          "op": "config",
+          "iterations": [
+            18,
+            2,
+            2
+          ],
+          "frequency": [
+            40,
+            5
+          ],
+          "min_island": 128
+        },
+        {
+          "op": "material",
+          "material": "static-floor",
+          "friction": 1,
+          "volume": 1,
+          "restitution": 0,
+          "fluid": false,
+          "dynamic": false,
+          "boxes": [
+            [
+              0,
+              0,
+              0,
+              1,
+              1,
+              1
+            ]
+          ]
+        },
+        {
+          "op": "material",
+          "material": "body",
+          "friction": 1,
+          "volume": 1,
+          "restitution": 0,
+          "fluid": false,
+          "dynamic": false,
+          "boxes": [
+            [
+              0,
+              0,
+              0,
+              1,
+              1,
+              1
+            ]
+          ]
+        },
+        {
+          "op": "chunk",
+          "scene": "static",
+          "global": true,
+          "id": -1,
+          "chunk": [
+            0,
+            0,
+            0
+          ],
+          "cells": [
+            {
+              "local": [
+                0,
+                0,
+                0
+              ],
+              "material": "static-floor",
+              "state": 3
+            },
+            {
+              "local": [
+                0,
+                0,
+                1
+              ],
+              "material": "static-floor",
+              "state": 3
+            },
+            {
+              "local": [
+                0,
+                0,
+                2
+              ],
+              "material": "static-floor",
+              "state": 3
+            },
+            {
+              "local": [
+                0,
+                0,
+                3
+              ],
+              "material": "static-floor",
+              "state": 3
+            },
+            {
+              "local": [
+                1,
+                0,
+                0
+              ],
+              "material": "static-floor",
+              "state": 3
+            },
+            {
+              "local": [
+                1,
+                0,
+                1
+              ],
+              "material": "static-floor",
+              "state": 3
+            },
+            {
+              "local": [
+                1,
+                0,
+                2
+              ],
+              "material": "static-floor",
+              "state": 3
+            },
+            {
+              "local": [
+                1,
+                0,
+                3
+              ],
+              "material": "static-floor",
+              "state": 3
+            },
+            {
+              "local": [
+                2,
+                0,
+                0
+              ],
+              "material": "static-floor",
+              "state": 3
+            },
+            {
+              "local": [
+                2,
+                0,
+                1
+              ],
+              "material": "static-floor",
+              "state": 3
+            },
+            {
+              "local": [
+                2,
+                0,
+                2
+              ],
+              "material": "static-floor",
+              "state": 3
+            },
+            {
+              "local": [
+                2,
+                0,
+                3
+              ],
+              "material": "static-floor",
+              "state": 3
+            },
+            {
+              "local": [
+                3,
+                0,
+                0
+              ],
+              "material": "static-floor",
+              "state": 3
+            },
+            {
+              "local": [
+                3,
+                0,
+                1
+              ],
+              "material": "static-floor",
+              "state": 3
+            },
+            {
+              "local": [
+                3,
+                0,
+                2
+              ],
+              "material": "static-floor",
+              "state": 3
+            },
+            {
+              "local": [
+                3,
+                0,
+                3
+              ],
+              "material": "static-floor",
+              "state": 3
+            }
+          ]
+        },
+        {
+          "op": "sublevel",
+          "scene": "static",
+          "id": 1,
+          "pose": [
+            0.5,
+            3,
+            0.5,
+            0,
+            0,
+            0,
+            1
+          ],
+          "center": [
+            64.5,
+            0.5,
+            64.5
+          ],
+          "bounds": [
+            64,
+            0,
+            64,
+            64,
+            0,
+            64
+          ],
+          "mass": 1,
+          "inertia": [
+            0.16666666666666666,
+            0,
+            0,
+            0,
+            0.16666666666666666,
+            0,
+            0,
+            0,
+            0.16666666666666666
+          ]
+        },
+        {
+          "op": "chunk",
+          "scene": "static",
+          "global": false,
+          "id": 1,
+          "chunk": [
+            4,
+            0,
+            4
+          ],
+          "cells": [
+            {
+              "local": [
+                0,
+                0,
+                0
+              ],
+              "material": "body",
+              "state": 3
+            }
+          ]
+        },
+        {
+          "op": "sample",
+          "scene": "static",
+          "id": 1,
+          "label": "initial"
+        },
+        {
+          "op": "step",
+          "scene": "static",
+          "dt": 0.025,
+          "count": 80,
+          "sample_every": 20,
+          "label": "settle"
+        },
+        {
+          "op": "scene",
+          "scene": "dynamic",
+          "gravity": [
+            0,
+            -9.81,
+            0
+          ],
+          "drag": 0
+        },
+        {
+          "op": "config",
+          "iterations": [
+            18,
+            2,
+            2
+          ],
+          "frequency": [
+            40,
+            5
+          ],
+          "min_island": 128
+        },
+        {
+          "op": "material",
+          "material": "dynamic-floor",
+          "friction": 1,
+          "volume": 1,
+          "restitution": 0,
+          "fluid": false,
+          "dynamic": true,
+          "boxes": [
+            [
+              0,
+              0,
+              0,
+              1,
+              1,
+              1
+            ]
+          ]
+        },
+        {
+          "op": "material",
+          "material": "dynamic-body",
+          "friction": 1,
+          "volume": 1,
+          "restitution": 0,
+          "fluid": false,
+          "dynamic": false,
+          "boxes": [
+            [
+              0,
+              0,
+              0,
+              1,
+              1,
+              1
+            ]
+          ]
+        },
+        {
+          "op": "chunk",
+          "scene": "dynamic",
+          "global": true,
+          "id": -1,
+          "chunk": [
+            0,
+            0,
+            0
+          ],
+          "cells": [
+            {
+              "local": [
+                0,
+                0,
+                0
+              ],
+              "material": "dynamic-floor",
+              "state": 3
+            },
+            {
+              "local": [
+                0,
+                0,
+                1
+              ],
+              "material": "dynamic-floor",
+              "state": 3
+            },
+            {
+              "local": [
+                0,
+                0,
+                2
+              ],
+              "material": "dynamic-floor",
+              "state": 3
+            },
+            {
+              "local": [
+                0,
+                0,
+                3
+              ],
+              "material": "dynamic-floor",
+              "state": 3
+            },
+            {
+              "local": [
+                1,
+                0,
+                0
+              ],
+              "material": "dynamic-floor",
+              "state": 3
+            },
+            {
+              "local": [
+                1,
+                0,
+                1
+              ],
+              "material": "dynamic-floor",
+              "state": 3
+            },
+            {
+              "local": [
+                1,
+                0,
+                2
+              ],
+              "material": "dynamic-floor",
+              "state": 3
+            },
+            {
+              "local": [
+                1,
+                0,
+                3
+              ],
+              "material": "dynamic-floor",
+              "state": 3
+            },
+            {
+              "local": [
+                2,
+                0,
+                0
+              ],
+              "material": "dynamic-floor",
+              "state": 3
+            },
+            {
+              "local": [
+                2,
+                0,
+                1
+              ],
+              "material": "dynamic-floor",
+              "state": 3
+            },
+            {
+              "local": [
+                2,
+                0,
+                2
+              ],
+              "material": "dynamic-floor",
+              "state": 3
+            },
+            {
+              "local": [
+                2,
+                0,
+                3
+              ],
+              "material": "dynamic-floor",
+              "state": 3
+            },
+            {
+              "local": [
+                3,
+                0,
+                0
+              ],
+              "material": "dynamic-floor",
+              "state": 3
+            },
+            {
+              "local": [
+                3,
+                0,
+                1
+              ],
+              "material": "dynamic-floor",
+              "state": 3
+            },
+            {
+              "local": [
+                3,
+                0,
+                2
+              ],
+              "material": "dynamic-floor",
+              "state": 3
+            },
+            {
+              "local": [
+                3,
+                0,
+                3
+              ],
+              "material": "dynamic-floor",
+              "state": 3
+            }
+          ]
+        },
+        {
+          "op": "sublevel",
+          "scene": "dynamic",
+          "id": 1,
+          "pose": [
+            0.5,
+            3,
+            0.5,
+            0,
+            0,
+            0,
+            1
+          ],
+          "center": [
+            64.5,
+            0.5,
+            64.5
+          ],
+          "bounds": [
+            64,
+            0,
+            64,
+            64,
+            0,
+            64
+          ],
+          "mass": 1,
+          "inertia": [
+            0.16666666666666666,
+            0,
+            0,
+            0,
+            0.16666666666666666,
+            0,
+            0,
+            0,
+            0.16666666666666666
+          ]
+        },
+        {
+          "op": "chunk",
+          "scene": "dynamic",
+          "global": false,
+          "id": 1,
+          "chunk": [
+            4,
+            0,
+            4
+          ],
+          "cells": [
+            {
+              "local": [
+                0,
+                0,
+                0
+              ],
+              "material": "dynamic-body",
+              "state": 3
+            }
+          ]
+        },
+        {
+          "op": "sample",
+          "scene": "dynamic",
+          "id": 1,
+          "label": "initial"
+        },
+        {
+          "op": "step",
+          "scene": "dynamic",
+          "dt": 0.025,
+          "count": 80,
+          "sample_every": 20,
+          "label": "settle"
+        },
+        {
+          "op": "dispose",
+          "scene": "dynamic"
+        },
+        {
+          "op": "dispose",
+          "scene": "static"
+        }
+      ]
+    },
+    {
+      "id": "world-negative-contact",
+      "repeat_count": 10,
+      "timeout_seconds": 20,
+      "acceptance_scope": [
+        "actual native contact at negative/far parent-world coordinates",
+        "observed f32 precision and missing contacts retained; no correction or universal tolerance"
+      ],
+      "actions": [
+        {
+          "op": "scene",
+          "scene": "a",
+          "gravity": [
+            0,
+            -9.81,
+            0
+          ],
+          "drag": 0
+        },
+        {
+          "op": "config",
+          "iterations": [
+            18,
+            2,
+            2
+          ],
+          "frequency": [
+            40,
+            5
+          ],
+          "min_island": 128
+        },
+        {
+          "op": "material",
+          "material": "solid",
+          "friction": 1,
+          "volume": 1,
+          "restitution": 0,
+          "fluid": false,
+          "dynamic": false,
+          "boxes": [
+            [
+              0,
+              0,
+              0,
+              1,
+              1,
+              1
+            ]
+          ]
+        },
+        {
+          "op": "material",
+          "material": "body",
+          "friction": 1,
+          "volume": 1,
+          "restitution": 0,
+          "fluid": false,
+          "dynamic": false,
+          "boxes": [
+            [
+              0,
+              0,
+              0,
+              1,
+              1,
+              1
+            ]
+          ]
+        },
+        {
+          "op": "chunk",
+          "scene": "a",
+          "global": true,
+          "id": -1,
+          "chunk": [
+            -2,
+            0,
+            -2
+          ],
+          "cells": [
+            {
+              "local": [
+                14,
+                0,
+                14
+              ],
+              "material": "solid",
+              "state": 3
+            },
+            {
+              "local": [
+                14,
+                0,
+                15
+              ],
+              "material": "solid",
+              "state": 3
+            },
+            {
+              "local": [
+                15,
+                0,
+                14
+              ],
+              "material": "solid",
+              "state": 3
+            },
+            {
+              "local": [
+                15,
+                0,
+                15
+              ],
+              "material": "solid",
+              "state": 3
+            }
+          ]
+        },
+        {
+          "op": "sublevel",
+          "scene": "a",
+          "id": 1,
+          "pose": [
+            -16.5,
+            3,
+            -16.5,
+            0,
+            0,
+            0,
+            1
+          ],
+          "center": [
+            64.5,
+            0.5,
+            64.5
+          ],
+          "bounds": [
+            64,
+            0,
+            64,
+            64,
+            0,
+            64
+          ],
+          "mass": 1,
+          "inertia": [
+            0.16666666666666666,
+            0,
+            0,
+            0,
+            0.16666666666666666,
+            0,
+            0,
+            0,
+            0.16666666666666666
+          ]
+        },
+        {
+          "op": "chunk",
+          "scene": "a",
+          "global": false,
+          "id": 1,
+          "chunk": [
+            4,
+            0,
+            4
+          ],
+          "cells": [
+            {
+              "local": [
+                0,
+                0,
+                0
+              ],
+              "material": "body",
+              "state": 3
+            }
+          ]
+        },
+        {
+          "op": "sample",
+          "scene": "a",
+          "id": 1,
+          "label": "initial"
+        },
+        {
+          "op": "step",
+          "scene": "a",
+          "dt": 0.025,
+          "count": 80,
+          "sample_every": 20,
+          "label": "settle"
+        },
+        {
+          "op": "dispose",
+          "scene": "a"
+        }
+      ]
+    },
+    {
+      "id": "world-far-origin-contact",
+      "repeat_count": 10,
+      "timeout_seconds": 20,
+      "acceptance_scope": [
+        "actual native contact at negative/far parent-world coordinates",
+        "observed f32 precision and missing contacts retained; no correction or universal tolerance"
+      ],
+      "actions": [
+        {
+          "op": "scene",
+          "scene": "a",
+          "gravity": [
+            0,
+            -9.81,
+            0
+          ],
+          "drag": 0
+        },
+        {
+          "op": "config",
+          "iterations": [
+            18,
+            2,
+            2
+          ],
+          "frequency": [
+            40,
+            5
+          ],
+          "min_island": 128
+        },
+        {
+          "op": "material",
+          "material": "solid",
+          "friction": 1,
+          "volume": 1,
+          "restitution": 0,
+          "fluid": false,
+          "dynamic": false,
+          "boxes": [
+            [
+              0,
+              0,
+              0,
+              1,
+              1,
+              1
+            ]
+          ]
+        },
+        {
+          "op": "material",
+          "material": "body",
+          "friction": 1,
+          "volume": 1,
+          "restitution": 0,
+          "fluid": false,
+          "dynamic": false,
+          "boxes": [
+            [
+              0,
+              0,
+              0,
+              1,
+              1,
+              1
+            ]
+          ]
+        },
+        {
+          "op": "chunk",
+          "scene": "a",
+          "global": true,
+          "id": -1,
+          "chunk": [
+            1874999,
+            0,
+            -1874999
+          ],
+          "cells": [
+            {
+              "local": [
+                0,
+                0,
+                0
+              ],
+              "material": "solid",
+              "state": 3
+            },
+            {
+              "local": [
+                0,
+                0,
+                1
+              ],
+              "material": "solid",
+              "state": 3
+            },
+            {
+              "local": [
+                0,
+                0,
+                2
+              ],
+              "material": "solid",
+              "state": 3
+            },
+            {
+              "local": [
+                0,
+                0,
+                3
+              ],
+              "material": "solid",
+              "state": 3
+            },
+            {
+              "local": [
+                1,
+                0,
+                0
+              ],
+              "material": "solid",
+              "state": 3
+            },
+            {
+              "local": [
+                1,
+                0,
+                1
+              ],
+              "material": "solid",
+              "state": 3
+            },
+            {
+              "local": [
+                1,
+                0,
+                2
+              ],
+              "material": "solid",
+              "state": 3
+            },
+            {
+              "local": [
+                1,
+                0,
+                3
+              ],
+              "material": "solid",
+              "state": 3
+            },
+            {
+              "local": [
+                2,
+                0,
+                0
+              ],
+              "material": "solid",
+              "state": 3
+            },
+            {
+              "local": [
+                2,
+                0,
+                1
+              ],
+              "material": "solid",
+              "state": 3
+            },
+            {
+              "local": [
+                2,
+                0,
+                2
+              ],
+              "material": "solid",
+              "state": 3
+            },
+            {
+              "local": [
+                2,
+                0,
+                3
+              ],
+              "material": "solid",
+              "state": 3
+            },
+            {
+              "local": [
+                3,
+                0,
+                0
+              ],
+              "material": "solid",
+              "state": 3
+            },
+            {
+              "local": [
+                3,
+                0,
+                1
+              ],
+              "material": "solid",
+              "state": 3
+            },
+            {
+              "local": [
+                3,
+                0,
+                2
+              ],
+              "material": "solid",
+              "state": 3
+            },
+            {
+              "local": [
+                3,
+                0,
+                3
+              ],
+              "material": "solid",
+              "state": 3
+            }
+          ]
+        },
+        {
+          "op": "sublevel",
+          "scene": "a",
+          "id": 1,
+          "pose": [
+            29999986,
+            3,
+            -29999982,
+            0,
+            0,
+            0,
+            1
+          ],
+          "center": [
+            64.5,
+            0.5,
+            64.5
+          ],
+          "bounds": [
+            64,
+            0,
+            64,
+            64,
+            0,
+            64
+          ],
+          "mass": 1,
+          "inertia": [
+            0.16666666666666666,
+            0,
+            0,
+            0,
+            0.16666666666666666,
+            0,
+            0,
+            0,
+            0.16666666666666666
+          ]
+        },
+        {
+          "op": "chunk",
+          "scene": "a",
+          "global": false,
+          "id": 1,
+          "chunk": [
+            4,
+            0,
+            4
+          ],
+          "cells": [
+            {
+              "local": [
+                0,
+                0,
+                0
+              ],
+              "material": "body",
+              "state": 3
+            }
+          ]
+        },
+        {
+          "op": "sample",
+          "scene": "a",
+          "id": 1,
+          "label": "initial"
+        },
+        {
+          "op": "step",
+          "scene": "a",
+          "dt": 0.025,
+          "count": 80,
+          "sample_every": 20,
+          "label": "settle"
+        },
+        {
+          "op": "dispose",
+          "scene": "a"
+        }
+      ]
+    },
+    {
+      "id": "rest-wake",
+      "repeat_count": 10,
+      "timeout_seconds": 20,
+      "acceptance_scope": [
+        "native rest plateau and wake=true impulse response",
+        "no direct sleeping flag export; observe unchanged poses, zero velocities and contact-buffer transition only",
+        "unchanged native / ABI-adapted fixture; no player support claim"
+      ],
+      "actions": [
+        {
+          "op": "scene",
+          "scene": "a",
+          "gravity": [
+            0,
+            -9.81,
+            0
+          ],
+          "drag": 0
+        },
+        {
+          "op": "config",
+          "iterations": [
+            18,
+            2,
+            2
+          ],
+          "frequency": [
+            40,
+            5
+          ],
+          "min_island": 128
+        },
+        {
+          "op": "material",
+          "material": "solid",
+          "friction": 1,
+          "volume": 1,
+          "restitution": 0,
+          "fluid": false,
+          "dynamic": false,
+          "boxes": [
+            [
+              0,
+              0,
+              0,
+              1,
+              1,
+              1
+            ]
+          ]
+        },
+        {
+          "op": "material",
+          "material": "body",
+          "friction": 1,
+          "volume": 1,
+          "restitution": 0,
+          "fluid": false,
+          "dynamic": false,
+          "boxes": [
+            [
+              0,
+              0,
+              0,
+              1,
+              1,
+              1
+            ]
+          ]
+        },
+        {
+          "op": "chunk",
+          "scene": "a",
+          "global": true,
+          "id": -1,
+          "chunk": [
+            0,
+            0,
+            0
+          ],
+          "cells": [
+            {
+              "local": [
+                0,
+                0,
+                0
+              ],
+              "material": "solid",
+              "state": 3
+            },
+            {
+              "local": [
+                0,
+                0,
+                1
+              ],
+              "material": "solid",
+              "state": 3
+            },
+            {
+              "local": [
+                0,
+                0,
+                2
+              ],
+              "material": "solid",
+              "state": 3
+            },
+            {
+              "local": [
+                0,
+                0,
+                3
+              ],
+              "material": "solid",
+              "state": 3
+            },
+            {
+              "local": [
+                1,
+                0,
+                0
+              ],
+              "material": "solid",
+              "state": 3
+            },
+            {
+              "local": [
+                1,
+                0,
+                1
+              ],
+              "material": "solid",
+              "state": 3
+            },
+            {
+              "local": [
+                1,
+                0,
+                2
+              ],
+              "material": "solid",
+              "state": 3
+            },
+            {
+              "local": [
+                1,
+                0,
+                3
+              ],
+              "material": "solid",
+              "state": 3
+            },
+            {
+              "local": [
+                2,
+                0,
+                0
+              ],
+              "material": "solid",
+              "state": 3
+            },
+            {
+              "local": [
+                2,
+                0,
+                1
+              ],
+              "material": "solid",
+              "state": 3
+            },
+            {
+              "local": [
+                2,
+                0,
+                2
+              ],
+              "material": "solid",
+              "state": 3
+            },
+            {
+              "local": [
+                2,
+                0,
+                3
+              ],
+              "material": "solid",
+              "state": 3
+            },
+            {
+              "local": [
+                3,
+                0,
+                0
+              ],
+              "material": "solid",
+              "state": 3
+            },
+            {
+              "local": [
+                3,
+                0,
+                1
+              ],
+              "material": "solid",
+              "state": 3
+            },
+            {
+              "local": [
+                3,
+                0,
+                2
+              ],
+              "material": "solid",
+              "state": 3
+            },
+            {
+              "local": [
+                3,
+                0,
+                3
+              ],
+              "material": "solid",
+              "state": 3
+            }
+          ]
+        },
+        {
+          "op": "sublevel",
+          "scene": "a",
+          "id": 1,
+          "pose": [
+            0.5,
+            3,
+            0.5,
+            0,
+            0,
+            0,
+            1
+          ],
+          "center": [
+            64.5,
+            0.5,
+            64.5
+          ],
+          "bounds": [
+            64,
+            0,
+            64,
+            64,
+            0,
+            64
+          ],
+          "mass": 1,
+          "inertia": [
+            0.16666666666666666,
+            0,
+            0,
+            0,
+            0.16666666666666666,
+            0,
+            0,
+            0,
+            0.16666666666666666
+          ]
+        },
+        {
+          "op": "chunk",
+          "scene": "a",
+          "global": false,
+          "id": 1,
+          "chunk": [
+            4,
+            0,
+            4
+          ],
+          "cells": [
+            {
+              "local": [
+                0,
+                0,
+                0
+              ],
+              "material": "body",
+              "state": 3
+            }
+          ]
+        },
+        {
+          "op": "sample",
+          "scene": "a",
+          "id": 1,
+          "label": "initial"
+        },
+        {
+          "op": "step",
+          "scene": "a",
+          "dt": 0.025,
+          "count": 80,
+          "sample_every": 20,
+          "label": "settle"
+        },
+        {
+          "op": "step",
+          "scene": "a",
+          "dt": 0.025,
+          "count": 200,
+          "sample_every": 40,
+          "label": "rest-observation"
+        },
+        {
+          "op": "impulse",
+          "scene": "a",
+          "id": 1,
+          "linear": [
+            0,
+            2,
+            0
+          ],
+          "angular": [
+            0,
+            0,
+            0
+          ],
+          "wake": true
+        },
+        {
+          "op": "sample",
+          "scene": "a",
+          "id": 1,
+          "label": "wake-impulse"
+        },
+        {
+          "op": "step",
+          "scene": "a",
+          "dt": 0.025,
+          "count": 20,
+          "sample_every": 5,
+          "label": "wake-response"
+        },
+        {
+          "op": "dispose",
+          "scene": "a"
+        }
+      ]
+    },
+    {
+      "id": "missing-terrain-chunk",
+      "repeat_count": 10,
+      "timeout_seconds": 20,
+      "acceptance_scope": [
+        "native collision absence after explicit global chunk removal",
+        "not Minecraft ticketing/unload or host unknown-residency policy"
+      ],
+      "actions": [
+        {
+          "op": "scene",
+          "scene": "a",
+          "gravity": [
+            0,
+            -9.81,
+            0
+          ],
+          "drag": 0
+        },
+        {
+          "op": "config",
+          "iterations": [
+            18,
+            2,
+            2
+          ],
+          "frequency": [
+            40,
+            5
+          ],
+          "min_island": 128
+        },
+        {
+          "op": "material",
+          "material": "solid",
+          "friction": 1,
+          "volume": 1,
+          "restitution": 0,
+          "fluid": false,
+          "dynamic": false,
+          "boxes": [
+            [
+              0,
+              0,
+              0,
+              1,
+              1,
+              1
+            ]
+          ]
+        },
+        {
+          "op": "material",
+          "material": "body",
+          "friction": 1,
+          "volume": 1,
+          "restitution": 0,
+          "fluid": false,
+          "dynamic": false,
+          "boxes": [
+            [
+              0,
+              0,
+              0,
+              1,
+              1,
+              1
+            ]
+          ]
+        },
+        {
+          "op": "chunk",
+          "scene": "a",
+          "global": true,
+          "id": -1,
+          "chunk": [
+            0,
+            0,
+            0
+          ],
+          "cells": [
+            {
+              "local": [
+                0,
+                0,
+                0
+              ],
+              "material": "solid",
+              "state": 3
+            },
+            {
+              "local": [
+                0,
+                0,
+                1
+              ],
+              "material": "solid",
+              "state": 3
+            },
+            {
+              "local": [
+                0,
+                0,
+                2
+              ],
+              "material": "solid",
+              "state": 3
+            },
+            {
+              "local": [
+                0,
+                0,
+                3
+              ],
+              "material": "solid",
+              "state": 3
+            },
+            {
+              "local": [
+                1,
+                0,
+                0
+              ],
+              "material": "solid",
+              "state": 3
+            },
+            {
+              "local": [
+                1,
+                0,
+                1
+              ],
+              "material": "solid",
+              "state": 3
+            },
+            {
+              "local": [
+                1,
+                0,
+                2
+              ],
+              "material": "solid",
+              "state": 3
+            },
+            {
+              "local": [
+                1,
+                0,
+                3
+              ],
+              "material": "solid",
+              "state": 3
+            },
+            {
+              "local": [
+                2,
+                0,
+                0
+              ],
+              "material": "solid",
+              "state": 3
+            },
+            {
+              "local": [
+                2,
+                0,
+                1
+              ],
+              "material": "solid",
+              "state": 3
+            },
+            {
+              "local": [
+                2,
+                0,
+                2
+              ],
+              "material": "solid",
+              "state": 3
+            },
+            {
+              "local": [
+                2,
+                0,
+                3
+              ],
+              "material": "solid",
+              "state": 3
+            },
+            {
+              "local": [
+                3,
+                0,
+                0
+              ],
+              "material": "solid",
+              "state": 3
+            },
+            {
+              "local": [
+                3,
+                0,
+                1
+              ],
+              "material": "solid",
+              "state": 3
+            },
+            {
+              "local": [
+                3,
+                0,
+                2
+              ],
+              "material": "solid",
+              "state": 3
+            },
+            {
+              "local": [
+                3,
+                0,
+                3
+              ],
+              "material": "solid",
+              "state": 3
+            }
+          ]
+        },
+        {
+          "op": "sublevel",
+          "scene": "a",
+          "id": 1,
+          "pose": [
+            0.5,
+            3,
+            0.5,
+            0,
+            0,
+            0,
+            1
+          ],
+          "center": [
+            64.5,
+            0.5,
+            64.5
+          ],
+          "bounds": [
+            64,
+            0,
+            64,
+            64,
+            0,
+            64
+          ],
+          "mass": 1,
+          "inertia": [
+            0.16666666666666666,
+            0,
+            0,
+            0,
+            0.16666666666666666,
+            0,
+            0,
+            0,
+            0.16666666666666666
+          ]
+        },
+        {
+          "op": "chunk",
+          "scene": "a",
+          "global": false,
+          "id": 1,
+          "chunk": [
+            4,
+            0,
+            4
+          ],
+          "cells": [
+            {
+              "local": [
+                0,
+                0,
+                0
+              ],
+              "material": "body",
+              "state": 3
+            }
+          ]
+        },
+        {
+          "op": "sample",
+          "scene": "a",
+          "id": 1,
+          "label": "initial"
+        },
+        {
+          "op": "step",
+          "scene": "a",
+          "dt": 0.025,
+          "count": 80,
+          "sample_every": 20,
+          "label": "settle"
+        },
+        {
+          "op": "chunk_remove",
+          "scene": "a",
+          "chunk": [
+            0,
+            0,
+            0
+          ],
+          "global": true
+        },
+        {
+          "op": "wake",
+          "scene": "a",
+          "id": 1
+        },
+        {
+          "op": "step",
+          "scene": "a",
+          "dt": 0.025,
+          "count": 30,
+          "sample_every": 10,
+          "label": "missing-terrain-response"
+        },
+        {
+          "op": "dispose",
+          "scene": "a"
+        }
+      ]
+    },
+    {
+      "id": "two-scene-config-only",
+      "repeat_count": 10,
+      "timeout_seconds": 20,
+      "acceptance_scope": [
+        "global solver configuration changes while contact geometry/materials remain untouched",
+        "two equal original scene states receive identical velocity input; first response under A versus B records config-only effect",
+        "alternating steps under global B then restored A; no per-scene snapshot assumption"
+      ],
+      "actions": [
+        {
+          "op": "scene",
+          "scene": "a",
+          "gravity": [
+            0,
+            -9.81,
+            0
+          ],
+          "drag": 0
+        },
+        {
+          "op": "scene",
+          "scene": "b",
+          "gravity": [
+            0,
+            -9.81,
+            0
+          ],
+          "drag": 0
+        },
+        {
+          "op": "config",
+          "iterations": [
+            18,
+            2,
+            2
+          ],
+          "frequency": [
+            40,
+            5
+          ],
+          "min_island": 128
+        },
+        {
+          "op": "material",
+          "material": "solid",
+          "friction": 1,
+          "volume": 1,
+          "restitution": 0,
+          "fluid": false,
+          "dynamic": false,
+          "boxes": [
+            [
+              0,
+              0,
+              0,
+              1,
+              1,
+              1
+            ]
+          ]
+        },
+        {
+          "op": "material",
+          "material": "body",
+          "friction": 1,
+          "volume": 1,
+          "restitution": 0,
+          "fluid": false,
+          "dynamic": false,
+          "boxes": [
+            [
+              0,
+              0,
+              0,
+              1,
+              1,
+              1
+            ]
+          ]
+        },
+        {
+          "op": "chunk",
+          "scene": "a",
+          "global": true,
+          "id": -1,
+          "chunk": [
+            0,
+            0,
+            0
+          ],
+          "cells": [
+            {
+              "local": [
+                0,
+                0,
+                0
+              ],
+              "material": "solid",
+              "state": 3
+            },
+            {
+              "local": [
+                0,
+                0,
+                1
+              ],
+              "material": "solid",
+              "state": 3
+            },
+            {
+              "local": [
+                0,
+                0,
+                2
+              ],
+              "material": "solid",
+              "state": 3
+            },
+            {
+              "local": [
+                0,
+                0,
+                3
+              ],
+              "material": "solid",
+              "state": 3
+            },
+            {
+              "local": [
+                1,
+                0,
+                0
+              ],
+              "material": "solid",
+              "state": 3
+            },
+            {
+              "local": [
+                1,
+                0,
+                1
+              ],
+              "material": "solid",
+              "state": 3
+            },
+            {
+              "local": [
+                1,
+                0,
+                2
+              ],
+              "material": "solid",
+              "state": 3
+            },
+            {
+              "local": [
+                1,
+                0,
+                3
+              ],
+              "material": "solid",
+              "state": 3
+            },
+            {
+              "local": [
+                2,
+                0,
+                0
+              ],
+              "material": "solid",
+              "state": 3
+            },
+            {
+              "local": [
+                2,
+                0,
+                1
+              ],
+              "material": "solid",
+              "state": 3
+            },
+            {
+              "local": [
+                2,
+                0,
+                2
+              ],
+              "material": "solid",
+              "state": 3
+            },
+            {
+              "local": [
+                2,
+                0,
+                3
+              ],
+              "material": "solid",
+              "state": 3
+            },
+            {
+              "local": [
+                3,
+                0,
+                0
+              ],
+              "material": "solid",
+              "state": 3
+            },
+            {
+              "local": [
+                3,
+                0,
+                1
+              ],
+              "material": "solid",
+              "state": 3
+            },
+            {
+              "local": [
+                3,
+                0,
+                2
+              ],
+              "material": "solid",
+              "state": 3
+            },
+            {
+              "local": [
+                3,
+                0,
+                3
+              ],
+              "material": "solid",
+              "state": 3
+            }
+          ]
+        },
+        {
+          "op": "sublevel",
+          "scene": "a",
+          "id": 1,
+          "pose": [
+            1.5,
+            1.2,
+            1.5,
+            0,
+            0,
+            0.14943813247359922,
+            0.9887710779360422
+          ],
+          "center": [
+            64.5,
+            0.5,
+            64.5
+          ],
+          "bounds": [
+            64,
+            0,
+            64,
+            64,
+            0,
+            64
+          ],
+          "mass": 1,
+          "inertia": [
+            0.16666666666666666,
+            0,
+            0,
+            0,
+            0.16666666666666666,
+            0,
+            0,
+            0,
+            0.16666666666666666
+          ]
+        },
+        {
+          "op": "chunk",
+          "scene": "a",
+          "global": false,
+          "id": 1,
+          "chunk": [
+            4,
+            0,
+            4
+          ],
+          "cells": [
+            {
+              "local": [
+                0,
+                0,
+                0
+              ],
+              "material": "body",
+              "state": 3
+            }
+          ]
+        },
+        {
+          "op": "step",
+          "scene": "a",
+          "dt": 0.025,
+          "count": 2,
+          "sample_every": 1,
+          "label": "same-state-config-A-warmup"
+        },
+        {
+          "op": "chunk",
+          "scene": "b",
+          "global": true,
+          "id": -1,
+          "chunk": [
+            0,
+            0,
+            0
+          ],
+          "cells": [
+            {
+              "local": [
+                0,
+                0,
+                0
+              ],
+              "material": "solid",
+              "state": 3
+            },
+            {
+              "local": [
+                0,
+                0,
+                1
+              ],
+              "material": "solid",
+              "state": 3
+            },
+            {
+              "local": [
+                0,
+                0,
+                2
+              ],
+              "material": "solid",
+              "state": 3
+            },
+            {
+              "local": [
+                0,
+                0,
+                3
+              ],
+              "material": "solid",
+              "state": 3
+            },
+            {
+              "local": [
+                1,
+                0,
+                0
+              ],
+              "material": "solid",
+              "state": 3
+            },
+            {
+              "local": [
+                1,
+                0,
+                1
+              ],
+              "material": "solid",
+              "state": 3
+            },
+            {
+              "local": [
+                1,
+                0,
+                2
+              ],
+              "material": "solid",
+              "state": 3
+            },
+            {
+              "local": [
+                1,
+                0,
+                3
+              ],
+              "material": "solid",
+              "state": 3
+            },
+            {
+              "local": [
+                2,
+                0,
+                0
+              ],
+              "material": "solid",
+              "state": 3
+            },
+            {
+              "local": [
+                2,
+                0,
+                1
+              ],
+              "material": "solid",
+              "state": 3
+            },
+            {
+              "local": [
+                2,
+                0,
+                2
+              ],
+              "material": "solid",
+              "state": 3
+            },
+            {
+              "local": [
+                2,
+                0,
+                3
+              ],
+              "material": "solid",
+              "state": 3
+            },
+            {
+              "local": [
+                3,
+                0,
+                0
+              ],
+              "material": "solid",
+              "state": 3
+            },
+            {
+              "local": [
+                3,
+                0,
+                1
+              ],
+              "material": "solid",
+              "state": 3
+            },
+            {
+              "local": [
+                3,
+                0,
+                2
+              ],
+              "material": "solid",
+              "state": 3
+            },
+            {
+              "local": [
+                3,
+                0,
+                3
+              ],
+              "material": "solid",
+              "state": 3
+            }
+          ]
+        },
+        {
+          "op": "sublevel",
+          "scene": "b",
+          "id": 1,
+          "pose": [
+            1.5,
+            1.2,
+            1.5,
+            0,
+            0,
+            0.14943813247359922,
+            0.9887710779360422
+          ],
+          "center": [
+            64.5,
+            0.5,
+            64.5
+          ],
+          "bounds": [
+            64,
+            0,
+            64,
+            64,
+            0,
+            64
+          ],
+          "mass": 1,
+          "inertia": [
+            0.16666666666666666,
+            0,
+            0,
+            0,
+            0.16666666666666666,
+            0,
+            0,
+            0,
+            0.16666666666666666
+          ]
+        },
+        {
+          "op": "chunk",
+          "scene": "b",
+          "global": false,
+          "id": 1,
+          "chunk": [
+            4,
+            0,
+            4
+          ],
+          "cells": [
+            {
+              "local": [
+                0,
+                0,
+                0
+              ],
+              "material": "body",
+              "state": 3
+            }
+          ]
+        },
+        {
+          "op": "step",
+          "scene": "b",
+          "dt": 0.025,
+          "count": 2,
+          "sample_every": 1,
+          "label": "same-state-config-A-warmup"
+        },
+        {
+          "op": "velocity",
+          "scene": "a",
+          "id": 1,
+          "linear": [
+            2,
+            -4,
+            0
+          ],
+          "angular": [
+            0,
+            0,
+            2
+          ],
+          "wake": true
+        },
+        {
+          "op": "sample",
+          "scene": "a",
+          "id": 1,
+          "label": "same-state-before-config-boundary"
+        },
+        {
+          "op": "velocity",
+          "scene": "b",
+          "id": 1,
+          "linear": [
+            2,
+            -4,
+            0
+          ],
+          "angular": [
+            0,
+            0,
+            2
+          ],
+          "wake": true
+        },
+        {
+          "op": "sample",
+          "scene": "b",
+          "id": 1,
+          "label": "same-state-before-config-boundary"
+        },
+        {
+          "op": "step",
+          "scene": "a",
+          "dt": 0.025,
+          "count": 1,
+          "sample_every": 1,
+          "label": "A-response-from-same-state"
+        },
+        {
+          "op": "config",
+          "iterations": [
+            1,
+            1,
+            1
+          ],
+          "frequency": [
+            5,
+            1
+          ],
+          "min_island": 128
+        },
+        {
+          "op": "step",
+          "scene": "b",
+          "dt": 0.025,
+          "count": 1,
+          "sample_every": 1,
+          "label": "B-response-from-same-state"
+        },
+        {
+          "op": "step",
+          "scene": "a",
+          "dt": 0.025,
+          "count": 1,
+          "sample_every": 1,
+          "label": "global-B-alternating"
+        },
+        {
+          "op": "step",
+          "scene": "b",
+          "dt": 0.025,
+          "count": 1,
+          "sample_every": 1,
+          "label": "global-B-alternating"
+        },
+        {
+          "op": "step",
+          "scene": "a",
+          "dt": 0.025,
+          "count": 1,
+          "sample_every": 1,
+          "label": "global-B-alternating"
+        },
+        {
+          "op": "step",
+          "scene": "b",
+          "dt": 0.025,
+          "count": 1,
+          "sample_every": 1,
+          "label": "global-B-alternating"
+        },
+        {
+          "op": "step",
+          "scene": "a",
+          "dt": 0.025,
+          "count": 1,
+          "sample_every": 1,
+          "label": "global-B-alternating"
+        },
+        {
+          "op": "step",
+          "scene": "b",
+          "dt": 0.025,
+          "count": 1,
+          "sample_every": 1,
+          "label": "global-B-alternating"
+        },
+        {
+          "op": "step",
+          "scene": "a",
+          "dt": 0.025,
+          "count": 1,
+          "sample_every": 1,
+          "label": "global-B-alternating"
+        },
+        {
+          "op": "step",
+          "scene": "b",
+          "dt": 0.025,
+          "count": 1,
+          "sample_every": 1,
+          "label": "global-B-alternating"
+        },
+        {
+          "op": "step",
+          "scene": "a",
+          "dt": 0.025,
+          "count": 1,
+          "sample_every": 1,
+          "label": "global-B-alternating"
+        },
+        {
+          "op": "step",
+          "scene": "b",
+          "dt": 0.025,
+          "count": 1,
+          "sample_every": 1,
+          "label": "global-B-alternating"
+        },
+        {
+          "op": "config",
+          "iterations": [
+            18,
+            2,
+            2
+          ],
+          "frequency": [
+            40,
+            5
+          ],
+          "min_island": 128
+        },
+        {
+          "op": "step",
+          "scene": "a",
+          "dt": 0.025,
+          "count": 1,
+          "sample_every": 1,
+          "label": "global-A-restored-alternating"
+        },
+        {
+          "op": "step",
+          "scene": "b",
+          "dt": 0.025,
+          "count": 1,
+          "sample_every": 1,
+          "label": "global-A-restored-alternating"
+        },
+        {
+          "op": "step",
+          "scene": "a",
+          "dt": 0.025,
+          "count": 1,
+          "sample_every": 1,
+          "label": "global-A-restored-alternating"
+        },
+        {
+          "op": "step",
+          "scene": "b",
+          "dt": 0.025,
+          "count": 1,
+          "sample_every": 1,
+          "label": "global-A-restored-alternating"
+        },
+        {
+          "op": "step",
+          "scene": "a",
+          "dt": 0.025,
+          "count": 1,
+          "sample_every": 1,
+          "label": "global-A-restored-alternating"
+        },
+        {
+          "op": "step",
+          "scene": "b",
+          "dt": 0.025,
+          "count": 1,
+          "sample_every": 1,
+          "label": "global-A-restored-alternating"
+        },
+        {
+          "op": "step",
+          "scene": "a",
+          "dt": 0.025,
+          "count": 1,
+          "sample_every": 1,
+          "label": "global-A-restored-alternating"
+        },
+        {
+          "op": "step",
+          "scene": "b",
+          "dt": 0.025,
+          "count": 1,
+          "sample_every": 1,
+          "label": "global-A-restored-alternating"
+        },
+        {
+          "op": "step",
+          "scene": "a",
+          "dt": 0.025,
+          "count": 1,
+          "sample_every": 1,
+          "label": "global-A-restored-alternating"
+        },
+        {
+          "op": "step",
+          "scene": "b",
+          "dt": 0.025,
+          "count": 1,
+          "sample_every": 1,
+          "label": "global-A-restored-alternating"
+        },
+        {
+          "op": "dispose",
+          "scene": "b"
+        },
+        {
+          "op": "dispose",
+          "scene": "a"
+        }
+      ]
+    }
+  ]
+}
